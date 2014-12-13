@@ -1,0 +1,1299 @@
+api
+{
+  "58303": { #identifier as key for easier access
+    "id": "53e916c4a874087103fa75ac",
+    "motion": { #embedded
+      "id": "53e916c4a874087103fa75ac",
+      "requirement": "simple majority",
+      "text": "Novela z. - daňový řád", 
+    },
+    "start_date": "2012-12-12T14:04:00",
+    "identifier": "58303",
+    "result": "pass",
+    "votes": [  #embedded
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "yes"
+      },
+      {
+        "voter_id": "53e916c4a874087103fa75ac",
+        "group_id": "53e916c4a874087103fa75ac",
+        "option": "no"
+      },
+      ...
+    ]
+  },
+  ...
+}
+

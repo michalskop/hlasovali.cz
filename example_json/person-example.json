@@ -1,0 +1,25 @@
+api
+{
+  "53e915b3a874087103fa72b1": {  #id as key for easier access
+    "id": "53e915b3a874087103fa72b1",
+    "name" : "Jiří Bílý",
+    "birth_date" : "1952-10-18",
+    "gender" : "male",
+    "family_name" : "Bílý",
+    "honorific_prefix" : "JUDr.",
+    "honorific_suffix" : "Ph.D.",
+    "sort_name" : "Bílý, Jiří",
+    "given_name" : "Jiří",
+    "identifiers" : [ 
+        {
+            "identifier" : "6",
+            "scheme" : "psp.cz/poslanec/1"
+        }, 
+        {
+            "identifier" : "6",
+            "scheme" : "psp.cz/osoby"
+        }
+    ]
+  },
+  ...
+}

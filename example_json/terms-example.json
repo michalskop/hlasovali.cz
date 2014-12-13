@@ -1,0 +1,21 @@
+note: sorted desc (for header)
+{
+    "terms": [
+        {
+            "name": "2010 - 2013",
+            "start_date": "2010-05-29 00:00:00",
+            "end_date": "2013-08-28 23:59:59",
+            "identifier": 6
+        }, 
+        ...
+    ],
+    "years": [
+        {
+            "name": "2010",
+            "start_date": "2010-01-01 00:00:00",
+            "end_date": "2013-12-31 23:59:59",
+            "identifier": 2010
+        }, 
+        ...
+    ]
+}

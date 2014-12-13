@@ -1,0 +1,164 @@
+/* PARTY */
+.person, .party {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    float: left;
+    margin: 0 10px 8px 0;
+    position: relative;
+    text-align: center;
+    width: 123px;
+}
+.person {
+    height: 220px;
+}
+.party {
+    height: 185px;
+}
+
+/*body {
+    font-family: sans-serif,arial,helvetica;
+}*/
+.person > div, .party > div {
+    border-color: #e7e7e7;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+}
+
+.person > div:hover, .party > div:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.person > div:hover > a, .party > div:hover > a {
+  text-decoration: none;
+}
+
+.person > div {
+    height: 220px;
+}
+.party > div {
+    height: 185px;
+}
+
+
+.person h2, .party h2 {
+    color: #121212;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 8px;
+    text-decoration: none;
+}
+.person img {
+    height: 132px;
+    width: 104px;
+}
+
+.party img {
+    height: 104px;
+    width: 104px;
+}
+
+.score {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.65);
+    border-radius: 6px;
+    bottom: 49px;
+    color: #111;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 1px;
+    position: absolute;
+    right: 10px;
+}
+.person-party {
+    /*font-family: sans-serif;*/
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+.d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+
+
+.vote-event {
+  width: 400px;
+  height: 475px;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
+
+.vote-event {
+  text-align: center;
+}
+.ok-color {
+  color: #38b44a;
+  fill: #38b44a;
+}
+.ko-color {
+  color: #df382c;
+  fill: #df382c;
+}
+#vote-event-legend: {
+    margin: 0;
+}
+
+
+.chart-legend {
+  padding-left: 60px;
+}
+/* CHART */
+g {
+  font: 8px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+ /* display: none;*/
+}
+
+.line {
+  fill: none;
+  opacity: .25;
+}
+.line.active {
+  stroke-width: 5px;
+  stroke: #444
+}
+
+circle {
+  fill-opacity: 0.5;
+  stroke-opacity: 1;
+}
+circle:hover {
+  fill-opacity: 1;
+}
+
+.band {
+  fill-opacity: 0.1
+}
+.band-lower {
+  fill: #f00;
+}
+.band-upper {
+  fill: #0f0;
+}

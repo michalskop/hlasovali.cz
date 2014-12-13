@@ -1,0 +1,24 @@
+rosnicka
+{
+  "id": "plasy",
+  "title": "Plasy",
+  "vote_events": { #identifier as key for easier access
+    "58281": {
+      "identifier": "58281",
+      "name": "Rušení NP Šumava dle ministra Chalupy",
+      "description": "Více lanovek, sjezdovek, hotelů, apartmánových domů a golfových hřišť v národním parku. Taková je vize Šumavy dle vládního návrhu zákona předloženého ministrem Tomášem Chalupou. Návrh se podobá plzeňskému návrhu také v tom, že navrhuje okamžitě otevřít dřevorubcům některá z nejkrásnějších míst národního parku. zbytky horských pralesů a slatě, které obdivují turisté a kde mají domov vzácné druhy zvířat. Světový svaz ochrany přírody potvrdil, že v takovém případě park ztratí celosvětově uznávaný statut „národního parku“. Za prospěšné považujeme hlasování pro návrh na zamítnutí, který předložil Robin Böhnisch.",
+      #"pro_issue": "yes",   #always yes?
+      #"weight": "35",
+      "subcategories": ["ochrana přírody a zvířat"],
+      "links": [
+        {
+          "url": "http://www.psp.cz/sqw/tisky.sqw?O=6&T=1004", 
+          "note": "Tisk"
+        }
+      ],
+      "available_vote_event": true
+    },
+    ...
+  }
+
+}

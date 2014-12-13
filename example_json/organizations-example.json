@@ -1,0 +1,9 @@
+api
+{
+  "53e916c4a874087103fa75ac": {  #id as key for easier access
+    "id" : "53e916c4a874087103fa75ac",
+    "name": "Poslanecký klub ...",
+  },
+  ...
+}
+

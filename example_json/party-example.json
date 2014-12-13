@@ -1,0 +1,15 @@
+rosnicka
+{
+  "kscm": {  #id as key for easier access
+    "id": "kscm",
+    "name": "Komunistická strana Čech a Moravy",
+    "abbreviation": "KSČM",
+    "children": [
+      "53e915b3a874087103fa72b1", "53e915b3a874087103fa72b1", ...
+    ],
+    "image": "kscm.jpg",
+    "color": "#ff0000",
+    "position": -90 #left-right scale (for vote-events results)
+  },
+  ...
+}
