@@ -38,7 +38,7 @@ foreach ($filtered_issue->vote_events as $vekey => $ve) {
 #      else $res = -1;
 #      $ve->result = $v->result;
 #      $ve->ok = $res*$ve->pro_issue;
-       $ve->ok = 1;
+       $ve->ok = 0;
       $ve->motion = $v->motion;
 #      if ($vekey == '58281'){
 #                  print_r($v);print_r($ve);die();}
