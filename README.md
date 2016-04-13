@@ -1,4 +1,3 @@
-hlasovali.cz
-============
+# Hlasovali.cz
 
 Hlasovali .cz
