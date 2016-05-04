@@ -15,7 +15,8 @@ cd /opt/letsencrypt
 ./letsencrypt-auto --apache -d $MYSITE -d www.$MYSITE
 
 # http://stackoverflow.com/a/878647/1666623
+cd /tmp
 sudo crontab -l > mycron
 echo "30 1 * * 1 /opt/letsencrypt/letsencrypt-auto renew >> /var/log/le-renew.log" >> mycron
-crontab mycron
+sudo crontab mycron
 rm mycron

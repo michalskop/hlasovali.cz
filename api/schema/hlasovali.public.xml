@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="hlasovali" schema="public" type="PostgreSQL - 9.5.2">
+   <tables>
+      <table name="current_organizations" numRows="0" remarks="" schema="public" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="classification" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="parent_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="4" name="founding_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="5" name="dissolution_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="6" name="attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+         <column autoUpdated="false" digits="0" id="7" name="user_id" nullable="true" remarks="" size="19" type="_int8"/>
+      </table>
+      <table name="current_people_in_organizations" numRows="0" remarks="" schema="public" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="given_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="family_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="person_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="3" name="start_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="4" name="end_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="5" name="organization_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="6" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="classification" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="8" name="founding_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="9" name="dissolution_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="10" name="organization_attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+      </table>
+      <table name="memberships" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('memberships_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="person_id" nullable="true" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="memberships_person_id_fkey" implied="false" onDeleteCascade="false" table="people"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="organization_id" nullable="true" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="memberships_organization_id_fkey" implied="false" onDeleteCascade="false" table="organizations"/>
+         </column>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="3" name="start_date" nullable="false" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="4" name="end_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="memberships_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="memberships_ukey" unique="true">
+            <column ascending="true" name="person_id"/>
+            <column ascending="true" name="organization_id"/>
+            <column ascending="true" name="start_date"/>
+         </index>
+      </table>
+      <table name="motions" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('motions_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="motion_id" foreignKey="tag_motion_id_fkey" implied="false" onDeleteCascade="false" table="tags"/>
+            <child column="motion_id" foreignKey="vote_events_motion_id_fkey" implied="false" onDeleteCascade="false" table="vote_events"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="description" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="3" name="date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="4" name="date_precision" nullable="true" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="5" name="organization_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="motions_organization_id_fkey" implied="false" onDeleteCascade="false" table="organizations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="user_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="motions_user_id_fkey" implied="false" onDeleteCascade="false" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="motions_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="organizations" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('organizations_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="organization_id" foreignKey="memberships_organization_id_fkey" implied="false" onDeleteCascade="false" table="memberships"/>
+            <child column="organization_id" foreignKey="motions_organization_id_fkey" implied="false" onDeleteCascade="false" table="motions"/>
+            <child column="organization_id" foreignKey="organizations_users_organization_id_fkey" implied="false" onDeleteCascade="false" table="organizations_users"/>
+            <child column="organization_id" foreignKey="votes_organization_id_fkey" implied="false" onDeleteCascade="false" table="votes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="classification" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="parent_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="4" name="founding_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="5" name="dissolution_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="6" name="attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+         <column autoUpdated="false" digits="0" id="7" name="user_id" nullable="true" remarks="" size="19" type="_int8"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="organizations_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="organizations_users" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="organization_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="organizations_users_organization_id_fkey" implied="false" onDeleteCascade="false" table="organizations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="user_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="organizations_users_user_id_fkey" implied="false" onDeleteCascade="false" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="2" name="active" nullable="false" remarks="" size="1" type="bool"/>
+         <primaryKey column="organization_id" sequenceNumberInPK="1"/>
+         <primaryKey column="user_id" sequenceNumberInPK="2"/>
+         <index name="organizations_users_pkey" unique="true">
+            <column ascending="true" name="organization_id"/>
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table name="people" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('people_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="person_id" foreignKey="memberships_person_id_fkey" implied="false" onDeleteCascade="false" table="memberships"/>
+            <child column="person_id" foreignKey="votes_person_id_fkey" implied="false" onDeleteCascade="false" table="votes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="given_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="family_name" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="people_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="people_in_organizations" numRows="0" remarks="" schema="public" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="given_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="family_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="person_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="3" name="start_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="4" name="end_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="5" name="organization_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="6" name="name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="classification" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="8" name="founding_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="6" id="9" name="dissolution_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="10" name="organization_attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+      </table>
+      <table name="tags" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="tag" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="motion_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="tag_motion_id_fkey" implied="false" onDeleteCascade="false" table="motions"/>
+         </column>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="2" name="active" nullable="false" remarks="" size="1" type="bool"/>
+         <primaryKey column="tag" sequenceNumberInPK="1"/>
+         <primaryKey column="motion_id" sequenceNumberInPK="2"/>
+         <index name="tag_pkey" unique="true">
+            <column ascending="true" name="tag"/>
+            <column ascending="true" name="motion_id"/>
+         </index>
+      </table>
+      <table name="users" numRows="0" remarks="" schema="public" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="role" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="pass" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="email" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="verified" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+      </table>
+      <table name="vote_events" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('vote_events_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="vote_event_id" foreignKey="votes_vote_event_id_fkey" implied="false" onDeleteCascade="false" table="votes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="motion_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="vote_events_motion_id_fkey" implied="false" onDeleteCascade="false" table="motions"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="2" name="start_date" nullable="false" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="3" name="date_precision" nullable="true" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="4" name="attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="vote_events_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="vote_events_motions" numRows="0" remarks="" schema="public" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="vote_event_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="1" name="vote_event_start_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="2" name="vote_event_date_precision" nullable="true" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="3" name="vote_event_attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+         <column autoUpdated="false" digits="0" id="4" name="motion_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="5" name="motion_name" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="motion_description" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="7" name="motion_date" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="8" name="motion_date_precision" nullable="true" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="9" name="organization_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="10" name="user_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="11" name="motion_attributes" nullable="true" remarks="" size="2147483647" type="jsonb"/>
+      </table>
+      <table name="votes" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="nextval('votes_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="vote_event_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="votes_vote_event_id_fkey" implied="false" onDeleteCascade="false" table="vote_events"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="person_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="votes_person_id_fkey" implied="false" onDeleteCascade="false" table="people"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="option" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="organization_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="votes_organization_id_fkey" implied="false" onDeleteCascade="false" table="organizations"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="votes_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>
