@@ -24,7 +24,8 @@ CREATE TABLE public.people
   given_name text,
   family_name text NOT NULL,
   attributes jsonb,
-  CONSTRAINT people_pkey PRIMARY KEY (id)
+  CONSTRAINT people_pkey PRIMARY KEY (id),
+  CONSTRAINT people_given_name_family_name_attributes_key UNIQUE (given_name, family_name, attributes)
 )
 WITH (
   OIDS=FALSE
@@ -58,7 +59,8 @@ CREATE TABLE public.organizations
   founding_date timestamptz,
   dissolution_date timestamptz,
   attributes jsonb,
-  CONSTRAINT organizations_pkey PRIMARY KEY (id)
+  CONSTRAINT organizations_pkey PRIMARY KEY (id),
+  CONSTRAINT organizations_name_classification_parent_id_key UNIQUE (name, classification, parent_id)
 )
 WITH (
   OIDS=FALSE
@@ -89,7 +91,7 @@ ALTER TABLE public.memberships_id_seq
   person_id bigint,
   organization_id bigint,
   start_date timestamptz not null DEFAULT NOW(),
-  end_date timestamptz not null DEFAULT "infinity",
+  end_date timestamptz not null DEFAULT 'infinity',
   CONSTRAINT memberships_pkey PRIMARY KEY (id),
   CONSTRAINT memberships_organization_id_fkey FOREIGN KEY (organization_id)
       REFERENCES public.organizations (id) MATCH SIMPLE
@@ -376,14 +378,18 @@ CREATE OR REPLACE FUNCTION organizations_insert_suborganization_check()
 $func$
 BEGIN
     IF (
-        (NEW.parent_id IS NOT NULL)
-    AND
-        (SELECT count(*)
-        FROM organizations_users as ou
-        WHERE NEW.parent_id = ou.organization_id
-        AND basic_auth.current_user_id() = ou.user_id
-        AND ou.active
-    ) > 0) THEN
+        basic_auth.current_role() = 'admin'
+    OR (
+            (NEW.parent_id IS NOT NULL)
+        AND
+            (SELECT count(*)
+            FROM organizations_users as ou
+            WHERE NEW.parent_id = ou.organization_id
+            AND basic_auth.current_user_id() = ou.user_id
+            AND ou.active
+            ) > 0
+        )
+    ) THEN
         RETURN NEW;
     ELSE
         raise invalid_authorization_specification using message = 'current user is not allowed to create a child organization for given parent_id';
@@ -683,7 +689,7 @@ grant select, insert, update
 grant select, insert, update, delete
     on all tables in schema basic_auth to admin;
 
-REVOKE select, insert, update, delete
+REVOKE insert, update, delete
     on organizations_users FROM author;
 
 grant select

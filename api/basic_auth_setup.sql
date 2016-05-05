@@ -491,3 +491,15 @@ create or replace view users as
   -- authors can edit comments/posts
   grant select, insert, update, delete
     on basic_auth.tokens, basic_auth.users to author;
+
+-- setting other rights
+
+grant usage on schema public, basic_auth to admin;
+grant usage on schema public, basic_auth to author;
+
+    ALTER TABLE public.users
+      OWNER TO postgres;
+    GRANT ALL ON TABLE public.users TO postgres;
+    GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.users TO author;
+    GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.users TO admin;
+    GRANT SELECT ON TABLE public.users TO anon;
