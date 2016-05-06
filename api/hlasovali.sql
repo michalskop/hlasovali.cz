@@ -218,7 +218,8 @@ CREATE TABLE public.votes
         ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT votes_organization_id_fkey FOREIGN KEY (organization_id)
         REFERENCES public.organizations (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION
+        ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT votes_vote_event_id_person_id_key UNIQUE (vote_event_id, person_id)
 )
 WITH (
 OIDS=FALSE
@@ -249,9 +250,22 @@ OIDS=FALSE
 ALTER TABLE public.organizations_users
 OWNER TO postgres;
 
+-- Sequence: public.votes_id_seq
+
+-- DROP SEQUENCE public.votes_id_seq;
+
+CREATE SEQUENCE public.tags_id_seq
+      INCREMENT 1
+      MINVALUE 1
+      MAXVALUE 9223372036854775807
+      START 1
+      CACHE 1;
+  ALTER TABLE public.tags_id_seq
+      OWNER TO postgres;
+
 CREATE TABLE public.tags
 (
-    id
+    id bigint NOT NULL DEFAULT nextval('tags_id_seq'::regclass),
     tag text NOT NULL,
     motion_id bigint NOT NULL,
     active boolean NOT NULL default FALSE,
@@ -618,7 +632,8 @@ select
     o.founding_date as founding_date,
     o.dissolution_date as dissolution_date,
     p.attributes as person_attributes,
-    o.attributes as organization_attributes
+    o.attributes as organization_attributes,
+    o.parent_id as parent_id
 from people as p
 left join memberships as m
 on p.id = m.person_id
@@ -640,7 +655,8 @@ select
     o.founding_date as founding_date,
     o.dissolution_date as dissolution_date,
     p.attributes as person_attributes,
-    o.attributes as organization_attributes
+    o.attributes as organization_attributes,
+    o.parent_id as parent_id
 from people as p
 left join memberships as m
 on p.id = m.person_id
