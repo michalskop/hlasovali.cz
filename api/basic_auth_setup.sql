@@ -469,7 +469,7 @@ grant execute on function
 
 
 -- Finally we need to modify the users view from the previous example. This is because all authors share a single db role. We could have chosen to assign a new role for every author (all inheriting from author) but we choose to tell them apart by their email addresses. The addition below prevents authors from seeing each others' info in the users view.
-create or replace view users as
+create or replace view public.users as
   select
         actual.id as id,
         actual.name as name,
@@ -487,10 +487,24 @@ create or replace view users as
           LIMIT 1
       ) = 'admin';
 
+create or replace view public.current_user as
+    select
+        actual.id as id,
+        actual.name as name,
+        actual.role as role,
+         '***'::text as pass,
+         actual.email as email,
+         actual.verified as verified,
+         actual.attributes as attributes
+    from basic_auth.users as actual
+    WHERE
+      basic_auth.current_user_id() = actual.id;
+
+
 
   -- authors can edit comments/posts
   grant select, insert, update, delete
-    on basic_auth.tokens, basic_auth.users to author;
+    on basic_auth.tokens, basic_auth.users, basic_auth.current_user to author;
 
 -- setting other rights
 
@@ -503,3 +517,10 @@ grant usage on schema public, basic_auth to author;
     GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.users TO author;
     GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.users TO admin;
     GRANT SELECT ON TABLE public.users TO anon;
+
+    ALTER TABLE public.current_user
+      OWNER TO postgres;
+    GRANT ALL ON TABLE public.current_user TO postgres;
+    GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.current_user TO author;
+    GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.current_user TO admin;
+    GRANT SELECT ON TABLE public.current_user TO anon;

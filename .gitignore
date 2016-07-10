@@ -6,3 +6,5 @@ smarty/templates_c
 www/settings.php
 postgrest.sh
 basic_insert.sql
+settings.json
+trial.php
