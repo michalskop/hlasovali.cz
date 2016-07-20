@@ -4,7 +4,8 @@ scripts/webcache
 scripts/__pycache__
 smarty/templates_c
 www/settings.php
+www/settings.json
 postgrest.sh
 basic_insert.sql
-settings.json
 trial.php
+www/fonts
