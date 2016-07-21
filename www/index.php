@@ -1,6 +1,14 @@
 <?php
 $settings = json_decode(file_get_contents("settings.json"));
 
+//get page
+$page = isset($_GET['page']) ? $_GET['page'] : 'frontpage';
+
+// do 'selects' directly
+$action = isset($_GET['action']) ? $_GET['action'] : 'view';
+if ($action == 'select') {
+    require("pages/" . $page . ".php");
+}
 
 require($settings->smarty_path);
 $smarty = new Smarty();
@@ -13,15 +21,27 @@ spl_autoload_register(function ($class) {
 });
 
 $smarty->assign('settings', $settings);
-
-
-//get page
-$page = isset($_GET['page']) ? $_GET['page'] : 'frontpage';
+$smarty->assign('request_uri', $_SERVER['REQUEST_URI']);
 $smarty->assign('page', $page);
+
 
 // set up user
 $user = new User($settings);
 $smarty->assign('user', $user->info());
+
+// set up city hall
+$cityhall = new CityHall($settings);
+$smarty->assign('cityhall', $cityhall->info());
+$smarty->assign('cityhalls', $cityhall->select_from());
+
+// get texts
+$t = new Text($settings);
+$smarty->assign('t',$t);
+
+//print_r($cityhall->select_from());die();
+//print_r($_SERVER);die();
+
+//require("pages/" . $page . ".php");
 
 switch ($page) {
 

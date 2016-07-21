@@ -39,14 +39,14 @@ class User {
         if (property_exists($this,'information'))
             return $this->information;
         if (isset($_COOKIE['auth_token']))
-            $params = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
+            $headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
         else {
-            $params = [];
+            $headers = [];
         }
         $result = $this->api->get(
             "current_user",
             [],
-            $params
+            $headers
         );
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()[0])) {

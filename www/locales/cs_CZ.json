@@ -1,0 +1,19 @@
+{
+    "name": "Hlasovali.cz",
+    "title": "Hlasovali.cz",
+
+    "__META": "",
+    "iso_lang": "cs",
+    "website_description": "",
+    "website_keywords": "",
+    "website_author": "Michal Škop, KohoVolit.eu",
+
+
+    "__LOGIN": "",
+    "login": "Přihlásit se",
+    "email_address": "Emailová adresa",
+    "password": "Heslo",
+    "logout": "Odhlásit se",
+    "already_logged_as": "Již přihlášen/a jako"
+
+}

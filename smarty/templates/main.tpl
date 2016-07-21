@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="{$t['iso_lang']}">
+<html lang="{$t->get('iso_lang')}">
 
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{$t['website_description']}">
-    <meta name="keywords" content="{$t['website_keywords']}">
-    <meta name="author" content="{$t['website_author']}">
+    <meta name="description" content="{$t->get('website_description')}">
+    <meta name="keywords" content="{$t->get('website_keywords')}">
+    <meta name="author" content="{$t->get('website_author')}">
     <link type="image/x-icon" href="{$settings->app_url}/images/favicon.ico" rel="shortcut icon">
 
-    <meta property="og:image" content="{$t['og:image']}"/>
-	<meta property="og:title" content="{$t['og:title']}"/>
-	<meta property="og:url" content="{$t['og:url']}"/>
-	<meta property="og:site_name" content="{$t['og:site_name']}"/>
-	<meta property="og:type" content="website"/>
+    {* <meta property="og:image" content="{$t->get(og_image)}"/>
+	<meta property="og:title" content="{$t->get(og_title)}"/>
+	<meta property="og:url" content="{$t->get(og_url)}"/>
+	<meta property="og:site_name" content="{$t->get(og_site_name)}"/>
+	<meta property="og:type" content="website"/> *}
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -44,7 +44,7 @@
 {*    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*}
 {*    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*}
 {*    <script src="../jquery.stickytableheaders.min.js"></script>*}
-    <title>{$t['title']}</title>
+    <title>{$t->get('title')}</title>
 
     {block name=additionalHead}{/block}
 
@@ -65,7 +65,7 @@
     <!-- google analytics -->
     {* <script type="text/javascript">
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', "{$t['google_tracking_id']}"]);
+      _gaq.push(['_setAccount', "{$t->get(google_tracking_id)}"]);
       _gaq.push(['_trackPageview']);
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -80,8 +80,8 @@
         (function (d, w, c) {
             (w[c] = w[c] || []).push(function() {
                 try {
-                    w.yaCounter{$t['yandex_metrica_id']} = new Ya.Metrika({
-                        id:{$t['yandex_metrica_id']},
+                    w.yaCounter{$t->get(yandex_metrica_id)} = new Ya.Metrika({
+                        id:{$t->get(yandex_metrica_id)},
                         clickmap:true,
                         trackLinks:true,
                         accurateTrackBounce:true
@@ -101,7 +101,7 @@
             } else { f(); }
         })(document, window, "yandex_metrika_callbacks");
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/{$t['yandex_metrica_id']}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/{$t->get(yandex_metrica_id)}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter --> *}
 
   </body>
