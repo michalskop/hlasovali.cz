@@ -34,7 +34,7 @@ class User {
         unset($this->information);
     }
 
-    // get info about logged in user
+    // get basic info about logged in user
     public function info(){
         if (property_exists($this,'information'))
             return $this->information;
@@ -58,6 +58,28 @@ class User {
                 $res = new StdClass();
                 $res->logged = false;
                 return $res;
+            }
+        }
+    }
+
+    // check if the user has rights as an author for a city hall
+    public function has_author_privilages($organization_id) {
+        $user = $this->info();
+        if (!$user->logged)
+            return false;
+        $headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
+        $result = $this->api->get(
+            "organizations_users",
+            ["user_id" => "eq." . $user->id,
+             "organization_id" => "eq." . $organization_id,
+             "active" => "is.true"],
+            $headers
+        );
+        if($result->info->http_code == 200) {
+            if (isset($result->decode_response()[0])) {
+                return true;
+            } else {
+                return false;
             }
         }
     }

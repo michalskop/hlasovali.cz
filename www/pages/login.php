@@ -15,7 +15,7 @@ switch ($action) {
         exit;
     case 'view':
     default:
-
+        $smarty->display('login.tpl');
 }
 
 ?>

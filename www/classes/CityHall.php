@@ -61,8 +61,11 @@ class CityHall {
                 }
             }
         } else {
-            $res = new StdClass();
-            $res->selected = false;
+            $this->information = new StdClass();
+            $this->information->selected = false;
+            // $res = new StdClass();
+            // $res->selected = false;
+            return $this->information;
             return $res;
         }
     }

@@ -8,6 +8,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'frontpage';
 $action = isset($_GET['action']) ? $_GET['action'] : 'view';
 if ($action == 'select') {
     require("pages/" . $page . ".php");
+    die();
 }
 
 require($settings->smarty_path);
@@ -41,11 +42,11 @@ $smarty->assign('t',$t);
 //print_r($cityhall->select_from());die();
 //print_r($_SERVER);die();
 
-//require("pages/" . $page . ".php");
+require("pages/" . $page . ".php");
 
-switch ($page) {
-
-}
-$smarty->display($page . '.tpl');
+// switch ($page) {
+//
+// }
+//$smarty->display($page . '.tpl');
 
 ?>

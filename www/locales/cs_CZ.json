@@ -14,6 +14,22 @@
     "email_address": "Emailová adresa",
     "password": "Heslo",
     "logout": "Odhlásit se",
-    "already_logged_as": "Již přihlášen/a jako"
+    "already_logged_as": "Již přihlášen/a jako",
+
+    "__MOTION": "",
+    "cityhall_not_selected": "Není vybrána žádná radnice.",
+    "no_priviliges": "Nemáte práva k této akci.",
+    "new_motion": "Nový návrh",
+    "motion_name": "Název návrhu",
+    "motion_human_name": "Krátký název návrhu",
+    "motion_description": "Popis návrhu",
+    "motion_date": "Datum návrhu",
+    "motion_time": "Čas návrhu",
+    "motion_link_description": "Popis, např. Usnesení",
+    "motion_link_link": "Link, např. https://example.com/usneseni1.html",
+    "tags": "Tagy",
+    "links": "Linky",
+    "add_link": "Přidat další link",
+    "save": "Uložit"
 
 }
