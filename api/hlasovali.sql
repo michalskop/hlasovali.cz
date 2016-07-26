@@ -178,7 +178,7 @@ CREATE TABLE public.vote_events
     CONSTRAINT vote_events_pkey PRIMARY KEY (id),
     CONSTRAINT vote_events_motion_id_fkey FOREIGN KEY (motion_id)
         REFERENCES public.motions (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION
+        ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (
 OIDS=FALSE
@@ -311,7 +311,7 @@ $func$
 LANGUAGE plpgsql;
 
 -- Only user with rights to update refered organization can update/delete something
-CREATE OR REPLACE FUNCTION organizations_users_old_check()
+CREATE OR REPLACE FUNCTION organizations_users_update_something_check()
   RETURNS trigger AS
 $func$
 BEGIN
@@ -326,6 +326,26 @@ BEGIN
         raise invalid_authorization_specification using message = 'current user is not allowed to do it';
     END IF;
     RETURN NEW;
+END
+$func$
+LANGUAGE plpgsql;
+
+-- Only user with rights to update refered organization can update/delete something
+CREATE OR REPLACE FUNCTION organizations_users_delete_something_check()
+  RETURNS trigger AS
+$func$
+BEGIN
+    IF (
+        SELECT count(*) FROM public.organizations_users as ou
+        LEFT JOIN basic_auth.users as u
+        ON ou.user_id = u.id
+        WHERE ou.active
+        AND (ou.organization_id = OLD.organization_id)
+        AND (ou.user_id = basic_auth.current_user_id())
+    ) = 0 THEN
+        raise invalid_authorization_specification using message = 'current user is not allowed to do it';
+    END IF;
+    RETURN OLD;
 END
 $func$
 LANGUAGE plpgsql;
@@ -478,6 +498,27 @@ END
 $func$
 LANGUAGE plpgsql;
 
+--Only user with rights to update a motion can delete its tags or vote events
+CREATE OR REPLACE FUNCTION motions_array_delete_check()
+    RETURNS trigger AS
+$func$
+BEGIN
+    IF
+            (basic_auth.current_role()) = 'admin'
+        OR
+            (SELECT count(*)
+            FROM motions as m
+            WHERE basic_auth.current_user_id() = m.user_id
+            AND m.id = OLD.motion_id) > 0
+    THEN
+        RETURN OLD;
+    ELSE
+        raise invalid_authorization_specification using message = 'current user is not allowed to update tags or vote events for given motion';
+    END IF;
+END
+$func$
+LANGUAGE plpgsql;
+
 --Only users with rights to update the motion (the vote event) can create its votes
 CREATE OR REPLACE FUNCTION vote_insert_check()
     RETURNS trigger AS
@@ -528,6 +569,31 @@ END
 $func$
 LANGUAGE plpgsql;
 
+--Only users with rights to update the motion (the vote event) can update its votes
+CREATE OR REPLACE FUNCTION vote_delete_check()
+    RETURNS trigger AS
+$func$
+BEGIN
+    IF
+            (basic_auth.current_role()) = 'admin'
+        OR
+            (
+                SELECT count(*)
+                FROM vote_events as ve
+                LEFT JOIN motions as m
+                ON ve.motion_id = m.id
+                WHERE basic_auth.current_user_id() = m.user_id
+                AND ve.id = OLD.vote_event_id
+            ) > 0
+    THEN
+        RETURN OLD;
+    ELSE
+        raise invalid_authorization_specification using message = 'current user is not allowed to update new votes for given vote event (motion)';
+    END IF;
+END
+$func$
+LANGUAGE plpgsql;
+
 -- ####### ######  ###  #####   #####  ####### ######   #####
 --    #    #     #  #  #     # #     # #       #     # #     #
 --    #    #     #  #  #       #       #       #     # #
@@ -556,10 +622,15 @@ CREATE TRIGGER membership_new_check
 BEFORE INSERT ON memberships
 FOR EACH ROW EXECUTE PROCEDURE organizations_users_new_check();
 
---Only user with rights to update the organization can manage its memberships
-CREATE TRIGGER membership_old_check
-BEFORE UPDATE OR DELETE ON memberships
-FOR EACH ROW EXECUTE PROCEDURE organizations_users_old_check();
+--Only user with rights to update the organization can update its memberships
+CREATE TRIGGER membership_update_check
+BEFORE UPDATE ON memberships
+FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_something_check();
+
+--Only user with rights to update the organization can delete its memberships
+CREATE TRIGGER membership_delete_check
+BEFORE DELETE ON memberships
+FOR EACH ROW EXECUTE PROCEDURE organizations_users_delete_something_check();
 
 --Only user with rights to update the organization can insert new motion of the organization
 CREATE TRIGGER motion_new_check
@@ -567,9 +638,14 @@ BEFORE INSERT ON motions
 FOR EACH ROW EXECUTE PROCEDURE organizations_users_new_check();
 
 --Only user with rights to update the organization can uppdate a motion of the organization
-CREATE TRIGGER motion_old_check
-BEFORE UPDATE OR DELETE ON motions
-FOR EACH ROW EXECUTE PROCEDURE organizations_users_old_check();
+CREATE TRIGGER motion_update_check
+BEFORE UPDATE ON motions
+FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_something_check();
+
+--Only user with rights to update the organization can uppdate a motion of the organization
+CREATE TRIGGER motion_delete_check
+BEFORE UPDATE ON motions
+FOR EACH ROW EXECUTE PROCEDURE organizations_users_delete_something_check();
 
 --Only user with rights to update a motion can insert its tags
 CREATE TRIGGER tags_insert_check
@@ -588,9 +664,13 @@ FOR EACH ROW EXECUTE PROCEDURE motions_array_insert_check();
 
 --Only users with rights to update the motion can update its vote events.
 CREATE TRIGGER vote_events_update_check
-BEFORE UPDATE OR DELETE ON vote_events
+BEFORE UPDATE ON vote_events
 FOR EACH ROW EXECUTE PROCEDURE motions_array_update_check();
 
+--Only users with rights to update the motion can delete its vote events.
+CREATE TRIGGER vote_events_delete_check
+BEFORE DELETE ON vote_events
+FOR EACH ROW EXECUTE PROCEDURE motions_array_delete_check();
 
 --Only users with rights to update the motion (the vote event) can create its votes
 CREATE TRIGGER vote_insert_check
@@ -599,8 +679,13 @@ FOR EACH ROW EXECUTE PROCEDURE vote_insert_check();
 
 --Only users with rights to update the motion (the vote event) can update its votes
 CREATE TRIGGER vote_update_check
-BEFORE UPDATE OR DELETE ON votes
+BEFORE UPDATE ON votes
 FOR EACH ROW EXECUTE PROCEDURE vote_update_check();
+
+--Only users with rights to update the motion (the vote event) can delete its votes
+CREATE TRIGGER vote_delete_check
+BEFORE DELETE ON votes
+FOR EACH ROW EXECUTE PROCEDURE vote_delete_check();
 
 -- Only user with rights to update refered parent organization can give rights to themselves to update the organization itself
 CREATE TRIGGER organizations_users_insert_check
@@ -767,7 +852,7 @@ grant select, insert, update
       on all tables in schema public to author;
 
 grant delete
-    on memberships, motions, organizations, people, vote_events, votes to author;
+    on public.memberships, public.motions, public.organizations, public.people, public.vote_events, public.votes to author;
 
 grant select, insert, update, delete
     on all tables in schema public to admin;
