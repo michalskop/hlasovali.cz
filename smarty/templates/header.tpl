@@ -40,7 +40,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$user->name} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">My page</a></li>
-                        <li><a href="?page=logout&action=select&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a></li>
+                        <li><a href="?page=logout&action=run&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a></li>
                     </ul>
             </li>
         {else}

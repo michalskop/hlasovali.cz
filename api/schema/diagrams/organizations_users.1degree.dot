@@ -1,4 +1,4 @@
-// dot 2.36.0 on Linux 3.13.0-85-generic
+// dot 2.36.0 on Linux 3.13.0-91-generic
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -26,14 +26,13 @@ digraph "oneDegreeRelationshipsDiagram" {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">organizations</TD></TR>
       <TR><TD PORT="id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">id</TD></TR>
-      <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
-      <TR><TD PORT="classification" COLSPAN="3" ALIGN="LEFT">classification</TD></TR>
-      <TR><TD PORT="parent_id" COLSPAN="3" ALIGN="LEFT">parent_id</TD></TR>
+      <TR><TD PORT="name" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">name</TD></TR>
+      <TR><TD PORT="classification" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">classification</TD></TR>
+      <TR><TD PORT="parent_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">parent_id</TD></TR>
       <TR><TD PORT="founding_date" COLSPAN="3" ALIGN="LEFT">founding_date</TD></TR>
       <TR><TD PORT="dissolution_date" COLSPAN="3" ALIGN="LEFT">dissolution_date</TD></TR>
       <TR><TD PORT="attributes" COLSPAN="3" ALIGN="LEFT">attributes</TD></TR>
-      <TR><TD PORT="user_id" COLSPAN="3" ALIGN="LEFT">user_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="organizations.html"
     tooltip="organizations"
@@ -45,7 +44,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="organization_id" COLSPAN="2" BGCOLOR="#bed1b8" ALIGN="LEFT">organization_id</TD><TD PORT="organization_id.type" ALIGN="LEFT">int8[19]</TD></TR>
       <TR><TD PORT="user_id" COLSPAN="2" BGCOLOR="#bed1b8" ALIGN="LEFT">user_id</TD><TD PORT="user_id.type" ALIGN="LEFT">int8[19]</TD></TR>
       <TR><TD PORT="active" COLSPAN="2" ALIGN="LEFT">active</TD><TD PORT="active.type" ALIGN="LEFT">bool[1]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
     </TABLE>>
     URL="organizations_users.html"
     tooltip="organizations_users"
@@ -61,7 +60,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="verified" COLSPAN="3" ALIGN="LEFT">verified</TD></TR>
       <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
       <TR><TD PORT="attributes" COLSPAN="3" ALIGN="LEFT">attributes</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     tooltip="basic_auth.users"
   ];

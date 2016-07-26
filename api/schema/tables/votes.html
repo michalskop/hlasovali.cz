@@ -57,6 +57,23 @@
    </table>
   </td></tr>
  </table>
+<div style="margin-right: 2pt;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-9598353634003340";
+google_ad_channel ="SchemaSpy-generated";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_type = "text";
+google_color_border = "9bab96";
+google_color_link = "489148";
+google_color_text = "000000";
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
 &nbsp;
 </td><tr valign='top'><td class='container' align='left' valign='top'>
 <a name='columns'></a>
@@ -84,19 +101,19 @@
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='odd'>
+<tr class='even'>
  <td class='primaryKey' title='Primary Key'>id</td>
  <td class='detail'>bigserial</td>
  <td class='detail' align='right'>19</td>
  <td class='detail' align='center'></td>
- <td class='detail' align='center'></td>
+ <td class='detail' align='center' title='Automatically updated by the database'>&nbsp;&radic;&nbsp;</td>
  <td class='detail' align='right'>nextval('votes_id_seq'::regclass)</td>
  <td class='detail'></td>
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
- <td class='detail'>vote_event_id</td>
+<tr class='odd'>
+ <td class='indexedColumn' title='Indexed'>vote_event_id</td>
  <td class='detail'>int8</td>
  <td class='detail' align='right'>19</td>
  <td class='detail' align='center'></td>
@@ -105,7 +122,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="votes.vote_event_id refs vote_events.id via votes_vote_event_id_fkey"><a href='vote_events.html'>vote_events</a><span class='relatedKey'>.id</span>
     </td>
     <td class='constraint detail'>votes_vote_event_id_fkey<span title='Restrict delete:
@@ -115,8 +132,8 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
- <td class='detail'>person_id</td>
+<tr class='even'>
+ <td class='indexedColumn' title='Indexed'>person_id</td>
  <td class='detail'>int8</td>
  <td class='detail' align='right'>19</td>
  <td class='detail' align='center'></td>
@@ -125,7 +142,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="votes.person_id refs people.id via votes_person_id_fkey"><a href='people.html'>people</a><span class='relatedKey'>.id</span>
     </td>
     <td class='constraint detail'>votes_person_id_fkey<span title='Restrict delete:
@@ -135,9 +152,9 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>option</td>
- <td class='detail'>varchar</td>
+ <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
  <td class='detail' align='center'></td>
  <td class='detail' align='center'></td>
@@ -146,7 +163,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>organization_id</td>
  <td class='detail'>int8</td>
  <td class='detail' align='right'>19</td>
@@ -156,7 +173,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="votes.organization_id refs organizations.id via votes_organization_id_fkey"><a href='organizations.html'>organizations</a><span class='relatedKey'>.id</span>
     </td>
     <td class='constraint detail'>votes_organization_id_fkey<span title='Restrict delete:
@@ -167,7 +184,7 @@
  <td class='comment detail'></td>
 </tr>
 </table>
-<p title='5 columns'>Table contained -1 rows at Thu May 05 00:25 CEST 2016<p/>
+<p title='5 columns'>Table contained 0 rows at Tue Jul 26 03:37 CEST 2016<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -187,26 +204,32 @@
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>votes_pkey</td>
  </tr>
+ <tr>
+  <td class='indexedColumn'>vote_event_id + person_id</td>
+  <td class='detail'>Must be unique</td>
+  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+  <td class='constraint' style='text-align:left;'>votes_vote_event_id_person_id_key</td>
+ </tr>
 </table>
 </div>
 <table width='100%' border='0'><tr><td class='container'>
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from votes'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="votes.html" title="votes" alt="" coords="186,151,465,337">
-<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,351,141,603">
-<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="17,202,129,334">
-<area shape="rect" id="node4" href="vote_events.html" title="vote_events" alt="" coords="11,5,135,185">
+<area shape="rect" id="node1" href="votes.html" title="votes" alt="" coords="185,175,439,361">
+<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,399,141,627">
+<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="13,226,134,382">
+<area shape="rect" id="node4" href="vote_events.html" title="vote_events" alt="" coords="7,5,140,209">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/votes.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="640,5,757,89">
-<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,234,141,486">
-<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="396,39,508,171">
-<area shape="rect" id="node4" href="motions.html" title="motions" alt="" coords="216,183,315,267">
-<area shape="rect" id="node5" href="organizations_users.html" title="organizations_users" alt="" coords="185,285,345,369">
-<area shape="rect" id="node6" href="vote_events.html" title="vote_events" alt="" coords="390,189,514,369">
-<area shape="rect" id="node7" href="votes.html" title="votes" alt="" coords="559,162,838,347">
+<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="633,5,754,89">
+<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,282,141,510">
+<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="395,39,517,195">
+<area shape="rect" id="node4" href="motions.html" title="motions" alt="" coords="199,231,332,315">
+<area shape="rect" id="node5" href="organizations_users.html" title="organizations_users" alt="" coords="185,333,345,417">
+<area shape="rect" id="node6" href="vote_events.html" title="vote_events" alt="" coords="389,213,523,417">
+<area shape="rect" id="node7" href="votes.html" title="votes" alt="" coords="567,186,820,371">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/votes.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

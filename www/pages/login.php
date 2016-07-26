@@ -8,10 +8,15 @@ spl_autoload_register(function ($class) {
 });
 
 switch ($action) {
-    case 'select':
+    case 'run':
         $user = new User($settings);
         $user->login($_POST['email'],$_POST['pass']);
-        header("Location: " . $_GET['continue']);
+        if (isset($_GET['continue'])) {
+            header("Location: " . $_GET['continue']);
+            exit;
+        } else {
+            $smarty->display('login.tpl');
+        }
         exit;
     case 'view':
     default:

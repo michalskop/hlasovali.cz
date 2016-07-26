@@ -2,7 +2,7 @@
 $settings = json_decode(file_get_contents("settings.json"));
 
 //get page
-$page = isset($_GET['page']) ? $_GET['page'] : 'frontpage';
+$page = isset($_GET['page']) ? $_GET['page'] : 'login';
 
 // do 'selects' directly
 $action = isset($_GET['action']) ? $_GET['action'] : 'view';
@@ -28,12 +28,12 @@ $smarty->assign('page', $page);
 
 // set up user
 $user = new User($settings);
-$smarty->assign('user', $user->info());
+$smarty->assign('user', $user->getUser());
 
 // set up city hall
 $cityhall = new CityHall($settings);
-$smarty->assign('cityhall', $cityhall->info());
-$smarty->assign('cityhalls', $cityhall->select_from());
+$smarty->assign('cityhall', $cityhall->getCityHall());
+$smarty->assign('cityhalls', $cityhall->selectFrom());
 
 // get texts
 $t = new Text($settings);

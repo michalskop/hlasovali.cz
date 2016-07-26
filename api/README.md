@@ -272,3 +272,14 @@ with data
 }
 ```
 Note: _option_ may be _yes_, _no_, _abstain_, _absent_, _not voting_; see http://www.popoloproject.com/specs/vote.html
+
+# Installation
+- server_install.sh
+- hlasovali_apache.sh
+- postgres_install.sh
+- letsencrypt.sh
+- sudo su postgres -c hlasovali_sql.sh
+- basic_insert.sh
+
+### Generate database description:
+`java -jar schemaSpy_5.0.0.jar -t pgsql -host localhost -db hlasovali -s public -u postgres -p password -o schemaspy -dp postgresql-9.4.1208.jre7.jar`

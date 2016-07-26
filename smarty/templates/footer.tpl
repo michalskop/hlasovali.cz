@@ -19,6 +19,7 @@
         <li>·</li>
          <li><a href="https://github.com/KohoVolit/hlidame.je/"><i class="fa fa-github"></i> Source</a></li>
      </ul> *}
+     <hr>
      <p>Od autorů <a href="http://volebnikalkulacka.cz">Volební kalkulačky</a>.
 
 </footer>

@@ -141,7 +141,8 @@ CREATE TABLE public.motions
         ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT motions_organization_id_fkey FOREIGN KEY (organization_id)
         REFERENCES public.organizations (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION
+        ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT motions_ukey UNIQUE (name, date, user_id, organization_id)
 )
 WITH (
 OIDS=FALSE
@@ -336,8 +337,6 @@ $func$
 BEGIN
     IF (
         SELECT count(*) FROM public.organizations_users as ou
-        LEFT JOIN basic_auth.users as u
-        ON ou.user_id = u.id
         WHERE ou.active
         AND (ou.organization_id = NEW.organization_id)
         AND (ou.user_id = basic_auth.current_user_id())
@@ -349,25 +348,50 @@ END
 $func$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION organizations_users_admin_check()
-    RETURNS trigger AS
+-- Only user with rights to update refered parent organization can give rights to themselves to update the organization itself
+CREATE OR REPLACE FUNCTION organizations_users_parent_new_check()
+  RETURNS trigger AS
 $func$
 BEGIN
     IF (NOT (
-        basic_auth.current_role() = 'admin'
-    ) AND (
-        SELECT classification
-        FROM organizations as o
-        WHERE NEW.organization_id = o.id
-        LIMIT 1
-    ) = 'city hall')
-     THEN
-        raise invalid_authorization_specification using message = 'only admin can do that';
+             basic_auth.current_role() = 'admin'
+    ) AND  (
+        SELECT count(*) FROM public.organizations as o
+        LEFT JOIN public.organizations as op
+        ON o.parent_id = op.id
+        LEFT JOIN public.organizations_users as ou
+        ON op.id = ou.organization_id
+        WHERE ou.active
+        AND (o.id = NEW.organization_id)
+        AND (ou.user_id = basic_auth.current_user_id())
+    ) = 0 )
+    THEN
+        raise invalid_authorization_specification using message = 'current user is not allowed to do it!';
     END IF;
     RETURN NEW;
 END
 $func$
 LANGUAGE plpgsql;
+
+-- CREATE OR REPLACE FUNCTION organizations_users_admin_check()
+--     RETURNS trigger AS
+-- $func$
+-- BEGIN
+--     IF (NOT (
+--         basic_auth.current_role() = 'admin'
+--     ) AND (
+--         SELECT classification
+--         FROM organizations as o
+--         WHERE NEW.organization_id = o.id
+--         LIMIT 1
+--     ) = 'city hall')
+--      THEN
+--         raise invalid_authorization_specification using message = 'only admin can do that';
+--     END IF;
+--     RETURN NEW;
+-- END
+-- $func$
+-- LANGUAGE plpgsql;
 
 -- Only admin can create a new top-level organization (without parent)
 CREATE OR REPLACE FUNCTION organizations_insert_admin_check()
@@ -468,8 +492,8 @@ BEGIN
                 LEFT JOIN motions as m
                 ON ve.motion_id = m.id
                 WHERE basic_auth.current_user_id() = m.user_id
-                AND m.id = NEW.motion_id) > 0
-            )
+                AND ve.id = NEW.vote_event_id
+            ) > 0
     THEN
         RETURN NEW;
     ELSE
@@ -493,8 +517,8 @@ BEGIN
                 LEFT JOIN motions as m
                 ON ve.motion_id = m.id
                 WHERE basic_auth.current_user_id() = m.user_id
-                AND m.id = OLD.motion_id) > 0
-            )
+                AND ve.id = OLD.vote_event_id
+            ) > 0
     THEN
         RETURN NEW;
     ELSE
@@ -524,7 +548,7 @@ FOR EACH ROW EXECUTE PROCEDURE organizations_insert_suborganization_check();
 
 -- Only user with rights to update the organization can update it
 CREATE TRIGGER organization_update_check
-BEFORE UPDATE ON organizations
+BEFORE UPDATE OR DELETE ON organizations
 FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_check();
 
 --Only user with rigths to update the organization can create its memberships
@@ -564,7 +588,7 @@ FOR EACH ROW EXECUTE PROCEDURE motions_array_insert_check();
 
 --Only users with rights to update the motion can update its vote events.
 CREATE TRIGGER vote_events_update_check
-BEFORE UPDATE ON vote_events
+BEFORE UPDATE OR DELETE ON vote_events
 FOR EACH ROW EXECUTE PROCEDURE motions_array_update_check();
 
 
@@ -578,13 +602,15 @@ CREATE TRIGGER vote_update_check
 BEFORE UPDATE OR DELETE ON votes
 FOR EACH ROW EXECUTE PROCEDURE vote_update_check();
 
+-- Only user with rights to update refered parent organization can give rights to themselves to update the organization itself
+CREATE TRIGGER organizations_users_insert_check
+BEFORE INSERT ON organizations_users
+FOR EACH ROW EXECUTE PROCEDURE organizations_users_parent_new_check();
 
 
-
-
-CREATE TRIGGER organizations_users_check
-BEFORE INSERT OR UPDATE OR DELETE ON organizations_users
-FOR EACH ROW EXECUTE PROCEDURE organizations_users_admin_check();
+-- CREATE TRIGGER organizations_users_check
+-- BEFORE INSERT OR UPDATE OR DELETE ON organizations_users
+-- FOR EACH ROW EXECUTE PROCEDURE organizations_users_admin_check();
 
 
 
@@ -683,6 +709,50 @@ FROM vote_events as ve
 LEFT JOIN motions as m
 ON ve.motion_id = m.id;
 
+-- everything about a single vote event
+create or replace view vote_events_information as
+    SELECT
+        p.given_name as person_given_name,
+        p.family_name as person_family_name,
+        o.name as organization_name,
+        o.classification as organization_classification,
+        o.founding_date as organization_founding_date,
+        o.dissolution_date as organization_dissolution_date,
+        p.attributes as person_attributes,
+        o.attributes as organization_attributes,
+        o.parent_id as parent_id,
+        v.id as vote_id,
+        v.option as vote_option,
+        ve.id as vote_event_id,
+        ve.start_date as vote_event_start_date,
+        ve.date_precision as vote_event_date_precision,
+        ve.attributes as vote_event_attributes,
+        m.id as motion_id,
+        m.name as motion_name,
+        m.description as motion_description,
+        m.date as motion_date,
+        m.date_precision as motion_date_precision,
+        m.attributes as motion_attributes,
+        u.id as user_id,
+        u.name as user_name,
+        o2.name as parent_organization_name,
+        o2.classification as parent_organization_classification,
+        o2.founding_date as parent_organization_founding_date,
+        o2.dissolution_date as parent_organization_dissolution_date
+    FROM votes as v
+    LEFT JOIN people as p
+    ON v.person_id = p.id
+    LEFT JOIN organizations as o
+    ON v.organization_id = o.id
+    LEFT JOIN vote_events as ve
+    ON v.vote_event_id = ve.id
+    LEFT JOIN motions as m
+    ON ve.motion_id = m.id
+    LEFT JOIN users as u
+    ON m.user_id = u.id
+    LEFT JOIN organizations as o2
+    ON m.organization_id = o2.id;
+
 
  -- ######  ###  #####  #     # #######  #####
  -- #     #  #  #     # #     #    #    #     #
@@ -696,6 +766,9 @@ grant usage, select on all sequences in schema public to author, admin;
 grant select, insert, update
       on all tables in schema public to author;
 
+grant delete
+    on memberships, motions, organizations, people, vote_events, votes to author;
+
 grant select, insert, update, delete
     on all tables in schema public to admin;
 
@@ -705,8 +778,8 @@ grant select, insert, update
 grant select, insert, update, delete
     on all tables in schema basic_auth to admin;
 
-REVOKE insert, update, delete
-    on organizations_users FROM author;
+-- REVOKE insert, update, delete
+--     on organizations_users FROM author;
 
 grant select
       on all tables in schema public to anon;

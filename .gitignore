@@ -1,7 +1,7 @@
 dev
 dev/*
 scripts/webcache
-scripts/__pycache__
+api/__pycache__
 smarty/templates_c
 www/settings.php
 www/settings.json
@@ -9,3 +9,4 @@ postgrest.sh
 basic_insert.sql
 trial.php
 www/fonts
+api/settings.py

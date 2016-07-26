@@ -16,14 +16,12 @@ sudo apt-get install postgresql postgresql-contrib
 sudo passwd postgres
 
 
-MYPGSQLPASS='example'
+# MYPGSQLPASS='example'
+#
+# MYEMAIL="michal.skop@example.com"
+# MYPASS="example"
 
-MYEMAIL="michal.skop@kohovolit.eu"
-MYPASS="example"
 
-sudo -i -u postgres
-
-createdb hlasovali -O postgres -E UTF-8 -D pg_default --lc-collate cs_CZ.UTF-8 --lc-ctype cs_CZ.UTF.8 -T template0
 
 # psql -f /home/projects/cz.parldata.net/api/setup.sql -d activities
 #

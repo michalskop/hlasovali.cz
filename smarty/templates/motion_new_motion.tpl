@@ -5,7 +5,7 @@
 <script src="{$settings->app_url}libs/bootstrap-tagsinput.min.js"></script>
 
 
-<form action="index.php?page=motion&action=create&continue={$request_uri|urlencode}" method="get" name="motion_form">
+<form action="index.php?page=motion&action=create&continue={$request_uri|urlencode}" method="post" name="motion_form">
     <fieldset>
         <div class="form-group">
             <label for="name">{$t->get('motion_name')}:</label>
@@ -34,10 +34,10 @@
             <fieldset id="links">
                 <div>
                     <div class="col-sm-4">
-                        <input type="text" id="links_decriptions" name="links_decriptions[]"     placeholder="{$t->get('motion_link_description')}" class="form-control"/>
+                        <input type="text" id="links_decriptions" name="links_descriptions[]"     placeholder="{$t->get('motion_link_description')}" class="form-control"/>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" id="links_links" name="links_links[]" placeholder="{$t->get('motion_link_link')}" class="form-control" />
+                        <input type="url" id="links_links" name="links_links[]" placeholder="{$t->get('motion_link_link')}" class="form-control" />
                     </div>
                 </div>
             </fieldset>

@@ -57,6 +57,23 @@
    </table>
   </td></tr>
  </table>
+<div style="margin-right: 2pt;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-9598353634003340";
+google_ad_channel ="SchemaSpy-generated";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_type = "text";
+google_color_border = "9bab96";
+google_color_link = "489148";
+google_color_text = "000000";
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
 &nbsp;
 </td><tr valign='top'><td class='container' align='left' valign='top'>
 <a name='columns'></a>
@@ -89,7 +106,7 @@
  <td class='detail'>bigserial</td>
  <td class='detail' align='right'>19</td>
  <td class='detail' align='center'></td>
- <td class='detail' align='center'></td>
+ <td class='detail' align='center' title='Automatically updated by the database'>&nbsp;&radic;&nbsp;</td>
  <td class='detail' align='right'>nextval('organizations_id_seq'::regclass)</td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
@@ -123,8 +140,8 @@
  <td class='comment detail'></td>
 </tr>
 <tr class='even'>
- <td class='detail'>name</td>
- <td class='detail'>varchar</td>
+ <td class='indexedColumn' title='Indexed'>name</td>
+ <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
  <td class='detail' align='center'></td>
  <td class='detail' align='center'></td>
@@ -134,8 +151,8 @@
  <td class='comment detail'></td>
 </tr>
 <tr class='odd'>
- <td class='detail'>classification</td>
- <td class='detail'>varchar</td>
+ <td class='indexedColumn' title='Indexed'>classification</td>
+ <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
  <td class='detail' align='center'></td>
  <td class='detail' align='center'></td>
@@ -145,7 +162,7 @@
  <td class='comment detail'></td>
 </tr>
 <tr class='even'>
- <td class='detail'>parent_id</td>
+ <td class='indexedColumn' title='Indexed'>parent_id</td>
  <td class='detail'>int8</td>
  <td class='detail' align='right'>19</td>
  <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
@@ -188,19 +205,8 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
- <td class='detail'>user_id</td>
- <td class='detail'>_int8</td>
- <td class='detail' align='right'>19</td>
- <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
- <td class='detail' align='center'></td>
- <td class='detail' align='right'>null</td>
- <td class='detail'></td>
- <td class='detail'> </td>
- <td class='comment detail'></td>
-</tr>
 </table>
-<p title='8 columns'>Table contained -1 rows at Thu May 05 00:25 CEST 2016<p/>
+<p title='7 columns'>Table contained 0 rows at Tue Jul 26 03:37 CEST 2016<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -220,29 +226,35 @@
   <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span></td>
   <td class='constraint' style='text-align:left;'>organizations_pkey</td>
  </tr>
+ <tr>
+  <td class='indexedColumn'>name + classification + parent_id</td>
+  <td class='detail'>Must be unique</td>
+  <td class='detail' style='text-align:left;'><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+  <td class='constraint' style='text-align:left;'>organizations_name_classification_parent_id_key</td>
+ </tr>
 </table>
 </div>
 <table width='100%' border='0'><tr><td class='container'>
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from organizations'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="351,5,479,185">
-<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="5,394,291,651">
-<area shape="rect" id="node3" href="motions.html" title="motions" alt="" coords="351,202,479,454">
-<area shape="rect" id="node4" href="organizations_users.html" title="organizations_users" alt="" coords="335,471,495,603">
-<area shape="rect" id="node5" href="votes.html" title="votes" alt="" coords="351,621,479,801">
+<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="337,5,465,185">
+<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,394,277,627">
+<area shape="rect" id="node3" href="motions.html" title="motions" alt="" coords="335,202,468,454">
+<area shape="rect" id="node4" href="organizations_users.html" title="organizations_users" alt="" coords="321,471,481,603">
+<area shape="rect" id="node5" href="votes.html" title="votes" alt="" coords="337,621,465,801">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/organizations.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="692,5,820,185">
-<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="5,327,291,585">
-<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="550,123,637,207">
-<area shape="rect" id="node4" href="motions.html" title="motions" alt="" coords="351,514,479,766">
-<area shape="rect" id="node5" title="basic_auth.users" alt="" coords="78,647,218,731">
-<area shape="rect" id="node6" href="organizations_users.html" title="organizations_users" alt="" coords="335,365,495,497">
-<area shape="rect" id="node7" href="tags.html" title="tags" alt="" coords="550,514,637,598">
-<area shape="rect" id="node8" href="vote_events.html" title="vote_events" alt="" coords="539,226,647,310">
-<area shape="rect" id="node9" href="votes.html" title="votes" alt="" coords="692,202,820,382">
+<area shape="rect" id="node1" href="memberships.html" title="memberships" alt="" coords="703,5,831,185">
+<area shape="rect" id="node2" href="organizations.html" title="organizations" alt="" coords="6,327,277,561">
+<area shape="rect" id="node3" href="people.html" title="people" alt="" coords="531,123,653,207">
+<area shape="rect" id="node4" href="motions.html" title="motions" alt="" coords="335,514,468,766">
+<area shape="rect" id="node5" title="basic_auth.users" alt="" coords="71,635,211,719">
+<area shape="rect" id="node6" href="organizations_users.html" title="organizations_users" alt="" coords="321,365,481,497">
+<area shape="rect" id="node7" href="tags.html" title="tags" alt="" coords="531,514,653,598">
+<area shape="rect" id="node8" href="vote_events.html" title="vote_events" alt="" coords="525,226,659,310">
+<area shape="rect" id="node9" href="votes.html" title="votes" alt="" coords="703,202,831,382">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/organizations.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

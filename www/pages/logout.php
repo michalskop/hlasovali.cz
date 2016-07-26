@@ -8,7 +8,7 @@ spl_autoload_register(function ($class) {
 });
 
 switch ($action) {
-    case 'select':
+    case 'run':
     default:
         $user = new User($settings);
         $user->logout();

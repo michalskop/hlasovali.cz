@@ -504,7 +504,7 @@ create or replace view public.current_user as
 
   -- authors can edit comments/posts
   grant select, insert, update, delete
-    on basic_auth.tokens, basic_auth.users, basic_auth.current_user to author;
+    on basic_auth.tokens, basic_auth.users to author;
 
 -- setting other rights
 

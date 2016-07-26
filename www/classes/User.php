@@ -10,6 +10,8 @@ class User {
         $this->api = new RestClient([
             'base_url' => $settings->api_url
         ]);
+        $this->headers = [];
+        $this->headers['Content-Type'] = 'application/json';
     }
 
     // login
@@ -17,7 +19,7 @@ class User {
         $result = $this->api->post(
             "rpc/login",
             json_encode(["email"=>$email,"pass"=>$pass]),
-            ['Content-Type' => 'application/json']
+            $this->headers
         );
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()->token))
@@ -35,18 +37,16 @@ class User {
     }
 
     // get basic info about logged in user
-    public function info(){
+    public function getUser(){
         if (property_exists($this,'information'))
             return $this->information;
         if (isset($_COOKIE['auth_token']))
-            $headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
-        else {
-            $headers = [];
-        }
+            $this->headers['Authorization'] = 'Bearer ' . $_COOKIE['auth_token'];
+
         $result = $this->api->get(
             "current_user",
             [],
-            $headers
+            $this->headers
         );
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()[0])) {
@@ -59,21 +59,26 @@ class User {
                 $res->logged = false;
                 return $res;
             }
+        } else {
+            unset($this->information);
+            $res = new StdClass();
+            $res->logged = false;
+            return $res;
         }
     }
 
     // check if the user has rights as an author for a city hall
-    public function has_author_privilages($organization_id) {
-        $user = $this->info();
+    public function hasAuthorPrivilages($organization_id) {
+        $user = $this->getUser();
         if (!$user->logged)
             return false;
-        $headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
+        $this->headers['Authorization'] = 'Bearer ' . $_COOKIE['auth_token'];
         $result = $this->api->get(
             "organizations_users",
             ["user_id" => "eq." . $user->id,
              "organization_id" => "eq." . $organization_id,
              "active" => "is.true"],
-            $headers
+            $this->headers
         );
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()[0])) {

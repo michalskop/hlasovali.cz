@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# sudo su postgres
+
+createdb hlasovali -O postgres -E UTF-8 -D pg_default --lc-collate cs_CZ.UTF-8 --lc-ctype cs_CZ.UTF.8 -T template0
+
+psql -f /home/michal/project/hlasovali.cz/api/basic_auth_setup.sql -d hlasovali
+psql -f /home/michal/project/hlasovali.cz/api/hlasovali.sql -d hlasovali

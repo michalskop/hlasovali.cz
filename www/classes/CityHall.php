@@ -11,14 +11,17 @@ class CityHall {
             'base_url' => $settings->api_url
         ]);
         if (isset($_COOKIE['auth_token']))
-            $this->headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
+            $this->headers = [
+                'Authorization' => 'Bearer ' . $_COOKIE['auth_token']
+            ];
         else {
             $this->headers = [];
         }
+        $this->headers['Content-Type'] = 'application/json';
     }
 
     // set
-    public function set($id) {
+    public function setCookie($id) {
         if ($this->exist($id))
             setcookie('city_hall', $id);
     }
@@ -40,7 +43,7 @@ class CityHall {
     }
 
     // get info about current city hall
-    public function info() {
+    public function getCityHall() {
         if (property_exists($this,'information'))
             return $this->information;
         if (isset($_COOKIE['city_hall'])) {
@@ -59,6 +62,10 @@ class CityHall {
                     $res->selected = false;
                     return $res;
                 }
+            } else {
+                $res = new StdClass();
+                $res->selected = false;
+                return $res;
             }
         } else {
             $this->information = new StdClass();
@@ -70,12 +77,12 @@ class CityHall {
         }
     }
 
-    public function select_from() {
-        if (property_exists($this,'select_from'))
-            return $this->select_from;
+    public function selectFrom() {
+        if (property_exists($this,'selectFrom'))
+            return $this->selectFrom;
         $result = $this->api->get_all(
             "organizations",
-            ["classification" => "eq.city hall", "order" => "name.asc"],
+            [],//["classification" => "eq.city hall", "order" => "name.asc"],
             $this->headers
         );
         return $result;

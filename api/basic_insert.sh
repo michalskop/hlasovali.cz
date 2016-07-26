@@ -1,8 +1,8 @@
 #!/bin/bash
 
-sudo -i -u postgres
+# sudo -i -u postgres
 
-MYEMAIL="michal.skop@kohovolit.eu"
+MYEMAIL="michal.skop@example.com"
 MYPASS="example"
 MYNAME="Michal Škop"
 

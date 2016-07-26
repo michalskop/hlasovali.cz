@@ -1,4 +1,4 @@
-// dot 2.36.0 on Linux 3.13.0-85-generic
+// dot 2.36.0 on Linux 3.13.0-91-generic
 // SchemaSpy rev 590
 digraph "current_people_in_organizations" {
   graph [
@@ -31,7 +31,9 @@ digraph "current_people_in_organizations" {
       <TR><TD PORT="classification" COLSPAN="3" ALIGN="LEFT">classification</TD></TR>
       <TR><TD PORT="founding_date" COLSPAN="3" ALIGN="LEFT">founding_date</TD></TR>
       <TR><TD PORT="dissolution_date" COLSPAN="3" ALIGN="LEFT">dissolution_date</TD></TR>
+      <TR><TD PORT="person_attributes" COLSPAN="3" ALIGN="LEFT">person_attributes</TD></TR>
       <TR><TD PORT="organization_attributes" COLSPAN="3" ALIGN="LEFT">organization_attributes</TD></TR>
+      <TR><TD PORT="parent_id" COLSPAN="3" ALIGN="LEFT">parent_id</TD></TR>
       <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">view</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/current_people_in_organizations.html"

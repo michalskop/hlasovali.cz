@@ -2,7 +2,7 @@
 {block name=body}
 
     {if !$user->logged}
-    <form action="index.php?page=login&action=select&continue={$request_uri|urlencode}" method="post">
+    <form action="index.php?page=login&action=run&continue={$request_uri|urlencode}" method="post">
         <div class="form-group">
             <label for="email">{$t->get('email_address')}</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Email">
@@ -15,7 +15,7 @@
     </form>
     {else}
         {$t->get('already_logged_as')}: {$user->name}
-        <small>(<a href="?page=logout&action=select&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a>)</small>
+        <small>(<a href="?page=logout&action=run&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a>)</small>
     {/if}
 
 {/block}
