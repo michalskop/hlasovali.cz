@@ -273,7 +273,7 @@ CREATE TABLE public.tags
     CONSTRAINT tag_pkey PRIMARY KEY (tag, motion_id),
     CONSTRAINT tag_motion_id_fkey FOREIGN KEY (motion_id)
         REFERENCES public.motions (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION
+        ON UPDATE NO ACTION ON DELETE CASCADE
 )
 WITH (
 OIDS=FALSE
@@ -644,7 +644,7 @@ FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_something_check();
 
 --Only user with rights to update the organization can uppdate a motion of the organization
 CREATE TRIGGER motion_delete_check
-BEFORE UPDATE ON motions
+BEFORE DELETE ON motions
 FOR EACH ROW EXECUTE PROCEDURE organizations_users_delete_something_check();
 
 --Only user with rights to update a motion can insert its tags
