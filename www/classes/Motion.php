@@ -19,10 +19,28 @@ class Motion
         $this->headers['Content-Type'] = 'application/json';
     }
 
+    // get info about motion
+    public function getMotion($id=NULL) {
+        $headers = $this->headers;
+        $headers['Prefer'] = 'plurality=singular';
+        $result = $this->api->get(
+            "motions",
+            ["id"=>"eq.".$id],
+            $headers
+        );
+        if ($result->info->http_code == 200) {
+            $item = $result->decode_response();
+            $item->exist = True;
+            return $item;
+        } else {
+            $item = new StdClass();
+            $item->exist = FALSE;
+            return $item;
+        }
+    }
+
     // parses form and prepares data for create
     function parseForm($form) {
-
-        print_r($form);
         $data = [];
         $data['name'] = htmlspecialchars(trim($form['name']));
         if (isset($form['description']) and (trim($form['description']) != '')) {
@@ -31,6 +49,7 @@ class Motion
         if (valid_date(trim($form['date']))) {
             $data['date'] = trim($form['date']);
             $time_precision = time_precision(trim($_POST['time']));
+            $data['date_precision'] = 10;
             if ($time_precision > 0) {
                 $data['date'] = $data['date'] . 'T' . trim($_POST['time']);
                 $data['date_precision'] = 11 + $time_precision;
@@ -39,7 +58,7 @@ class Motion
             $date['date_precision'] = 0;
         }
         if (isset($_POST['links_links']) and isset($_POST['links_descriptions'])) {
-            $attributes = [];
+            $attributes = ['links'=>[]];
             $n = count($_POST['links_links']);
 
             for ($i=0; $i<$n; $i++) {
@@ -50,7 +69,9 @@ class Motion
                         $item = [];
                         $item['url'] = $link;
                         $item['text'] = $descr;
-                        $attributes[] = $item;
+                        if (!isset($attributes['links']))
+                            $attributes['links'] = [];
+                        $attributes['links'][] = $item;
                     }
                 }
             }
@@ -60,13 +81,25 @@ class Motion
     }
 
     public function create($data) {
-        print_r($data);
+        $headers = $this->headers;
+        $headers['Prefer'] = 'return=representation';
         $r = $this->api->post(
             "motions",
             json_encode($data),
-            $this->headers
+            $headers
         );
-        print_r($r);
+        return $r->decode_response();
+    }
+
+    public function update($data,$id) {
+        $headers = $this->headers;
+        $headers['Prefer'] = 'return=representation';
+        $r = $this->api->patch(
+            "motions?id=eq." . $id,
+            json_encode($data),
+            $headers
+        );
+        return $r->decode_response();
     }
 }
 ?>

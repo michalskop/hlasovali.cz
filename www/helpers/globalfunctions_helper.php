@@ -42,4 +42,23 @@ function time_precision($time) {
     return 0;
 }
 
+// takes date in ISO format and date_precision and prepares data/time
+// example return ['date' => '2012-01-01', 'time' => "10:00"]
+function preformat_date($date,$date_precision) {
+    $valid = substr($date,0,$date_precision);
+    $out = [];
+    try {
+        $d = new DateTime($valid);
+        $out['date'] = $d->format('Y-m-d');
+        if ($date_precision > 11) {
+            $out['time'] = substr($valid,11,$date_precision - 11);
+        } else {
+            $out['time'] = FALSE;
+        }
+    } catch (Exception $e) {
+        $out = ['date' => FALSE, 'time' => FALSE];
+    }
+    return $out;
+}
+
 ?>

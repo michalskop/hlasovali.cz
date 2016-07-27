@@ -7,7 +7,7 @@
         </div>
     {else}
         {if $user->logged and $user_has_author_privilages}
-            <h2><small>{$cityhall->name}</small></h2>
+            <h2><small>{$cityhall->name|htmlspecialchars}</small></h2>
             {include "motion_new_motion.tpl"}
         {else}
             <div class="alert alert-danger" role="alert">

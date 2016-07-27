@@ -5,53 +5,68 @@
 <script src="{$settings->app_url}libs/bootstrap-tagsinput.min.js"></script>
 
 
-<form action="index.php?page=motion&action=create&continue={$request_uri|urlencode}" method="post" name="motion_form">
-    <fieldset>
-        <div class="form-group">
-            <label for="name">{$t->get('motion_name')}:</label>
-            <input type="text" required class="form-control" name="name" id="name" placeholder="{$t->get('motion_human_name')}..."/>
-        </div>
+<fieldset>
+    <input type="hidden" name="motion_id" value="{$motion->id}">
 
-        <div class="row">
-            <div class="form-group col-sm-6">
-                <label for="date">{$t->get('motion_date')}:</label>
-                <input type="date" required class="form-control" name="date" id="date" placeholder="2012-07-21" pattern="{literal}[0-9]4}-[0-9]{2}-[0-9]{2}{/literal}"/>
-            </div>
-            <div class="form-group col-sm-6">
-                <label for="time">{$t->get('motion_time')}:</label>
-                <input type="time" class="form-control" name="time" id="time" placeholder="12:00"/>
-            </div>
-        </div>
+    <div class="form-group">
+        <label for="name">{$t->get('motion_name')}:</label>
+        <input type="text" required class="form-control" name="name" id="name" value="{$motion->name|htmlspecialchars}"/>
+    </div>
 
-        <div class="form-group">
-            <label for="description">{$t->get('motion_description')}:</label>
-            <textarea id="description" name="description">
-            </textarea>
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="date">{$t->get('motion_date')}:</label>
+            <input type="date" required class="form-control" name="date" id="date" {if !$date_and_time['date']}placeholder="2012-07-21"{else}value="{$date_and_time['date']}"{/if} pattern="{literal}[0-9]4}-[0-9]{2}-[0-9]{2}{/literal}"/>
         </div>
+        <div class="form-group col-sm-6">
+            <label for="time">{$t->get('motion_time')}:</label>
+            <input type="time" class="form-control" name="time" id="time" {if !$date_and_time['time']}placeholder="12:00"{else}value="{$date_and_time['time']}"{/if}/>
+        </div>
+    </div>
 
-        <div class="form-group">
-            <label for="links">{$t->get('links')}:</label>
-            <fieldset id="links">
-                <div>
+    <div class="form-group">
+        <label for="description">{$t->get('motion_description')}:</label>
+        <textarea id="description" name="description">
+            {$motion->description|htmlspecialchars}
+        </textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="links">{$t->get('links')}:</label>
+        <fieldset id="links">
+            <div>
+                {if count($motion->attributes->links) == 0}
                     <div class="col-sm-4">
                         <input type="text" id="links_descriptions" name="links_descriptions[]"     placeholder="{$t->get('motion_link_description')}" class="form-control"/>
                     </div>
                     <div class="col-sm-8">
                         <input type="url" id="links_links" name="links_links[]" placeholder="{$t->get('motion_link_link')}" class="form-control" />
                     </div>
-                </div>
-            </fieldset>
-            <button class="add_field_button btn btn-info btn-xs">+ {$t->get('add_link')}</button>
-        </div>
+                {else}
+                    {foreach $motion->attributes->links as $link}
+                        <div class="col-sm-4">
+                            <input type="text" id="links_descriptions" name="links_descriptions[]" value="{$link->text|htmlspecialchars}" class="form-control"/>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="url" id="links_links" name="links_links[]" value="{$link->url|htmlspecialchars}" class="form-control" />
+                        </div>
+                    {/foreach}
+                {/if}
+            </div>
+        </fieldset>
+        <button class="add_field_button btn btn-info btn-xs">+ {$t->get('add_link')}</button>
+    </div>
 
-        <div class="form-group">
-            <label for="tags">{$t->get('tags')}:</label>
-            <input type="text" id="tags" name="tags" data-role="tagsinput" />
-        </div>
+    <div class="form-group">
+        <label for="tags">{$t->get('tags')}:</label>
+        <input type="text" id="tags" name="tags" data-role="tagsinput" value="{foreach $tags as $tag}{$tag->tag|htmlspecialchars},{/foreach}"/>
+    </div>
 
 
-        <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
-    </fieldset>
+    <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
+</fieldset>
+
+
 <script>
 $(document).ready(function() {
     //initialize summernote for vysiwyg edit
@@ -96,4 +111,3 @@ $(document).ready(function() {
 
 });
 </script>
-</form>

@@ -30,6 +30,13 @@
     "tags": "Tagy",
     "links": "Linky",
     "add_link": "Přidat další link",
-    "save": "Uložit"
+    "save": "Uložit",
+    "edit": "Upravit",
+    "motion": "Návrh",
+    "motion_does_not_exist": "Daný návrh neexistuje",
+    "close": "Zavřít",
+    "save_changes": "Uložit změny",
+    "cancel": "Zrušit",
+    "date_format": "%d.%m.%Y"
 
 }

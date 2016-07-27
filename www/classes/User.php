@@ -72,7 +72,7 @@ class User {
         $user = $this->getUser();
         if (!$user->logged)
             return false;
-        $this->headers['Authorization'] = 'Bearer ' . $_COOKIE['auth_token'];
+        // $this->headers['Authorization'] = 'Bearer ' . $_COOKIE['auth_token'];
         $result = $this->api->get(
             "organizations_users",
             ["user_id" => "eq." . $user->id,
@@ -86,6 +86,25 @@ class User {
             } else {
                 return false;
             }
+        }
+    }
+
+    public function canEditMotion($motion_id) {
+        $user = $this->getUser();
+        if (!$user->logged)
+            return false;
+        $headers = $this->headers;
+        $headers['Prefer'] = 'plurality=singular';
+        $result = $this->api->get(
+            "motions",
+            ["user_id" => "eq." . $user->id,
+            "id" => "eq." . $motion_id],
+            $headers
+        );
+        if ($result->info->http_code == 200) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

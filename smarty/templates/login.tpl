@@ -14,7 +14,7 @@
         <input type="submit" class="btn btn-success" value="{$t->get('login')}"/>
     </form>
     {else}
-        {$t->get('already_logged_as')}: {$user->name}
+        {$t->get('already_logged_as')}: {$user->name|htmlspecialchars}
         <small>(<a href="?page=logout&action=run&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a>)</small>
     {/if}
 

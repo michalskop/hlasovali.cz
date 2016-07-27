@@ -21,7 +21,7 @@
           <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               {if $cityhall->selected}
-                {$cityhall->name}
+                {$cityhall->name|htmlspecialchars}
               {else}
                 Select Town
               {/if}
@@ -29,7 +29,7 @@
                 <ul class="dropdown-menu">
                     {foreach $cityhalls as $ch}
                         {if (!isset($cityhall->id) or (!($ch->id) == $cityhall->id))}
-                            <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name}</a></li>
+                            <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name|htmlspecialchars}</a></li>
                         {/if}
                     {/foreach}
                 </ul>
