@@ -135,6 +135,21 @@ class RestClient implements Iterator, ArrayAccess {
     }
 
     //note: based on cz.parldata.net api.py
+    public function get_one($url, $parameters=[], $headers=[]) {
+        $headers['Prefer'] = 'plurality=singular';
+        $result = $this->get($url, $parameters, $headers);
+        if ($result->info->http_code == 200) {
+            $item = $result->decode_response();
+            $item->exist = True;
+            return $item;
+        } else {
+            $item = new StdClass();
+            $item->exist = FALSE;
+            return $item;
+        }
+    }
+
+    //note: based on cz.parldata.net api.py
     public function get_all($url, $parameters=[], $headers=[]) {
         $result = $this->get($url, $parameters, $headers);
         if($result->info->http_code == 200) {
@@ -213,6 +228,7 @@ class RestClient implements Iterator, ArrayAccess {
             if($client->url[0] != '/' && substr($client->options['base_url'], -1) != '/')
                 $client->url = '/' . $client->url;
             $client->url = $client->options['base_url'] . $client->url;
+            //print_r($client->url);echo "\n"; //debug
         }
         $curlopt[CURLOPT_URL] = $client->url;
 

@@ -36,8 +36,28 @@ class User {
         unset($this->information);
     }
 
+    // get publicly available info about user
+    public function getUser($id=NULL) {
+        $headers = $this->headers;
+        $headers['Prefer'] = 'plurality=singular';
+        $result = $this->api->get(
+            "public_users",
+            ["id" => "eq." . $id],
+            $headers
+        );
+        if ($result->info->http_code == 200) {
+            $item = $result->decode_response();
+            $item->exist = True;
+            return $item;
+        } else {
+            $item = new StdClass();
+            $item->exist = FALSE;
+            return $item;
+        }
+    }
+
     // get basic info about logged in user
-    public function getUser(){
+    public function getCurrentUser(){
         if (property_exists($this,'information'))
             return $this->information;
         if (isset($_COOKIE['auth_token']))
@@ -48,6 +68,17 @@ class User {
             [],
             $this->headers
         );
+        //fix problem with invalid hanging JWT:
+        if (isset($result->response)) {
+            try {
+                $resp = json_decode($result->response);
+                if (isset($resp->message) and $resp->message == "Invalid JWT") {
+                    $this->logout();
+                }
+            } catch (Exception $e) {
+
+            }
+        }
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()[0])) {
                 $this->information = $result->decode_response()[0];
@@ -69,7 +100,7 @@ class User {
 
     // check if the user has rights as an author for a city hall
     public function hasAuthorPrivilages($organization_id) {
-        $user = $this->getUser();
+        $user = $this->getCurrentUser();
         if (!$user->logged)
             return false;
         // $this->headers['Authorization'] = 'Bearer ' . $_COOKIE['auth_token'];
@@ -90,7 +121,7 @@ class User {
     }
 
     public function canEditMotion($motion_id) {
-        $user = $this->getUser();
+        $user = $this->getCurrentUser();
         if (!$user->logged)
             return false;
         $headers = $this->headers;

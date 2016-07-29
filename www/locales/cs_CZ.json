@@ -37,6 +37,19 @@
     "close": "Zavřít",
     "save_changes": "Uložit změny",
     "cancel": "Zrušit",
-    "date_format": "%d.%m.%Y"
+    "date_format": "%d.%m.%Y",
+    "created_by_author": "Zapsal/a",
+    "ve_yes": "Pro",
+    "ve_no": "Proti",
+    "ve_abstain": "Zdržení",
+    "ve_absent": "Nepřít.",
+    "add_representative": "Přidat zastupitele",
+    "remove": "Odebrat",
+    "current_number": "Aktuální počet",
+    "family_name": "Příjmení",
+    "given_name": "Jméno",
+    "party_abbreviation": "Strana (zkr.)",
+    "party_name": "Strana",
+    "votes_by_representatives": "Hlasování zastupitelů"
 
 }

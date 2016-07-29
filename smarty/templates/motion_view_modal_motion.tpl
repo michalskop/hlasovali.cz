@@ -44,11 +44,14 @@
                     </div>
                 {else}
                     {foreach $motion->attributes->links as $link}
-                        <div class="col-sm-4">
-                            <input type="text" id="links_descriptions" name="links_descriptions[]" value="{$link->text|htmlspecialchars}" class="form-control"/>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="url" id="links_links" name="links_links[]" value="{$link->url|htmlspecialchars}" class="form-control" />
+                        <div>
+                            <div class="col-sm-4">
+                                <input type="text" id="links_descriptions" name="links_descriptions[]" value="{$link->text|htmlspecialchars}" class="form-control"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="url" id="links_links" name="links_links[]" value="{$link->url|htmlspecialchars}" class="form-control" />
+                            </div>
+                            <button class="remove_field col-sm-1 btn btn-danger">X</button>
                         </div>
                     {/foreach}
                 {/if}
@@ -63,7 +66,6 @@
     </div>
 
 
-    <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
 </fieldset>
 
 

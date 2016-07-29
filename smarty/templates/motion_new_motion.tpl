@@ -50,50 +50,55 @@
         </div>
 
 
-        <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
+
     </fieldset>
-<script>
-$(document).ready(function() {
-    //initialize summernote for vysiwyg edit
-    $('#description').summernote({
-        toolbar: [
-            // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['link', ['link']],
-            ['misc', ['fullscreen','codeview','help']]
-        ],
-        placeholder: "{$t->get('motion_description')}...",
-        lang: 'cs-CZ',
-        minHeight: 30,
-    });
-    //send the description back to textarea
-    $('form[name=motion_form]').submit(function(){
-        $('#description').html($('#description').summernote('code'));
-    });
-
-
-    var max_fields      = 10; //maximum input boxes allowed
-        var wrapper         = $("#links"); //Fields wrapper
-        var add_button      = $(".add_field_button"); //Add button ID
-        var motion_link_description = "{$t->get('motion_link_description')}";
-        var motion_link_link = "{$t->get('motion_link_link')}";
-
-        var x = 1; //initlal text box count
-        $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                x++; //text box increment
-                $(wrapper).append('<div><div class="col-sm-4"><input type="text" id="links_descriptions" name="links_descriptions[]" placeholder="'+motion_link_description+'" class="form-control"/></div><div class="col-sm-7"><input type="text" id="links_links" name="links_links[]" placeholder="'+motion_link_link+'" class="form-control" /></div><button class="remove_field col-sm-1 btn btn-danger">X</button></div>'); //add input box
-            }
+    <script>
+    $(document).ready(function() {
+        //initialize summernote for vysiwyg edit
+        $('#description').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['link', ['link']],
+                ['misc', ['fullscreen','codeview','help']]
+            ],
+            placeholder: "{$t->get('motion_description')}...",
+            lang: 'cs-CZ',
+            minHeight: 30,
+        });
+        //send the description back to textarea
+        $('form[name=motion_form]').submit(function(){
+            $('#description').html($('#description').summernote('code'));
         });
 
-        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); x--;
-        })
+
+        var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $("#links"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+            var motion_link_description = "{$t->get('motion_link_description')}";
+            var motion_link_link = "{$t->get('motion_link_link')}";
+
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    x++; //text box increment
+                    $(wrapper).append('<div><div class="col-sm-4"><input type="text" name="links_descriptions[]" placeholder="'+motion_link_description+'" class="form-control"/></div><div class="col-sm-7"><input type="text" name="links_links[]" placeholder="'+motion_link_link+'" class="form-control" /></div><button class="remove_field col-sm-1 btn btn-danger">X</button></div>'); //add input box
+                }
+            });
+
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
 
 
-});
-</script>
+    });
+    </script>
+
+    {include "motion_new_vote-event.tpl"}
+
+    <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
+
 </form>

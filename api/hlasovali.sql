@@ -794,20 +794,16 @@ FROM vote_events as ve
 LEFT JOIN motions as m
 ON ve.motion_id = m.id;
 
--- everything about a single vote event
-create or replace view vote_events_information as
+-- info about vote event
+create or replace view public.vote_events_information as
     SELECT
-        p.given_name as person_given_name,
-        p.family_name as person_family_name,
+        o.id as organization_id,
         o.name as organization_name,
         o.classification as organization_classification,
         o.founding_date as organization_founding_date,
         o.dissolution_date as organization_dissolution_date,
-        p.attributes as person_attributes,
         o.attributes as organization_attributes,
         o.parent_id as parent_id,
-        v.id as vote_id,
-        v.option as vote_option,
         ve.id as vote_event_id,
         ve.start_date as vote_event_start_date,
         ve.date_precision as vote_event_date_precision,
@@ -818,25 +814,92 @@ create or replace view vote_events_information as
         m.date as motion_date,
         m.date_precision as motion_date_precision,
         m.attributes as motion_attributes,
-        u.id as user_id,
-        u.name as user_name,
-        o2.name as parent_organization_name,
-        o2.classification as parent_organization_classification,
-        o2.founding_date as parent_organization_founding_date,
-        o2.dissolution_date as parent_organization_dissolution_date
-    FROM votes as v
-    LEFT JOIN people as p
-    ON v.person_id = p.id
-    LEFT JOIN organizations as o
-    ON v.organization_id = o.id
-    LEFT JOIN vote_events as ve
-    ON v.vote_event_id = ve.id
+        pu.id as user_id,
+        pu.name as user_name,
+        pu.attributes as user_attributes
+    FROM vote_events as ve
     LEFT JOIN motions as m
     ON ve.motion_id = m.id
-    LEFT JOIN users as u
-    ON m.user_id = u.id
-    LEFT JOIN organizations as o2
-    ON m.organization_id = o2.id;
+    LEFT JOIN organizations as o
+    ON m.organization_id = o.id
+    LEFT JOIN public_users as pu
+    ON m.user_id = pu.id;
+
+-- publicly available info about users
+create or replace view public.users as
+  select
+        id,
+        name,
+        attributes
+  from basic_auth.users;
+
+-- political groups (parties) with most votes
+create or replace view public.organizations_with_number_of_votes as
+    select
+        t.count,
+        o2.*
+    from
+        (select
+            count(*) as count,
+            v.organization_id
+        from votes as v
+        left join organizations as o
+        on v.organization_id = o.id
+        group by v.organization_id
+        ) as t
+    left join organizations as o2
+    on t.organization_id = o2.id;
+
+-- people with organization (party), in which they ever voted
+create or replace view public.people_voted_in_organizations as
+    select
+        p.id as person_id,
+        p.given_name as person_given_name,
+        p.family_name as person_family_name,
+        p.attributes as person_attributes,
+        o.id as organization_id,
+        o.name as organization_name,
+        o.classification as organization_classification,
+        o.parent_id as organization_parent_id,
+        o.founding_date as organization_founding_date,
+        o.dissolution_date as organization_dissolution_date,
+        o.attributes as organization_attributes
+    from
+        (select person_id, organization_id from votes
+        group by person_id, organization_id) as t
+    left join people as p
+    on t.person_id = p.id
+    left join organizations as o
+    on o.id = t.organization_id;
+
+-- select votes with info about people and parties
+create or replace view public.votes_people_organizations as
+    select
+        p.id as person_id,
+        p.given_name as person_given_name,
+        p.family_name as person_family_name,
+        p.attributes as person_attributes,
+        o.id as organization_id,
+        o.name as organization_name,
+        o.classification as organization_classification,
+        o.parent_id as organization_parent_id,
+        o.founding_date as organization_founding_date,
+        o.dissolution_date as organization_dissolution_date,
+        o.attributes as organization_attributes,
+        ve.id as vote_event_id,
+        ve.motion_id as vote_event_motion_id,
+        ve.start_date as vote_event_start_date,
+        ve.date_precision as vote_event_date_precision,
+        ve.attributes as vote_event_attributes,
+        v.option as vote_option
+    from votes as v
+    left join people as p
+    on v.person_id = p.id
+    left join organizations as o
+    on v.organization_id = o.id
+    left join vote_events as ve
+    on v.vote_event_id = ve.id;
+
 
 
  -- ######  ###  #####  #     # #######  #####
@@ -865,6 +928,9 @@ grant select, insert, update, delete
 
 -- REVOKE insert, update, delete
 --     on organizations_users FROM author;
+
+REVOKE insert, update, delete
+    on public.public_users FROM author;
 
 grant select
       on all tables in schema public to anon;

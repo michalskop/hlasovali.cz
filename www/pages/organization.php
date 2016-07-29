@@ -14,7 +14,7 @@ switch ($action) {
 
 function select($settings) {
     $cityhall = new CityHall($settings);
-    $cityhall->set($_GET['org']);
+    $cityhall->setCookie($_GET['org']);
     header("Location: " . $_GET['continue']);
     exit;
 }

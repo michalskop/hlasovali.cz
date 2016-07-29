@@ -28,7 +28,7 @@ $smarty->assign('page', $page);
 
 // set up user
 $user = new User($settings);
-$smarty->assign('user', $user->getUser());
+$smarty->assign('user', $user->getCurrentUser());
 
 // set up city hall
 $cityhall = new CityHall($settings);

@@ -7,12 +7,17 @@ author = {
     "pass": "example"
 }
 
+author2 = {
+    "email": "author@example.com",
+    "pass": "example"
+}
+
 admin = {
     "email": "michal.skop@example.com",
     "pass": "example"
 }
 
-# as admin
+# as ADMIN
 api.login(admin['email'],admin['pass'])
 
 data = {

@@ -1,0 +1,35 @@
+<div class="row ve-row" id="row-{{i}}">
+    <div class="form-group col-sm-1">
+        <button class="btn btn-sm btn-danger semitransparent" data-row="{{i}}" data-col="x">X {{t.remove}}</button>
+    </div>
+    <div class="form-group col-sm-1">
+        <input type="text" name="family_name-{{i}}" required class="form-control input-sm" data-typeahead="family" data-row="{{i}}" data-col="family_name" placeholder="{{t.family_name}}" value="{{family_name}}">
+    </div>
+    <div class="form-group col-sm-1">
+        <input type="text" name="given_name-{{i}}" required class="form-control input-sm" data-row="{{i}}" data-col="give_name" placeholder="{{t.given_name}}" value="{{given_name}}">
+    </div>
+    <div class="form-group col-sm-1">
+        <input type="text" name="organization_abbreviation-{{i}}" required class="form-control input-sm" data-typeahead="abbreviations" data-row="{{i}}" data-col="organization_abbreviation" placeholder="{{t.party_abbreviation}}" value="{{organization_abbreviation}}">
+    </div>
+    <div class="form-group col-sm-3">
+        <input type="text" name="organization_name-{{i}}" required class="form-control input-sm" data-typeahead="parties" data-row="{{i}}" data-col="organization_name" placeholder="{{t.party_name}}" value="{{organization_name}}">
+    </div>
+    <div class="form-group col-sm-1">
+        <input type="color" name="organization_color-{{i}}" required class="form-control input-sm" data-row="{{i}}" data-col="organization_color" value="{{organization_color}}">
+    </div>
+    <div class="form-group col-sm-4">
+        <label class="radio-inline">
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_yes}}checked{{/if}}  option=value="yes"><span  class="text-success">{{t.ve_yes}}</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_no}}checked{{/if}}value="no"><span  class="text-danger">{{t.ve_no}}</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_abstain}}checked{{/if}} value="abstain"><span class="text-danger">{{t.ve_abstain}}</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_absent}}checked{{/if}} value="absent"><span class="text-muted">{{t.ve_absent}}</span>
+        </label>
+    </div>
+
+</div>

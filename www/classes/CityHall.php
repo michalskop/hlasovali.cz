@@ -82,7 +82,7 @@ class CityHall {
             return $this->selectFrom;
         $result = $this->api->get_all(
             "organizations",
-            [],//["classification" => "eq.city hall", "order" => "name.asc"],
+            ["classification" => "eq.city hall", "order" => "name.asc"],
             $this->headers
         );
         return $result;

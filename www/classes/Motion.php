@@ -6,8 +6,8 @@
 
 class Motion
 {
-
     public function __construct($settings) {
+        $this->settings = $settings;
         $this->api = new RestClient([
             'base_url' => $settings->api_url
         ]);
@@ -21,22 +21,10 @@ class Motion
 
     // get info about motion
     public function getMotion($id=NULL) {
-        $headers = $this->headers;
-        $headers['Prefer'] = 'plurality=singular';
-        $result = $this->api->get(
-            "motions",
-            ["id"=>"eq.".$id],
-            $headers
-        );
-        if ($result->info->http_code == 200) {
-            $item = $result->decode_response();
-            $item->exist = True;
-            return $item;
-        } else {
-            $item = new StdClass();
-            $item->exist = FALSE;
-            return $item;
-        }
+        $view = new View($this->settings);
+        $params = ["id"=>"eq.".$id];
+        $result = $view->getView('motions','one',$params);
+        return $result;
     }
 
     // parses form and prepares data for create
