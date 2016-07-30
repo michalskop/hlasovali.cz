@@ -18,7 +18,7 @@
                 {if $cityhall->selected}
                   {$cityhall->name|htmlspecialchars}
                 {else}
-                  {$t->get('select_cityhall')}Select Town
+                  {$t->get('select_cityhall')}
                 {/if}
                 <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -37,7 +37,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$user->name} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">My page</a></li>
+                        <li><a href="#">{$t->get('my_page')}</a></li>
                         <li><a href="?page=logout&action=run&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a></li>
                     </ul>
             </li>

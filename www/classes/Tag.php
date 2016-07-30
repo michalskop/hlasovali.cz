@@ -54,7 +54,7 @@ class Tag extends Table
 
     //creates new tag(s)
     public function create($data) {
-        return $this->table->create('tags',$data);
+        return $this->table->creates('tags',$data);
     }
 
     //update tag(s)

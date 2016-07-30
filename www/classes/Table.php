@@ -50,7 +50,14 @@ class Table
             json_encode($data),
             $headers
         );
-        return $r->decode_response();
+        if ($r->info->http_code == 201) {
+            $res = $r->decode_response();
+            $res->exist = TRUE;
+        } else {
+            $res = new StdClass();
+            $res->exist = FALSE;
+        }
+        return $res;
     }
 
     public function updates($table,$data,$id) {
@@ -61,7 +68,14 @@ class Table
             json_encode($data),
             $headers
         );
-        return $r->decode_response();
+        if ($r->info->http_code == 200) {
+            $res = $r->decode_response()[0];
+            $res->exist = TRUE;
+        } else {
+            $res = new StdClass();
+            $res->exist = FALSE;
+        }
+        return $res;
     }
 
     //note: based on cz.parldata.net api.py

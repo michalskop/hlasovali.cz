@@ -60,11 +60,11 @@ class VoteEvent extends Table
     }
 
     public function create($data) {
-        return $this->table->create('vote_events',$data);
+        return $this->table->creates('vote_events',$data);
     }
 
     public function update($data,$id) {
-        return $this->table->update('vote_events',$data,$id);
+        return $this->table->updates('vote_events',$data,$id);
     }
 
 }

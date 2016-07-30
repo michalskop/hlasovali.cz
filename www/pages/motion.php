@@ -51,8 +51,10 @@ function create() {
     $motion = new Motion($settings);
     $data = $motion->parseForm($_POST);
     $data['organization_id'] = $cityhall->getCityHall()->id;
-    $data['user_id'] = $user->getUser()->id;
-    $new_motion = $motion->create($data);
+    $data['user_id'] = $user->getCurrentUser()->id;
+    //$new_motion = $motion->create($data);
+    $new_motion = $motion->getMotion(18); //**
+
 
     //create tags
     $tags = new Tag($settings);
@@ -68,6 +70,24 @@ function create() {
     $tags->create($tdata);
 
     //create vote event
+    $vote_event = new VoteEvent($settings);
+    $data = [
+        'motion_id' => $new_motion->id,
+        'start_date' => $new_motion->date,
+        'date_precision' => $new_motion->date_precision
+    ];
+    $parsed = $vote_event->parseForm($_POST);
+    if (isset($parsed['vote_event_identifier'])) {
+        $data['identifier'] = $parsed['vote_event_identifier'];
+    }
+    $new_vote_event = $vote_event->create($data);
+
+    //create organizations
+    $table = new Table($settings);
+    $organization = new Organization($settings);
+    $parties = _create_update_organizations($parsed,$table,$organization);
+
+
 
 
     header("Location: index.php?page=motion&action=view&m=" . $new_motion->id);
@@ -86,7 +106,7 @@ function neww() {
         $smarty->assign('form_rows',json_encode($form['rows']));
         $smarty->assign('form_t',json_encode($form['t']));
     }
-    
+
     $smarty->display('motion_new.tpl');
 }
 
@@ -226,13 +246,13 @@ function _vote_event_table($action='edit',$id=NULL) {
             $item->family_name = $ve->person_family_name;
             $item->given_name = $ve->person_given_name;
             $item->organization_name = $ve->organization_name;
-            if (isset($ve->attributes->abbreviation)) {
-                $item->organization_abbreviation = $ve->attributes->abbreviation;
+            if (isset($ve->organization_attributes->abbreviation)) {
+                $item->organization_abbreviation = $ve->organization_attributes->abbreviation;
             } else {
                 $item->organization_abbreviation = "";
             }
-            if (isset($ve->attributes->color)) {
-                $item->organization_color = $ve->attributes->color;
+            if (isset($ve->organization_attributes->color)) {
+                $item->organization_color = $ve->organization_attributes->color;
             } else {
                 $item->organization_color = "#000000";
             }
@@ -274,6 +294,53 @@ function _option4handlebars($item) {
             $item->option_is_absent = true;
             break;
     }
+}
+
+function _create_update_organizations($parsed, $table, $organization){
+    global $user, $cityhall, $settings;
+
+    $organizations = [];
+    $parsed_orgs = [];
+    foreach($parsed['rows'] as $row) {
+        if (!isset($organizations[$row['organization_name']])) {
+            $params = [
+                'name' => "eq." . $row['organization_name'],
+                'parent_id' => "eq." . $cityhall->getCityHall()->id,
+                'classification' => 'eq.political group'
+            ];
+            $organizations[$row['organization_name']] = $table->get_one('organizations',$params);
+            $parsed_orgs[$row['organization_name']] = $row;
+        }
+    }
+    foreach ($organizations as $key => $org) {
+        if ($org->exist) {
+            if (!isset($org->attributes)) {
+                $org->attributes = new StdClass;
+            }
+            if (!isset($org->attributes->abbreviation) or
+                !isset($org->attributes->color) or
+                ($org->attributes->abbreviation != $parsed_orgs[$org->name]['organization_abbreviation']) or
+                ($org->attributes->color != $parsed_orgs[$org->name]['organization_color'])
+                ) {
+                $org->attributes->abbreviation = $parsed_orgs[$org->name]['organization_abbreviation'];
+                $org->attributes->color = $parsed_orgs[$org->name]['organization_color'];
+                unset($org->exist);
+                $organizations[$org->name] = $organization->update((array) $org, $org->id);
+            }
+        } else {
+            $attrs = new StdClass();
+            $attrs->abbreviation = $parsed_orgs[$key]['organization_abbreviation'];
+            $attrs->color = $parsed_orgs[$key]['organization_color'];
+            $new = [
+                'name' => $parsed_orgs[$key]['organization_name'],
+                'classification'=> 'political group',
+                'parent_id'=> $cityhall->getCityHall()->id,
+                'attributes'=> $attrs
+            ];
+            $organizations[$key] = $organization->create($new);
+        }
+    }
+    return $organizations;
 }
 
 

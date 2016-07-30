@@ -31,7 +31,6 @@ class Organization extends Table
     }
 
     public function update($data,$id) {
-        return $this->table->updates('organizations',$data,$id);
-
+        return $this->table->updates('organizations', $data, $id);
     }
 }
