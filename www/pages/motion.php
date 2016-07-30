@@ -67,6 +67,9 @@ function create() {
     }
     $tags->create($tdata);
 
+    //create vote event
+
+
     header("Location: index.php?page=motion&action=view&m=" . $new_motion->id);
 }
 
@@ -74,15 +77,16 @@ function neww() {
     global $user, $cityhall, $settings, $smarty, $t;
     if ($cityhall->information->selected) {
         $smarty->assign('user_has_author_privilages', $user->hasAuthorPrivilages($cityhall->information->id));
+
+        //vote event
+        $form = _vote_event_table('new');
+
+        $smarty->assign('form_organizations',json_encode($form['organizations']));
+        $smarty->assign('form_family',json_encode($form['family']));
+        $smarty->assign('form_rows',json_encode($form['rows']));
+        $smarty->assign('form_t',json_encode($form['t']));
     }
-
-    //vote event
-    $form = _vote_event_table('new');
-
-    $smarty->assign('form_organizations',json_encode($form['organizations']));
-    $smarty->assign('form_family',json_encode($form['family']));
-    $smarty->assign('form_rows',json_encode($form['rows']));
-    $smarty->assign('form_t',json_encode($form['t']));
+    
     $smarty->display('motion_new.tpl');
 }
 
@@ -123,13 +127,13 @@ function view() {
     }
 
     //vote event
-    $view = new View($settings);
+    $table = new Table($settings);
     if ($m->exist) {
         $params = ['motion_id'=>'eq.'.$m->id];
     } else {
         $params = ['motion_id'=>NULL];
     }
-    $ve_info = $view->getView('vote_events_information','one',$params);
+    $ve_info = $table->getTable('vote_events_information','one',$params);
     if ($ve_info->exist) {
         $form = _vote_event_table('view',$ve_info->vote_event_id);
     } else {
@@ -146,41 +150,47 @@ function view() {
 
 //if id is null, get info about last vote event in city hall without votes
 function _vote_event_table($action='edit',$id=NULL) {
-    global $cityhall, $settings, $t;
+    global $cityhall, $settings, $t, $user;
 
     $form_t = $t->getAll(); //texts for handlebars
     $organization = new Organization($settings);
 
-        //list of parties for typeahead
-    $most = $organization->getOrganizationsWithVotes([
-        "order"=>"count.desc"
-    ]);
-    $locals = $organization->getOrganizations([
-        "parent_id"=>"eq.".$cityhall->getCityHall()->id,
-        "classification"=>"eq.political group",
-    ]);
+    //for typeahead
     $form_organizations = [];
-    $org_names = [];
-    foreach ($most as $o){
-        if (!in_array($o->name,$org_names)) {
-            $form_organizations[] = $o;
-            $org_names[] = $o->name;
-        }
-    }
-    foreach ($locals as $o){
-        if (!in_array($o->name,$org_names)) {
-            $form_organizations[] = $o;
-            $org_names[] = $o->name;
-        }
-    }
-
-    $person = new Person($settings);
-    $ever_voted = $person->getPeopleVotedInOrganizations([
-        "organization_parent_id" => "eq.". $cityhall->getCityHall()->id
-    ]);
     $form_family = [];
-    foreach($ever_voted as $ev) {
-        $form_family[] = $ev->person_family_name;
+    if (($action == 'new') or ($user->canEditMotion($_GET['m'])) ){
+            //list of parties for typeahead
+        $most = $organization->getOrganizationsWithVotes([
+            "order"=>"count.desc"
+        ]);
+        $locals = $organization->getOrganizations([
+            "parent_id"=>"eq.".$cityhall->getCityHall()->id,
+            "classification"=>"eq.political group",
+        ]);
+
+        $org_names = [];
+        foreach ($most as $o){
+            if (!in_array($o->name,$org_names)) {
+                $form_organizations[] = $o;
+                $org_names[] = $o->name;
+            }
+        }
+        foreach ($locals as $o){
+            if (!in_array($o->name,$org_names)) {
+                $form_organizations[] = $o;
+                $org_names[] = $o->name;
+            }
+        }
+
+        //family names
+        $person = new Person($settings);
+        $ever_voted = $person->getPeopleVotedInOrganizations([
+            "organization_parent_id" => "eq.". $cityhall->getCityHall()->id
+        ]);
+        $form_family = [];
+        foreach($ever_voted as $ev) {
+            $form_family[] = $ev->person_family_name;
+        }
     }
 
     $form_rows = [];
@@ -212,6 +222,7 @@ function _vote_event_table($action='edit',$id=NULL) {
         foreach($ves as $ve){
             $item = new StdClass();
             $item->i = $i;
+            $item->id = $ve->person_id;
             $item->family_name = $ve->person_family_name;
             $item->given_name = $ve->person_given_name;
             $item->organization_name = $ve->organization_name;

@@ -4,19 +4,12 @@
 * class for tags
 */
 
-class Tag
+class Tag extends Table
 {
 
     public function __construct($settings) {
-        $this->api = new RestClient([
-            'base_url' => $settings->api_url
-        ]);
-        if (isset($_COOKIE['auth_token']))
-            $this->headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
-        else {
-            $this->headers = [];
-        }
-        $this->headers['Content-Type'] = 'application/json';
+        parent::__construct($settings);
+        $this->table = new Table($settings);
     }
 
     //get tags
@@ -32,7 +25,7 @@ class Tag
         if ($active === FALSE) {
             $params['active'] = 'is.false';
         }
-        $result_arr = $this->api->get_all(
+        $result_arr = $this->get_all(
             "tags",
             $params,
             $this->headers
@@ -61,11 +54,7 @@ class Tag
 
     //creates new tag(s)
     public function create($data) {
-        $r = $this->api->post(
-            "tags",
-            json_encode($data),
-            $this->headers
-        );
+        return $this->table->create('tags',$data);
     }
 
     //update tag(s)
@@ -101,8 +90,6 @@ class Tag
             $this->create($create);
 
         //removed
-        print_r($olds);
-        print_r($news);
         foreach($olds as $old) {
             if (!in_array($old,$news)) {
                 echo $old;

@@ -4,33 +4,33 @@
 * class for people
 */
 
-class Person
+class Person extends Table
 {
     public function __construct($settings) {
-        $this->settings = $settings;
-        $this->api = new RestClient([
-            'base_url' => $settings->api_url
-        ]);
-        if (isset($_COOKIE['auth_token']))
-            $this->headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
-        else {
-            $this->headers = [];
-        }
-        $this->headers['Content-Type'] = 'application/json';
+        parent::__construct($settings);
+        $this->table = new Table($settings);
     }
 
     // get people with params
     public function getPeople($params = []) {
-        $view = new View($this->settings);
-        $result = $view->getView('people','all',$params);
+        $result = $this->table->getTable('people','all',$params);
         return $result;
     }
 
     // get people with params
     public function getPeopleVotedInOrganizations($params = []) {
-        $view = new View($this->settings);
-        $result = $view->getView('people_voted_in_organizations','all',$params);
+        $table = new Table($this->settings);
+        $result = $table->getTable('people_voted_in_organizations','all',$params);
         return $result;
+    }
+
+    public function create($data) {
+        return $this->table->creates('people',$data);
+    }
+
+    public function update($data,$id) {
+        return $this->table->updates('people',$data,$id);
+
     }
 
 }

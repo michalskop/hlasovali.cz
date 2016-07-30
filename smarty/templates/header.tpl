@@ -8,32 +8,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand{if $page=='frontpage'} active{/if}" href="/">{$t->get('name')}</a>
+      <a class="navbar-brand{if $page=='frontpage'} active{/if}" href="/"><span class="col-xs"><small>{$t->get('pre_name')} </small></span>{$t->get('name')}</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                {if $cityhall->selected}
+                  {$cityhall->name|htmlspecialchars}
+                {else}
+                  {$t->get('select_cityhall')}Select Town
+                {/if}
+                <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      {foreach $cityhalls as $ch}
+                          <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name|htmlspecialchars}</a>
+                      {/foreach}
+                  </ul>
+            </li>
             <li></li>
             {* <li ><a href="https://github.com/KohoVolit/activities#api" target="_blank">API</a></li> *}
         </ul>
 
       <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              {if $cityhall->selected}
-                {$cityhall->name|htmlspecialchars}
-              {else}
-                Select Town
-              {/if}
-              <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    {foreach $cityhalls as $ch}
-                        {if (!isset($cityhall->id) or (!($ch->id) == $cityhall->id))}
-                            <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name|htmlspecialchars}</a></li>
-                        {/if}
-                    {/foreach}
-                </ul>
-          </li>
 
         {if $user->logged}
             <li class="dropdown">

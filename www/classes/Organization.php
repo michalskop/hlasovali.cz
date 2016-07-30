@@ -4,33 +4,34 @@
 * abstract class for reading views
 */
 
-class Organization
+class Organization extends Table
 {
     public function __construct($settings) {
-        $this->settings = $settings;
-        $this->api = new RestClient([
-            'base_url' => $settings->api_url
-        ]);
-        if (isset($_COOKIE['auth_token']))
-            $this->headers = ['Authorization' => 'Bearer ' . $_COOKIE['auth_token']];
-        else {
-            $this->headers = [];
-        }
-        $this->headers['Content-Type'] = 'application/json';
+        parent::__construct($settings);
+        $this->table = new Table($settings);
     }
 
     // get organizations with params
     public function getOrganizations($params = []) {
-        $view = new View($this->settings);
-        $result = $view->getView('organizations','all',$params);
+        $table = new Table($this->settings);
+        $result = $table->getTable('organizations','all',$params);
         return $result;
     }
 
     // get first page of organizations with most votes
     //params, example: [['key': 'id', 'operator': 'eq', 'value': '1']]
     public function getOrganizationsWithVotes($params=[]) {
-        $view = new View($this->settings);
-        $result = $view->getView('organizations_with_number_of_votes','all',$params);
+        $table = new Table($this->settings);
+        $result = $table->getTable('organizations_with_number_of_votes','all',$params);
         return $result;
+    }
+
+    public function create($data) {
+        return $this->table->creates('organizations',$data);
+    }
+
+    public function update($data,$id) {
+        return $this->table->updates('organizations',$data,$id);
+
     }
 }

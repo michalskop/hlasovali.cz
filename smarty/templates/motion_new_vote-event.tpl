@@ -71,6 +71,12 @@
 </style>
 <hr>
 <h2>{$t->get('votes_by_representatives')}</h2>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label for="vote_event_identifier">{$t->get('vote_event_identifier')}:</label>
+        <input type="text" name="vote_event_identifier" class="form-control input-sm" placeholder="{$t->get('vote_event_identifier_placeholder')}" >
+    </div>
+</div>
 <div>
     <div class="row">
         <div class="form-group col-sm-4" >

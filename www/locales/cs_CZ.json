@@ -8,6 +8,10 @@
     "website_keywords": "",
     "website_author": "Michal Škop, KohoVolit.eu",
 
+    "__HEADER": "",
+    "pre_name": "Víme, jak",
+    "select_cityhall": "Město",
+
 
     "__LOGIN": "",
     "login": "Přihlásit se",
@@ -45,11 +49,13 @@
     "ve_absent": "Nepřít.",
     "add_representative": "Přidat zastupitele",
     "remove": "Odebrat",
-    "current_number": "Aktuální počet",
+    "current_number": "Aktuální počet zadaných zastupitelů",
     "family_name": "Příjmení",
     "given_name": "Jméno",
     "party_abbreviation": "Strana (zkr.)",
     "party_name": "Strana",
-    "votes_by_representatives": "Hlasování zastupitelů"
+    "votes_by_representatives": "Hlasování zastupitelů",
+    "vote_event_identifier": "Číslo hlasování",
+    "vote_event_identifier_placeholder": "Oficiální číslo hlasování"
 
 }

@@ -4,20 +4,12 @@
 * class about current city hall
 */
 
-class CityHall {
+class CityHall extends Table
+{
 
     public function __construct($settings) {
-        $this->api = new RestClient([
-            'base_url' => $settings->api_url
-        ]);
-        if (isset($_COOKIE['auth_token']))
-            $this->headers = [
-                'Authorization' => 'Bearer ' . $_COOKIE['auth_token']
-            ];
-        else {
-            $this->headers = [];
-        }
-        $this->headers['Content-Type'] = 'application/json';
+        parent::__construct($settings);
+        $this->table = new Table($settings);
     }
 
     // set
@@ -28,17 +20,12 @@ class CityHall {
 
     //exist
     public function exist($id) {
-        $result = $this->api->get(
-            "organizations",
-            ["id" => "eq.".$id, "classification" => "eq.city hall"],
-            $this->headers
-        );
-        if($result->info->http_code == 200) {
-            if (isset($result->decode_response()[0])) {
-                return true;
-            } else {
-                return false;
-            }
+        $params = ["id" => "eq.".$id, "classification" => "eq.city hall"];
+        $result = $this->table->get_one("organizations",$params);
+        if ($result->exist) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -47,44 +34,30 @@ class CityHall {
         if (property_exists($this,'information'))
             return $this->information;
         if (isset($_COOKIE['city_hall'])) {
-            $result = $this->api->get(
-                "organizations",
-                ["id" => "eq.".$_COOKIE['city_hall']],
-                $this->headers
-            );
-            if($result->info->http_code == 200) {
-                if (isset($result->decode_response()[0])) {
-                    $this->information = $result->decode_response()[0];
-                    $this->information->selected = true;
-                    return $this->information;
-                } else {
-                    $res = new StdClass();
-                    $res->selected = false;
-                    return $res;
-                }
+            $params = ["id" => "eq.".$_COOKIE['city_hall']];
+            $result = $this->table->get_one("organizations",$params);
+            if ($result->exist) {
+                $this->information = $result;
+                $this->information->selected = TRUE;
             } else {
-                $res = new StdClass();
-                $res->selected = false;
-                return $res;
+                $this->information = new StdClass();
+                $this->information->selected = false;
             }
         } else {
             $this->information = new StdClass();
             $this->information->selected = false;
-            // $res = new StdClass();
-            // $res->selected = false;
-            return $this->information;
-            return $res;
         }
+        return $this->information;
     }
 
     public function selectFrom() {
         if (property_exists($this,'selectFrom'))
             return $this->selectFrom;
-        $result = $this->api->get_all(
+        $result = $this->table->get_all(
             "organizations",
-            ["classification" => "eq.city hall", "order" => "name.asc"],
-            $this->headers
+            ["classification" => "eq.city hall", "order" => "name.asc"]
         );
+        $this->selectFrom = $result;
         return $result;
     }
 

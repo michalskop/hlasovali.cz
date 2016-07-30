@@ -1,4 +1,6 @@
 <div class="row ve-row" id="row-{{i}}">
+    <input type="hidden" name="id-{{i}}" value="{{id}}" data-row="{{i}}" data-col="id">
+    <input type="hidden" name="default_option-{{i}}" value="{{option}}" data-row="{{i}}" data-col="default_option">
     <div class="form-group col-sm-1">
         <button class="btn btn-sm btn-danger semitransparent" data-row="{{i}}" data-col="x">X {{t.remove}}</button>
     </div>
@@ -19,7 +21,7 @@
     </div>
     <div class="form-group col-sm-4">
         <label class="radio-inline">
-            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_yes}}checked{{/if}}  option=value="yes"><span  class="text-success">{{t.ve_yes}}</span>
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_yes}}checked{{/if}} required option=value="yes"><span  class="text-success">{{t.ve_yes}}</span>
         </label>
         <label class="radio-inline">
             <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_no}}checked{{/if}}value="no"><span  class="text-danger">{{t.ve_no}}</span>

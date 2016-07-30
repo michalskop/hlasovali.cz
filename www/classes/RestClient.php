@@ -125,55 +125,6 @@ class RestClient implements Iterator, ArrayAccess {
         return $this->execute($url, 'DELETE', $parameters, $headers);
     }
 
-    //note: based on cz.parldata.net api.py
-    public function get_result_size($url, $parameters=[], $headers=[]) {
-        $result = $this->get($url, $parameters, $headers);
-        if($result->info->http_code == 200) {
-            $size = explode('/',$result->headers->content_range)[1];
-            return $size;
-        }
-    }
-
-    //note: based on cz.parldata.net api.py
-    public function get_one($url, $parameters=[], $headers=[]) {
-        $headers['Prefer'] = 'plurality=singular';
-        $result = $this->get($url, $parameters, $headers);
-        if ($result->info->http_code == 200) {
-            $item = $result->decode_response();
-            $item->exist = True;
-            return $item;
-        } else {
-            $item = new StdClass();
-            $item->exist = FALSE;
-            return $item;
-        }
-    }
-
-    //note: based on cz.parldata.net api.py
-    public function get_all($url, $parameters=[], $headers=[]) {
-        $result = $this->get($url, $parameters, $headers);
-        if($result->info->http_code == 200) {
-            $size = explode('/',$result->headers->content_range)[1];
-            $last_arr = explode('-',explode('/',$result->headers->content_range)[0]);
-            if (isset($last_arr[1]))
-                $last = (int) $last_arr[1];
-            else {
-                $last = 0;
-            }
-            $arr = $result->decode_response();
-            while(($last + 1) < $size) {
-                $headers['Range'] = ($last + 1) . '-';
-                $result = $this->get($url, $parameters, $headers);
-                if($result->info->http_code == 200) {
-                    $last = explode('-',explode('/',$result->headers->content_range)[0])[1];
-                    $arr = array_merge($arr, $result->decode_response());
-                }
-            }
-            return $arr;
-        }
-        return [];
-    }
-
     public function execute($url, $method='GET', $parameters=[], $headers=[]){
         $client = clone $this;
         $client->url = $url;
