@@ -7,9 +7,11 @@
 
 <form action="index.php?page=motion&action=create&continue={$request_uri|urlencode}" method="post" name="motion_form">
     <fieldset>
-        <div class="form-group">
-            <label for="name">{$t->get('motion_name')}:</label>
-            <input type="text" required class="form-control" name="name" id="name" placeholder="{$t->get('motion_human_name')}..."/>
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="name">{$t->get('motion_name')}:</label>
+                <input type="text" required class="form-control" name="name" id="name" placeholder="{$t->get('motion_human_name')}..."/>
+            </div>
         </div>
 
         <div class="row">

@@ -228,6 +228,9 @@ function view() {
         $form = _vote_event_table('view');
     }
 
+    $hemicycle = _hemicycle($form['rows']);
+
+    $smarty->assign('hemicycle',$hemicycle);
     $smarty->assign('table_rows',$form['rows']);
     $smarty->assign('form_organizations',json_encode($form['organizations']));
     $smarty->assign('form_family',json_encode($form['family']));
@@ -235,6 +238,80 @@ function view() {
     $smarty->assign('form_t',json_encode($form['t']));
 
     $smarty->display('motion_view.tpl');
+}
+
+function _hemicycle($rows) {
+    global $settings;
+
+    $data = [];
+    $counts = ["against"=>0,"for"=>0,"all"=>0];
+    $orloj_arr = [];
+    foreach ($rows as $row) {
+        $item = new StdClass();
+        $item->color = $row->organization_color;
+        $item->name = $row->given_name . ' ' . $row->family_name;
+        $item->option_code = _hemicycle_option2code($row->option);
+        if ($item->option_code == 1) {
+            $counts['for']++;
+        } elseif ($item->option_code == -1) {
+            $counts['against']++;
+        }
+        $counts["all"]++;
+        $item->option = $row->option;
+        $item->party = $row->organization_abbreviation;
+        $orloj_arr[$item->party] = [
+            "color" => $item->color,
+            "text" => $item->party
+        ];
+        $data[] = $item;
+    }
+
+    //change orloj to pure array
+    $orloj = [];
+    foreach ($orloj_arr as $o) {
+        $orloj[] = $o;
+    }
+
+    // numbers in hemicycle rows
+    $hems = json_decode(file_get_contents($settings->app_path . 'www/pages/hemicycle.data.json'));
+    $n_str = (string) count($data);
+    $ns = _hemicycle_optimal_rows(count($data),$hems->$n_str);
+
+    //sort data
+    foreach ($data as $key => $row) {
+        $option_code[$key]  = $row->option_code;
+        $party[$key] = $row->party;
+    }
+    array_multisort($option_code, SORT_ASC, $party, SORT_ASC, $data);
+
+    return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj)];
+}
+
+function _hemicycle_option2code($o) {
+    if ($o == "yes") {
+        return 1;
+    }
+    return -1;
+}
+
+function _hemicycle_optimal_rows($n,$adepts) {
+    $best = floor(pow(((int)$n)/2 + 1, 0.48));
+    $beststr = (string) $best;
+    if (isset($adepts->$best)) {
+        return $adepts->$best;
+    }
+    $closest_distance = $best;
+    foreach($adepts as $key => $adept) {
+        if (abs($key - $best) < $closest_distance) {
+                $closest = $key;
+        }
+    }
+    if (isset($adepts->$closest)) {
+        return $adepts->$closest;
+    }
+    $out = new stdClass();
+    $out->n = $n;
+    return [$out];
 }
 
 //if id is null, get info about last vote event in city hall without votes

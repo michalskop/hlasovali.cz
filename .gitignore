@@ -10,3 +10,4 @@ basic_insert.sql
 trial.php
 www/fonts
 api/settings.py
+/www/pages/cache

@@ -8,9 +8,11 @@
 <fieldset>
     <input type="hidden" name="motion_id" value="{$motion->id}">
 
-    <div class="form-group">
-        <label for="name">{$t->get('motion_name')}:</label>
-        <input type="text" required class="form-control" name="name" id="name" value="{$motion->name|htmlspecialchars}"/>
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="name">{$t->get('motion_name')}:</label>
+            <input type="text" required class="form-control" name="name" id="name" value="{$motion->name|htmlspecialchars}"/>
+        </div>
     </div>
 
     <div class="row">

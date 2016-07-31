@@ -51,6 +51,7 @@
         {/if}
     </div>
     <div class="col-sm-6">
+    {include "motion_view_hemicycle.tpl"}
     </div>
 </div>
 {include "motion_view_vote-event_table.tpl"}
