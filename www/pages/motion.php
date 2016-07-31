@@ -17,9 +17,50 @@ switch ($action) {
     case 'update':
         update();
         break;
+    case 'delete':
+        deletee();
+        break;
     case 'view':
     default:
         view();
+}
+
+// deletes motion and its vote_events and votes
+// note: cannot just delete motion because of problems with triggers
+function deletee() {
+    global $user, $settings;
+
+    if (isset($_GET['m'])) {
+        $motion = new Motion($settings);
+
+        $vote_event = new VoteEvent($settings);
+        $vote = new Vote($settings);
+
+        $params = [
+            "motion_id" => "eq.". $_GET['m']
+        ];
+        $vote_events = $vote_event->getVoteEvents($params);
+
+        foreach ($vote_events as $ve) {
+            $params = [
+                "vote_event_id" => "eq." . $ve->id
+            ];
+            $votes = $vote->getVotes($params);
+            foreach ($votes as $v) {
+                $vote->delete($v->id);
+            }
+            $vote_event->delete($ve->id);
+        }
+        $motion->delete($_GET['m']);
+    }
+
+
+
+    die();
+
+    //go to all motions
+    header("Location: index.php");
+
 }
 
 function update() {
@@ -355,8 +396,6 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
     foreach ($votes as $v) {
         $votes_arr[$v->person_id] = $v;
     }
-    echo "<br><br>"; print_r($existing_arr);
-    echo "<br><br>"; print_r($votes_arr);
 
     $changing = [];
     $deleting = [];
@@ -382,10 +421,6 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
             $deleting[] = $e;
         }
     }
-    echo "<br><br>"; print_r($changing);
-    echo "<br><br>"; print_r($deleting);
-    echo "<br><br>"; print_r($creating);
-
 
     foreach($changing as $v) {
         $vote->update($v,$v->id);
@@ -394,7 +429,6 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
         $vote->delete($v->id);
     }
     $vote->create($creating);
-    die();
 }
 
 function _create_votes($parsed, $organizations, $people, $vote_event_id) {

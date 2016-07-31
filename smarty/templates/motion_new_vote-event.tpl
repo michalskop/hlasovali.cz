@@ -71,7 +71,7 @@
 </style>
 <hr>
 <h2>{$t->get('votes_by_representatives')}</h2>
-{if $vote_event->exist}
+{if isset($vote_event) and $vote_event->exist}
     <input type="hidden" name="vote_event_id" value="{$vote_event->vote_event_id}">
 {/if}
 <div class="row">

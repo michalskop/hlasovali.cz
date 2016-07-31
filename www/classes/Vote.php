@@ -26,8 +26,7 @@ class Vote extends Table
     }
 
     public function delete($id) {
-        $this->table->deletes('vote',$id);
+        $this->table->deletes('votes',$id);
     }
-
 }
 ?>

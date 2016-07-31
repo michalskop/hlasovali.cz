@@ -68,5 +68,9 @@ class Motion extends Table
     public function update($data,$id) {
         return $this->table->updates('motions',$data,$id);
     }
+
+    public function delete($id) {
+        $this->table->deletes('motions',$id);
+    }
 }
 ?>

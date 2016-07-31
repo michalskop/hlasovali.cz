@@ -74,7 +74,8 @@ class Table
 
     public function deletes($table,$id) {
         $this->api->delete(
-            $table . "?id=eq." . $id,
+            $table . '?id=eq.' . $id,
+            [],
             $this->headers
         );
     }

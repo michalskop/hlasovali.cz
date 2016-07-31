@@ -57,6 +57,12 @@
     "party_name": "Strana",
     "votes_by_representatives": "Hlasování zastupitelů",
     "vote_event_identifier": "Číslo hlasování",
-    "vote_event_identifier_placeholder": "Oficiální číslo hlasování"
+    "vote_event_identifier_placeholder": "Oficiální číslo hlasování",
+    "delete": "Smazat",
+    "delete?": "Smazat?",
+    "delete!": "Smazat!",
+    "really_delete_motion": "Opravdu chcete smazat celý návrh? (celý popis i hlasování)",
+    "cannot_be_undone": "Tuto akci nelze vzít zpět!",
+    "do_not_want_delete": "Ne, nechci to smazat, chci zpět."
 
 }

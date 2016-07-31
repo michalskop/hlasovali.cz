@@ -1,6 +1,8 @@
 <h1>{$motion->name|htmlspecialchars}
     {if $user_can_edit}
-        <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#modal-edit">{$t->get('edit')}</button>
+        <button type="button" class="btn btn-xs btb-primary" data-toggle="modal" data-target="#modal-edit">{$t->get('edit')}</button>
+        <button type="button" class="btn btn-xs btn-danger" data-toggle="modal"
+        data-target="#modal-delete">{$t->get('delete')}</button>
     {/if}
     {if $user->logged and $user_has_author_privilages}
         <a href="index.php?page=motion&action=new" type="button" class="btn btn-xs btn-success">{$t->get('new_motion')}</a>

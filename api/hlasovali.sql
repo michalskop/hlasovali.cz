@@ -213,13 +213,13 @@ CREATE TABLE public.votes
     CONSTRAINT votes_pkey PRIMARY KEY (id),
     CONSTRAINT votes_person_id_fkey FOREIGN KEY (person_id)
         REFERENCES public.people (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION,
+        ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT votes_vote_event_id_fkey FOREIGN KEY (vote_event_id)
         REFERENCES public.vote_events (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION,
+        ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT votes_organization_id_fkey FOREIGN KEY (organization_id)
         REFERENCES public.organizations (id) MATCH SIMPLE
-        ON UPDATE NO ACTION ON DELETE NO ACTION,
+        ON UPDATE NO ACTION ON DELETE CASCADE,
     CONSTRAINT votes_vote_event_id_person_id_key UNIQUE (vote_event_id, person_id)
 )
 WITH (
@@ -303,9 +303,29 @@ BEGIN
         AND (ou.organization_id = OLD.id)
         AND (ou.user_id = basic_auth.current_user_id())
     ) = 0 THEN
-        raise invalid_authorization_specification using message = 'current user is not allowed to do it';
+        raise invalid_authorization_specification using message = 'current user is not allowed to update it';
     END IF;
     RETURN NEW;
+END
+$func$
+LANGUAGE plpgsql;
+
+-- Only user with rights to update the organization can delete it
+CREATE OR REPLACE FUNCTION organizations_users_update_check()
+  RETURNS trigger AS
+$func$
+BEGIN
+    IF (
+        SELECT count(*) FROM public.organizations_users as ou
+        LEFT JOIN basic_auth.users as u
+        ON ou.user_id = u.id
+        WHERE ou.active
+        AND (ou.organization_id = OLD.id)
+        AND (ou.user_id = basic_auth.current_user_id())
+    ) = 0 THEN
+        raise invalid_authorization_specification using message = 'current user is not allowed to delete it';
+    END IF;
+    RETURN OLD;
 END
 $func$
 LANGUAGE plpgsql;
@@ -513,7 +533,7 @@ BEGIN
     THEN
         RETURN OLD;
     ELSE
-        raise invalid_authorization_specification using message = 'current user is not allowed to update tags or vote events for given motion';
+        raise invalid_authorization_specification using message = 'current user is not allowed to delete tags or vote events for given motion';
     END IF;
 END
 $func$
@@ -614,7 +634,7 @@ FOR EACH ROW EXECUTE PROCEDURE organizations_insert_suborganization_check();
 
 -- Only user with rights to update the organization can update it
 CREATE TRIGGER organization_update_check
-BEFORE UPDATE OR DELETE ON organizations
+BEFORE UPDATE ON organizations
 FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_check();
 
 --Only user with rigths to update the organization can create its memberships
@@ -915,7 +935,7 @@ grant select, insert, update
       on all tables in schema public to author;
 
 grant delete
-    on public.memberships, public.motions, public.organizations, public.people, public.vote_events, public.votes to author;
+    on public.memberships, public.motions, public.organizations, public.vote_events, public.votes to author;
 
 grant select, insert, update, delete
     on all tables in schema public to admin;

@@ -63,4 +63,8 @@ class VoteEvent extends Table
         return $this->table->updates('vote_events',$data,$id);
     }
 
+    public function delete($id) {
+        return $this->table->deletes('vote_events',$id);
+    }
+
 }

@@ -7,6 +7,7 @@
     {else}
         {if $user_can_edit}
             {include "motion_view_modal.tpl"}
+            {include "motion_view_modal-delete.tpl"}
         {/if}
         {include "motion_view_motion.tpl"}
     {/if}
