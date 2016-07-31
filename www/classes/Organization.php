@@ -13,16 +13,14 @@ class Organization extends Table
 
     // get organizations with params
     public function getOrganizations($params = []) {
-        $table = new Table($this->settings);
-        $result = $table->getTable('organizations','all',$params);
+        $result = $this->table->getTable('organizations','all',$params);
         return $result;
     }
 
     // get first page of organizations with most votes
     //params, example: [['key': 'id', 'operator': 'eq', 'value': '1']]
     public function getOrganizationsWithVotes($params=[]) {
-        $table = new Table($this->settings);
-        $result = $table->getTable('organizations_with_number_of_votes','all',$params);
+        $result = $this->table->getTable('organizations_with_number_of_votes','all',$params);
         return $result;
     }
 

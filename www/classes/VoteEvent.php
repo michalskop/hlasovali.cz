@@ -13,28 +13,24 @@ class VoteEvent extends Table
 
     // get votes from vote event(s) with people and organizations
     public function getVoteEventVotes($params) {
-        $table = new Table($this->settings);
-        $result = $table->getTable('votes_people_organizations','all',$params);
+        $result = $this->table->getTable('votes_people_organizations','all',$params);
         return $result;
     }
 
     public function getVoteEvents($params) {
-        $table = new Table($this->settings);
-        $result = $table->getTable('vote_events','all',$params);
+        $result = $this->table->getTable('vote_events','all',$params);
         return $result;
     }
 
     public function getVoteEvent($id=NULL) {
         $params = ['id'=>'eq.'.$id];
-        $table = new Table($this->settings);
-        $result = $table->getTable('vote_events','one',$params);
+        $result = $this->table->getTable('vote_events','one',$params);
         return $result;
     }
 
     public function getLastVoteEvent($params) {
-        $table = new Table($this->settings);
         $params["order"] = "vote_event_start_date.desc";
-        $result = $table->getTable('vote_events_information','one',$params);
+        $result = $this->table->getTable('vote_events_information','one',$params);
         return $result;
     }
 

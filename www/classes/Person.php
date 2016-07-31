@@ -19,8 +19,7 @@ class Person extends Table
 
     // get people with params
     public function getPeopleVotedInOrganizations($params = []) {
-        $table = new Table($this->settings);
-        $result = $table->getTable('people_voted_in_organizations','all',$params);
+        $result = $this->table->getTable('people_voted_in_organizations','all',$params);
         return $result;
     }
 

@@ -42,6 +42,9 @@ class Table
         }
     }
 
+    //in case of no item, return object with x->exist === false
+    //in case of a single item, returns object of the item, with x->exist === true
+    //in case of multiple items, returns array of objects of the items
     public function creates($table,$data) {
         $headers = $this->headers;
         $headers['Prefer'] = 'return=representation';
@@ -51,8 +54,17 @@ class Table
             $headers
         );
         if ($r->info->http_code == 201) {
-            $res = $r->decode_response();
-            $res->exist = TRUE;
+            $decoded = $r->decode_response();
+            if (is_array($decoded)) {
+                if (count($decoded) > 1) {
+                    $res = $decoded;
+                } else {
+                    $res = $decoded[0];
+                    $res->exist = TRUE;
+                }
+            } else {
+                $res = $decoded;
+            }
         } else {
             $res = new StdClass();
             $res->exist = FALSE;
@@ -60,6 +72,16 @@ class Table
         return $res;
     }
 
+    public function deletes($table,$id) {
+        $this->api->delete(
+            $table . "?id=eq." . $id,
+            $this->headers
+        );
+    }
+
+    //in case of no item, return object with x->exist === false
+    //in case of a single item, returns object of the item, with x->exist === true
+    //in case of multiple items, returns array of objects of the items
     public function updates($table,$data,$id) {
         $headers = $this->headers;
         $headers['Prefer'] = 'return=representation';
@@ -69,8 +91,17 @@ class Table
             $headers
         );
         if ($r->info->http_code == 200) {
-            $res = $r->decode_response()[0];
-            $res->exist = TRUE;
+            $decoded = $r->decode_response();
+            if (is_array($decoded)) {
+                if (count($decoded) > 1) {
+                    $res = $decoded;
+                } else {
+                    $res = $decoded[0];
+                    $res->exist = TRUE;
+                }
+            } else {
+                $res = $decoded;
+            }
         } else {
             $res = new StdClass();
             $res->exist = FALSE;

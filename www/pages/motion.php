@@ -30,16 +30,39 @@ function update() {
     $motion = new Motion($settings);
     $data = $motion->parseForm($_POST);
     $data['organization_id'] = $cityhall->getCityHall()->id;
-    $current_user = $user->getCurrentUser();
-    if ($current_user->logged){
-        $data['user_id'] = $current_user->id;
-    }
+    $data['user_id'] = $user->getCurrentUser()->id;
     $new_motion = $motion->update($data,$_POST['motion_id']);
 
     //update tags
     $tags = new Tag($settings);
     $t_arr = $tags->parseForm($_POST);
     $tags->update($t_arr,$_POST['motion_id']);
+
+    //update vote event
+    $vote_event = new VoteEvent($settings);
+    $data = [
+        'motion_id' => $new_motion->id,
+        'start_date' => $new_motion->date,
+        'date_precision' => $new_motion->date_precision
+    ];
+    $parsed = $vote_event->parseForm($_POST);
+    if (isset($parsed['vote_event_identifier'])) {
+        $data['identifier'] = $parsed['vote_event_identifier'];
+    }
+    $new_vote_event = $vote_event->update($data,$_POST['vote_event_id']);
+
+    //create/update organizations(parties)
+    $table = new Table($settings);
+    $organization = new Organization($settings);
+    $organizations = _create_update_organizations($parsed,$table,$organization);
+
+    //create/update people
+    $person = new Person($settings);
+    $people = _create_update_people($parsed,$table,$person);
+
+    //update votes
+    _update_votes($parsed, $organizations, $people, $new_vote_event->id);
+
     header("Location: " . $_GET['continue']);
 }
 
@@ -52,9 +75,7 @@ function create() {
     $data = $motion->parseForm($_POST);
     $data['organization_id'] = $cityhall->getCityHall()->id;
     $data['user_id'] = $user->getCurrentUser()->id;
-    //$new_motion = $motion->create($data);
-    $new_motion = $motion->getMotion(18); //**
-
+    $new_motion = $motion->create($data);
 
     //create tags
     $tags = new Tag($settings);
@@ -82,14 +103,19 @@ function create() {
     }
     $new_vote_event = $vote_event->create($data);
 
-    //create organizations
+    //create/update organizations(parties)
     $table = new Table($settings);
     $organization = new Organization($settings);
-    $parties = _create_update_organizations($parsed,$table,$organization);
+    $organizations = _create_update_organizations($parsed,$table,$organization);
 
+    //create/update people
+    $person = new Person($settings);
+    $people = _create_update_people($parsed,$table,$person);
 
+    //create votes
+    _create_votes($parsed, $organizations, $people, $new_vote_event->id);
 
-
+    //go to the new motion
     header("Location: index.php?page=motion&action=view&m=" . $new_motion->id);
 }
 
@@ -156,6 +182,7 @@ function view() {
     $ve_info = $table->getTable('vote_events_information','one',$params);
     if ($ve_info->exist) {
         $form = _vote_event_table('view',$ve_info->vote_event_id);
+        $smarty->assign('vote_event',$ve_info);
     } else {
         $form = _vote_event_table('view');
     }
@@ -296,8 +323,139 @@ function _option4handlebars($item) {
     }
 }
 
+function _update_votes($parsed, $organizations, $people, $vote_event_id) {
+    global $settings;
+    $vote = new Vote($settings);
+
+    $params = ['vote_event_id' => 'eq.'.$vote_event_id];
+    $existing = $vote->getVotes($params);
+
+    $votes = [];
+    foreach ($parsed['rows'] as $row) {
+        if ($row['option'] == 'on') {
+            $row['option'] = $row['default_option'];
+        }
+
+        if (in_array($row['option'],$vote->allowed_options)) {
+            $v = new StdClass();
+            $v->option = $row['option'];
+            $name = $row['family_name'] . '+' . $row['given_name'];
+            $v->person_id = $people[$name]->id;
+            $v->organization_id = $organizations[$row['organization_name']]->id;
+            $v->vote_event_id = $vote_event_id;
+            $votes[] = $v;
+        }
+    }
+
+    $existing_arr = [];
+    foreach ($existing as $e) {
+        $existing_arr[$e->person_id] = $e;
+    }
+    $votes_arr = [];
+    foreach ($votes as $v) {
+        $votes_arr[$v->person_id] = $v;
+    }
+    echo "<br><br>"; print_r($existing_arr);
+    echo "<br><br>"; print_r($votes_arr);
+
+    $changing = [];
+    $deleting = [];
+    $creating = [];
+    foreach($votes_arr as $k=>$v) {
+        if (isset($existing_arr[$k])) {
+            $e = $existing_arr[$k];
+            if (($e->organization_id == $v->organization_id) and
+                ($e->option == $v->option)
+            ) {
+                //it is ok, kept
+            } else {
+                $it = $v;
+                $it->id = $e->id;
+                $changing[] = $it;
+            }
+        } else {
+            $creating[] = $v;
+        }
+    }
+    foreach($existing_arr as $k=>$e) {
+        if (!isset($votes_arr[$k])) {
+            $deleting[] = $e;
+        }
+    }
+    echo "<br><br>"; print_r($changing);
+    echo "<br><br>"; print_r($deleting);
+    echo "<br><br>"; print_r($creating);
+
+
+    foreach($changing as $v) {
+        $vote->update($v,$v->id);
+    }
+    foreach($deleting as $v) {
+        $vote->delete($v->id);
+    }
+    $vote->create($creating);
+    die();
+}
+
+function _create_votes($parsed, $organizations, $people, $vote_event_id) {
+    global $settings;
+    $vote = new Vote($settings);
+
+    $votes = [];
+    foreach ($parsed['rows'] as $row) {
+        if ($row['option'] == 'on') {
+            $row['option'] = $row['default_option'];
+        }
+        if (in_array($row['option'],$vote->allowed_options)) {
+            $v = new StdClass();
+            $v->option = $row['option'];
+            $name = $row['family_name'] . '+' . $row['given_name'];
+            $v->person_id = $people[$name]->id;
+            $v->organization_id = $organizations[$row['organization_name']]->id;
+            $v->vote_event_id = $vote_event_id;
+            $votes[] = $v;
+        }
+    }
+    $vote->create($votes);
+}
+
+function _create_update_people($parsed, $table, $person) {
+    global $cityhall;
+
+    $people = [];
+    $parsed_people = [];
+    $people_out = [];
+    foreach($parsed['rows'] as $row) {
+        $params = [
+            'person_family_name' => "eq." . $row['family_name'],
+            'person_given_name' => "eq." . $row['given_name'],
+            'organization_parent_id' => "eq." . $cityhall->getCityHall()->id
+        ];
+        $name = $row['family_name'] . '+' . $row['given_name'];
+        $people[$name] = $table->get_one('people_voted_in_organizations',$params);
+        $parsed_people[$name] = $row;
+    }
+    foreach ($people as $key=>$p) {
+        if ($p->exist) {
+            $new = new StdClass();
+            $new->family_name = $p->person_family_name;
+            $new->given_name = $p->person_given_name;
+            $new->id = $p->person_id;
+            $people_out[$key] = $new;
+        } else {
+            $new = [
+                'family_name' => $parsed_people[$key]['family_name'],
+                'given_name' => $parsed_people[$key]['given_name']
+            ];
+            $people_out[$key] = $person->create($new);
+        }
+    }
+    return $people_out;
+
+}
+
 function _create_update_organizations($parsed, $table, $organization){
-    global $user, $cityhall, $settings;
+    global $cityhall, $user;
 
     $organizations = [];
     $parsed_orgs = [];
@@ -312,10 +470,11 @@ function _create_update_organizations($parsed, $table, $organization){
             $parsed_orgs[$row['organization_name']] = $row;
         }
     }
+
     foreach ($organizations as $key => $org) {
         if ($org->exist) {
             if (!isset($org->attributes)) {
-                $org->attributes = new StdClass;
+                $org->attributes = new StdClass();
             }
             if (!isset($org->attributes->abbreviation) or
                 !isset($org->attributes->color) or
@@ -338,6 +497,13 @@ function _create_update_organizations($parsed, $table, $organization){
                 'attributes'=> $attrs
             ];
             $organizations[$key] = $organization->create($new);
+            //and give rights to the current user:
+            $item = [
+                'organization_id' => $organizations[$key]->id,
+                'user_id' => $user->getCurrentUser()->id,
+                'active' => TRUE
+            ];
+            $table->create('organizations_users',$item);
         }
     }
     return $organizations;

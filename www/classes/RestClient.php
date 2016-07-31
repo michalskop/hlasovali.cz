@@ -179,7 +179,7 @@ class RestClient implements Iterator, ArrayAccess {
             if($client->url[0] != '/' && substr($client->options['base_url'], -1) != '/')
                 $client->url = '/' . $client->url;
             $client->url = $client->options['base_url'] . $client->url;
-            print_r($client->url);echo " <br>\n"; //**debug
+            //print_r($client->url);echo " <br>\n"; //**debug
         }
         $curlopt[CURLOPT_URL] = $client->url;
 

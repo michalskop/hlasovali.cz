@@ -13,9 +13,8 @@ class Motion extends Table
 
     // get info about motion
     public function getMotion($id=NULL) {
-        $table = new Table($this->settings);
         $params = ["id"=>"eq.".$id];
-        $result = $table->getTable('motions','one',$params);
+        $result = $this->table->getTable('motions','one',$params);
         return $result;
     }
 
