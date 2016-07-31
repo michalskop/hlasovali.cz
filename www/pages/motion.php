@@ -228,6 +228,7 @@ function view() {
         $form = _vote_event_table('view');
     }
 
+    $smarty->assign('table_rows',$form['rows']);
     $smarty->assign('form_organizations',json_encode($form['organizations']));
     $smarty->assign('form_family',json_encode($form['family']));
     $smarty->assign('form_rows',json_encode($form['rows']));
@@ -537,7 +538,7 @@ function _create_update_organizations($parsed, $table, $organization){
                 'user_id' => $user->getCurrentUser()->id,
                 'active' => TRUE
             ];
-            $table->create('organizations_users',$item);
+            $table->creates('organizations_users',$item);
         }
     }
     return $organizations;

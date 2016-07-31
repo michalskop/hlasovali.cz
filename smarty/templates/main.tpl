@@ -38,13 +38,13 @@
     <link href="{$settings->app_url}libs/bootstrap.min.css" rel="stylesheet">
 {*   <link href="//cdn.bootcss.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">*}
     <link href="{$settings->app_url}libs/font-awesome.min.css" rel="stylesheet">
-    <link href="{$settings->app_url}project.css" rel="stylesheet">
+    <link href="{$settings->app_url}css/project.css" rel="stylesheet">
     <script src="{$settings->app_url}libs/jquery-1.11.3.min.js"></script>
     <script src="{$settings->app_url}libs/bootstrap.min.js"></script>
 {*    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*}
 {*    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*}
 {*    <script src="../jquery.stickytableheaders.min.js"></script>*}
-    <title>{$t->get('title')}</title>
+    <title>{$t->get('app_title')}</title>
 
     {block name=additionalHead}{/block}
 

@@ -1,6 +1,6 @@
 {
-    "name": "Hlasovali.cz",
-    "title": "Hlasovali.cz",
+    "app_name": "Hlasovali.cz",
+    "app_title": "Hlasovali.cz",
 
     "__META": "",
     "iso_lang": "cs",
@@ -10,9 +10,14 @@
 
     "__HEADER": "",
     "pre_name": "Víme, jak",
+    "post_name": "v0.1",
     "select_cityhall": "Město",
     "my_page": "Moje stránka",
 
+    "__FOOTER": "",
+    "footer_motto": "Od autorů <a href='http://volebnikalkulacka.cz'>Volební kalkulačky</a>.",
+    "footer_source": "Zdrojový kód",
+    "contact": "Kontakt",
 
     "__LOGIN": "",
     "login": "Přihlásit se",
@@ -43,14 +48,17 @@
     "save_changes": "Uložit změny",
     "cancel": "Zrušit",
     "date_format": "%d.%m.%Y",
-    "created_by_author": "Zapsal/a",
+    "created_by_author": "Editor/ka",
     "ve_yes": "Pro",
     "ve_no": "Proti",
-    "ve_abstain": "Zdržení",
-    "ve_absent": "Nepřít.",
+    "ve_abstain_short": "Zdržení",
+    "ve_abstain": "Zdržel/a se",
+    "ve_absent_short": "Nepřít.",
+    "ve_absent": "Nepřítomen/a",
     "add_representative": "Přidat zastupitele",
     "remove": "Odebrat",
     "current_number": "Aktuální počet zadaných zastupitelů",
+    "name": "Jméno",
     "family_name": "Příjmení",
     "given_name": "Jméno",
     "party_abbreviation": "Strana (zkr.)",
@@ -63,6 +71,12 @@
     "delete!": "Smazat!",
     "really_delete_motion": "Opravdu chcete smazat celý návrh? (celý popis i hlasování)",
     "cannot_be_undone": "Tuto akci nelze vzít zpět!",
-    "do_not_want_delete": "Ne, nechci to smazat, chci zpět."
+    "do_not_want_delete": "Ne, nechci to smazat, chci zpět.",
+    "voted": "Hlasoval/a",
+    "links": "Odkazy",
+
+
+    "__ABOUT": "",
+    "about_project": "O projektu"
 
 }
