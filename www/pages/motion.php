@@ -230,6 +230,7 @@ function view() {
 
     $hemicycle = _hemicycle($form['rows']);
 
+    $smarty->assign('result',$hemicycle['result']);
     $smarty->assign('hemicycle',$hemicycle);
     $smarty->assign('table_rows',$form['rows']);
     $smarty->assign('form_organizations',json_encode($form['organizations']));
@@ -279,12 +280,21 @@ function _hemicycle($rows) {
 
     //sort data
     foreach ($data as $key => $row) {
-        $option_code[$key]  = $row->option_code;
+        $option_code[$key]  = -1*$row->option_code;
         $party[$key] = $row->party;
     }
     array_multisort($option_code, SORT_ASC, $party, SORT_ASC, $data);
 
-    return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj)];
+    //result
+    if ($counts['for']>$counts['against']) {
+        $result = 'pass';
+    } elseif ($counts['all']>0) {
+        $result = 'fail';
+    } else {
+        $result = FALSE;
+    }
+
+    return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj),'result'=>$result];
 }
 
 function _hemicycle_option2code($o) {

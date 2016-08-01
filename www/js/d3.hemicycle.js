@@ -181,19 +181,19 @@ d3.hemicycle = function() {
               .attr('font-size',xxScale(d.widthIcon))        //adjust as needed
               .attr('font-weight','bold')
               .attr('text-anchor',"end")
-              .attr('fill', score['against']['color'])
+              .attr('fill', score['for']['color'])
               .attr('x',parseFloat(xScale(0))-parseFloat(xxScale(d.widthIcon*0.15)))
               .attr('y',yScale(0))
-              .text(score['against']['value']);
+              .text(score['for']['value']);
             svg.append("text")
               .attr('font-family', 'sans-serif')
               .attr('font-size',xxScale(d.widthIcon))        //adjust as needed
               .attr('font-weight','bold')
               .attr('text-anchor',"start")
-              .attr('fill', score['for']['color'])
+              .attr('fill', score['against']['color'])
               .attr('x',parseFloat(xScale(0))+parseFloat(xxScale(d.widthIcon*0.15)))
               .attr('y',yScale(0))
-              .text(score['for']['value']);
+              .text(score['against']['value']);
             svg.append("text")
               .attr('font-family', 'sans-serif')
               .attr('font-size',xxScale(d.widthIcon))        //adjust as needed

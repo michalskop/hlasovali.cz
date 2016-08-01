@@ -8,7 +8,7 @@
     <meta name="description" content="{$t->get('website_description')}">
     <meta name="keywords" content="{$t->get('website_keywords')}">
     <meta name="author" content="{$t->get('website_author')}">
-    <link type="image/x-icon" href="{$settings->app_url}/images/favicon.ico" rel="shortcut icon">
+    <link type="image/x-icon" href="{$settings->app_url}images/favicon.svg" rel="shortcut icon">
 
     {* <meta property="og:image" content="{$t->get(og_image)}"/>
 	<meta property="og:title" content="{$t->get(og_title)}"/>
@@ -37,10 +37,10 @@
 {*    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet">*}
     <link href="{$settings->app_url}libs/bootstrap.min.css" rel="stylesheet">
 {*   <link href="//cdn.bootcss.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">*}
-    <link href="{$settings->app_url}libs/font-awesome.min.css" rel="stylesheet">
     <link href="{$settings->app_url}css/project.css" rel="stylesheet">
     <script src="{$settings->app_url}libs/jquery-1.11.3.min.js"></script>
     <script src="{$settings->app_url}libs/bootstrap.min.js"></script>
+    <link href="{$settings->app_url}libs/font-awesome.min.css" rel="stylesheet">
 {*    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*}
 {*    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*}
 {*    <script src="../jquery.stickytableheaders.min.js"></script>*}

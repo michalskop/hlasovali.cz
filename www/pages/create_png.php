@@ -8,7 +8,4 @@ if (!$fmtime or (time() - $fmtime >= $cache_life)) {
     $com = 'inkscape -z -e cache/png/' . $_POST['url'].'.png cache/svg/' .  $_POST['url'].'.svg';
     exec($com);
 }
-#$fsvg = fopen('cache/svg/' . $_POST['url'].'.svg','w');
-#fwrite($fsvg,$_POST['svg']);
-#fclose($fsvg);
 ?>

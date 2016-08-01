@@ -4,6 +4,7 @@
 
     "__META": "",
     "iso_lang": "cs",
+    "locale": "cz_CZ",
     "website_description": "",
     "website_keywords": "",
     "website_author": "Michal Škop, KohoVolit.eu",
@@ -76,6 +77,8 @@
     "links": "Odkazy",
     "against": "Proti",
     "pro": "Pro",
+    "pass": "Schváleno",
+    "fail": "Neschváleno",
 
 
     "__ABOUT": "",

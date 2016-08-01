@@ -20,6 +20,12 @@
             {if $date_and_time['time']}
                 {$date_and_time['time']}
             {/if}
+            {if $result}
+                {if $result=="pass"}<span class="text-success">
+                {else}<span class="text-danger">{/if}
+                {$t->get($result)}
+                </span>
+            {/if}
         </div>
         <div>
             <p>

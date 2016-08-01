@@ -54,9 +54,9 @@ var dat = {$hemicycle['dat']};
                .widthIcon(function(d) { return d.widthIcon;})
                .width(function(d) { return d.width;})
                .people(function(d) { return d.people;})
-               .arcs([{ "start":counts['all'] - counts['for'],
-               "end":counts['all']-1,"color":"green", "opacity":0.15}, { "start":0,"end":counts['against'] - 1, "color":"darkred", "opacity":0.15}])
-               .score({ "against":{ "color":"red","value":counts['against']}, "for":{ "color":"green","value":counts['for']}})
+               .arcs([{ "start":counts['all'] - counts['against'],
+               "end":counts['all'] - 1,"color":"#ff0039", "opacity":0.15}, { "start":0,"end":counts['for'] - 1, "color":"#3fb618", "opacity":0.15}])
+               .score({ "against":{ "color":"#ff0039","value":counts['against']}, "for":{ "color":"#3fb618","value":counts['for']}})
                ;
 
       //create hemicycle
@@ -77,7 +77,7 @@ var dat = {$hemicycle['dat']};
        .style("opacity", 1e-6);
 
        //legend data
-       var legendData = [{ "label":["{$motion->name|htmlspecialchars|truncate:50:"...":true}"],"icons":[{ "color":"red","text":"{$t->get('against')|upper}","class":"legend-option-against"},{ "color":"green","text":"{$t->get('pro')|upper}","class":"legend-option-for"}]}];
+       var legendData = [{ "label":["{$motion->name|htmlspecialchars|truncate:50:"...":true}"],"icons":[{ "color":"#3fb618","text":"{$t->get('pro')|upper}","class":"legend-option-pro"},{ "color":"#ff0039","text":"{$t->get('against')|upper}","class":"legend-option-against"}]}];
 
        var myLegend = d3.legend()
                .label(function(d) { return d.label;})
