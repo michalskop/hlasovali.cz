@@ -1,4 +1,4 @@
-<div id="chart"></div>
+<div id="chart" class="hemicycle-container"></div>
 <!-- hemicycle https://github.com/KohoVolit/widget-hemicycle -->
 <script src="{$settings->app_url}libs/d3.v3.min.js"></script>
 <script src="{$settings->app_url}js/d3.hemicycle.js"></script>

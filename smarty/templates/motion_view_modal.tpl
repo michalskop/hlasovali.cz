@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn" data-dismiss="modal">{$t->get('cancel')}</button>
-                    <input type="submit" class="btn btn-success" value="{$t->get('save')}"/>
+                    <button type="button" class="btn" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> {$t->get('cancel')}</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i> {$t->get('save')}</button>
                 </div>
             </form>
         </div>

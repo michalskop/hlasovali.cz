@@ -10,8 +10,8 @@
         <p><strong>{$t->get('cannot_be_undone')}</strong>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">{$t->get('do_not_want_delete')}</button>
-        <a href="index.php?page=motion&action=delete&m={$motion->id}" type="button" class="btn btn-danger">{$t->get('delete!')}</a>
+        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-reply" aria-hidden="true"></i> {$t->get('do_not_want_delete')}</button>
+        <a href="index.php?page=motion&action=delete&m={$motion->id}" type="button" class="btn btn-danger"><i class="fa fa-exclamation" aria-hidden="true"></i> {$t->get('delete!')}</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

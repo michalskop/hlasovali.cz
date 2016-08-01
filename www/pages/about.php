@@ -9,7 +9,7 @@ spl_autoload_register(function ($class) {
 
 //include text
 $parsedown = new Parsedown();
-$content_md = file_get_contents("pages/about.md");
+$content_md = file_get_contents("pages/about_cs_CZ.md");
 $content = $parsedown->text($content_md);
 
 $smarty->assign('content',$content);

@@ -16,15 +16,17 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 {if $cityhall->selected}
-                  {$cityhall->name|htmlspecialchars}
+                    <strong>{$cityhall->name|htmlspecialchars}</strong>
                 {else}
-                  {$t->get('select_cityhall')}
+                    {$t->get('select_cityhall')}
                 {/if}
                 <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       {foreach $cityhalls as $ch}
                           <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name|htmlspecialchars}</a>
                       {/foreach}
+                      <li role="separator" class="divider">
+                      <li><a href="?page=about#new_authors">{$t->get('add_new_cityhall')}</a>
                   </ul>
             </li>
             <li></li>
@@ -32,17 +34,16 @@
         </ul>
 
       <ul class="nav navbar-nav navbar-right">
-
         {if $user->logged}
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$user->name} <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><small>{$user->name}</small> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">{$t->get('my_page')}</a></li>
                         <li><a href="?page=logout&action=run&continue={$request_uri|urlencode}&u={$user->id}">{$t->get('logout')}</a></li>
                     </ul>
             </li>
         {else}
-            <li><a href="?page=login">{$t->get('login')}</a></li>
+            <li><a href="?page=login"><i class="fa fa-user" aria-hidden="true"></i>  <small>{$t->get('login')}</small></a></li>
         {/if}
       </ul>
     </div> <!-- /.navbar-collapse -->

@@ -14,11 +14,13 @@
     "post_name": "v0.1",
     "select_cityhall": "Město",
     "my_page": "Moje stránka",
+    "add_new_cityhall": "Přidat novou obec",
 
     "__FOOTER": "",
     "footer_motto": "Od autorů <a href='http://volebnikalkulacka.cz'>Volební kalkulačky</a>.",
     "footer_source": "Zdrojový kód",
     "contact": "Kontakt",
+    "licence": "Licence",
 
     "__LOGIN": "",
     "login": "Přihlásit se",
@@ -69,7 +71,7 @@
     "vote_event_identifier_placeholder": "Oficiální číslo hlasování",
     "delete": "Smazat",
     "delete?": "Smazat?",
-    "delete!": "Smazat!",
+    "delete!": "Smazat",
     "really_delete_motion": "Opravdu chcete smazat celý návrh? (celý popis i hlasování)",
     "cannot_be_undone": "Tuto akci nelze vzít zpět!",
     "do_not_want_delete": "Ne, nechci to smazat, chci zpět.",

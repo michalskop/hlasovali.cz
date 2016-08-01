@@ -101,6 +101,6 @@
 
     {include "motion_new_vote-event.tpl"}
 
-    <input type="submit" class="btn btn-success btn-block" value="{$t->get('save')}"/>
+    <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-check" aria-hidden="true"></i> {$t->get('save')}</button>
 
 </form>

@@ -107,7 +107,7 @@
     <fieldset id="form_fieldset">
 
     </fieldset>
-    <div class="form-group col-sm-2">
+    <div class="form-group col-sm-3">
         <button class="btn btn-sm btn-info btn-block" id="add-row"> + {$t->get('add_representative')}</button>
     </div>
 </div>
