@@ -8,7 +8,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand{if $page=='frontpage'} active{/if}" href="/"><span class="col-xs"><small>{$t->get('pre_name')} </small></span>{$t->get('app_name')}<span class="col-xs"><small> {$t->get('post_name')}</small></a>
+      <a class="navbar-brand{if $page=='frontpage'} active{/if}" href="/">
+          {* <span class="col-xs"><small>{$t->get('pre_name')} </small> *}
+      <i class="fa fa-hand-paper-o" aria-hidden="true"></i> {$t->get('app_name')}<span class="col-xs"><small><small> {$t->get('post_name')}</small></small></span></a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse">

@@ -174,6 +174,7 @@ CREATE TABLE public.vote_events
     identifier text,
     start_date timestamptz NOT NULL,
     date_precision smallint,
+    result text,
     attributes jsonb,
     CONSTRAINT vote_events_pkey PRIMARY KEY (id),
     CONSTRAINT vote_events_motion_id_fkey FOREIGN KEY (motion_id)
@@ -749,70 +750,50 @@ select *
 from organizations
 where founding_date < NOW() and ((dissolution_date is null) or (dissolution_date > NOW()));
 
--- Current people
-create or replace view current_people_in_organizations as
-select
-    p.given_name as given_name,
-    p.family_name as family_name,
-    m.person_id as person_id,
-    m.start_date as start_date,
-    m.end_date as end_date,
-    m.organization_id as organization_id,
-    o.name as name,
-    o.classification as classification,
-    o.founding_date as founding_date,
-    o.dissolution_date as dissolution_date,
-    p.attributes as person_attributes,
-    o.attributes as organization_attributes,
-    o.parent_id as parent_id
-from people as p
-left join memberships as m
-on p.id = m.person_id
-left join organizations as o
-on o.id = m.organization_id
-where (m.start_date < NOW()) and (m.end_date > NOW());
-
--- People
-create or replace view people_in_organizations as
-select
-    p.given_name as given_name,
-    p.family_name as family_name,
-    m.person_id as person_id,
-    m.start_date as start_date,
-    m.end_date as end_date,
-    m.organization_id as organization_id,
-    o.name as name,
-    o.classification as classification,
-    o.founding_date as founding_date,
-    o.dissolution_date as dissolution_date,
-    p.attributes as person_attributes,
-    o.attributes as organization_attributes,
-    o.parent_id as parent_id
-from people as p
-left join memberships as m
-on p.id = m.person_id
-left join organizations as o
-on o.id = m.organization_id;
-
--- vote events with their motions
-create or replace view vote_events_motions as
-SELECT
-    ve.id as vote_event_id,
-    ve.identifier as vote_event_identifier,
-    ve.start_date as vote_event_start_date,
-    ve.date_precision as vote_event_date_precision,
-    ve.attributes as vote_event_attributes,
-    m.id as motion_id,
-    m.name as motion_name,
-    m.description as motion_description,
-    m.date as motion_date,
-    m.date_precision as motion_date_precision,
-    m.organization_id as organization_id,
-    m.user_id as user_id,
-    m.attributes as motion_attributes
-FROM vote_events as ve
-LEFT JOIN motions as m
-ON ve.motion_id = m.id;
+-- -- Current people
+-- create or replace view current_people_in_organizations as
+-- select
+--     p.given_name as given_name,
+--     p.family_name as family_name,
+--     m.person_id as person_id,
+--     m.start_date as start_date,
+--     m.end_date as end_date,
+--     m.organization_id as organization_id,
+--     o.name as name,
+--     o.classification as classification,
+--     o.founding_date as founding_date,
+--     o.dissolution_date as dissolution_date,
+--     p.attributes as person_attributes,
+--     o.attributes as organization_attributes,
+--     o.parent_id as parent_id
+-- from people as p
+-- left join memberships as m
+-- on p.id = m.person_id
+-- left join organizations as o
+-- on o.id = m.organization_id
+-- where (m.start_date < NOW()) and (m.end_date > NOW());
+--
+-- -- People
+-- create or replace view people_in_organizations as
+-- select
+--     p.given_name as given_name,
+--     p.family_name as family_name,
+--     m.person_id as person_id,
+--     m.start_date as start_date,
+--     m.end_date as end_date,
+--     m.organization_id as organization_id,
+--     o.name as name,
+--     o.classification as classification,
+--     o.founding_date as founding_date,
+--     o.dissolution_date as dissolution_date,
+--     p.attributes as person_attributes,
+--     o.attributes as organization_attributes,
+--     o.parent_id as parent_id
+-- from people as p
+-- left join memberships as m
+-- on p.id = m.person_id
+-- left join organizations as o
+-- on o.id = m.organization_id;
 
 -- info about vote event
 create or replace view public.vote_events_information as
@@ -827,6 +808,7 @@ create or replace view public.vote_events_information as
         ve.id as vote_event_id,
         ve.start_date as vote_event_start_date,
         ve.date_precision as vote_event_date_precision,
+        ve.result as vote_event_result,
         ve.attributes as vote_event_attributes,
         m.id as motion_id,
         m.name as motion_name,
@@ -852,6 +834,31 @@ create or replace view public.users as
         name,
         attributes
   from basic_auth.users;
+
+  -- vote events with their motions and authors
+  create or replace view public.vote_events_motions_users as
+  SELECT
+      ve.id as vote_event_id,
+      ve.identifier as vote_event_identifier,
+      ve.start_date as vote_event_start_date,
+      ve.date_precision as vote_event_date_precision,
+      ve.result as vote_event_result,
+      ve.attributes as vote_event_attributes,
+      m.id as motion_id,
+      m.name as motion_name,
+      m.description as motion_description,
+      m.date as motion_date,
+      m.date_precision as motion_date_precision,
+      m.organization_id as organization_id,
+      m.attributes as motion_attributes,
+      u.id as user_id,
+      u.name as user_name,
+      u.attributes as user_attributes
+  FROM vote_events as ve
+  LEFT JOIN motions as m
+  ON ve.motion_id = m.id
+  LEFT JOIN users as u
+  ON m.user_id = u.id;
 
 -- political groups (parties) with most votes
 create or replace view public.organizations_with_number_of_votes as
@@ -910,6 +917,7 @@ create or replace view public.votes_people_organizations as
         ve.motion_id as vote_event_motion_id,
         ve.start_date as vote_event_start_date,
         ve.date_precision as vote_event_date_precision,
+        ve.result as vote_event_result,
         ve.attributes as vote_event_attributes,
         v.option as vote_option
     from votes as v

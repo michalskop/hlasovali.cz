@@ -71,11 +71,18 @@ d3.hemicycle = function() {
             // ARCS
             for (key in arcs_val) {
                 arc = arcs_val[key];
-                    //correct for +-90:
-                if (arc.start == 0) arc.startangle = -90;
-                else arc.startangle = (data[arc.start].rot + data[arc.start-1].rot)/2;
-                if (arc.end == (data.length -1)) arc.endangle = 90;
-                else arc.endangle = (data[arc.end].rot + data[arc.end+1].rot)/2;
+                    //correct of empty arcs:
+                if ((arc.start > arc.end)) {
+                    arc.startangle = -90;
+                    arc.endangle = -90;
+                } else {
+                        //correct for +-90:
+                    if (arc.start == 0) arc.startangle = -90;
+                    else arc.startangle = (data[arc.start].rot + data[arc.start-1].rot)/2;
+                    if (arc.end == (data.length -1)) arc.endangle = 90;
+                    else arc.endangle = (data[arc.end].rot + data[arc.end+1].rot)/2;
+                }
+
             }
             var arci = d3.svg.arc()
                 .startAngle(function(d){

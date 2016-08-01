@@ -2,13 +2,13 @@
 
 // purifies html
 // results is html text with only allowed tags
-function purify_html($dirty_html) {
+function purify_html($dirty_html, $allowed = 'p[style],br,hr,b,i,u,a[href],span[style],ul,ol,li') {
     global $settings;
 
     //see http://htmlpurifier.org/live/INSTALL
     require_once($settings->app_path . 'www/classes/HTMLPurifier.standalone.php');
     $config = HTMLPurifier_Config::createDefault();
-    $config->set('HTML.Allowed', 'p[style],br,hr,b,i,u,a[href],span[style],ul,ol,li');
+    $config->set('HTML.Allowed', $allowed);
     $purifier = new HTMLPurifier($config);
     $clean_html = $purifier->purify($dirty_html);
     return $clean_html;

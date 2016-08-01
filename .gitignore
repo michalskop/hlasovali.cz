@@ -11,3 +11,4 @@ trial.php
 www/fonts
 api/settings.py
 /www/pages/cache
+www/classes/standalone/HTMLPurifier/DefinitionCache/Serializer/

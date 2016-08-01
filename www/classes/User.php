@@ -68,12 +68,14 @@ class User extends Table
         if($result->info->http_code == 200) {
             if (isset($result->decode_response()[0])) {
                 $this->information = $result->decode_response()[0];
+                $this->information->exist = true;
                 $this->information->logged = true;
                 return $this->information;
             } else {
                 unset($this->information);
                 $res = new StdClass();
                 $res->logged = false;
+                $res->exist = false;
                 return $res;
             }
         } else {

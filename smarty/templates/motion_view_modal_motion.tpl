@@ -113,5 +113,10 @@ $(document).ready(function() {
         })
 
 
+    //if # is present, directly open modal
+    if(window.location.hash) {
+        $('#modal-edit').modal('show');
+    }
+
 });
 </script>

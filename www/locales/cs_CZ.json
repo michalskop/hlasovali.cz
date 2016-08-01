@@ -82,6 +82,11 @@
     "pass": "Schváleno",
     "fail": "Neschváleno",
 
+    "__MOTIONS": "",
+    "filter": "Filtrování",
+    "since": "Od",
+    "until": "Do",
+    "tag": "Tag",
 
     "__ABOUT": "",
     "about_project": "O projektu"

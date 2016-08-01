@@ -73,6 +73,9 @@
 <h2>{$t->get('votes_by_representatives')}</h2>
 {if isset($vote_event) and $vote_event->exist}
     <input type="hidden" name="vote_event_id" value="{$vote_event->vote_event_id}">
+    {if in_array($vote_event->vote_event_result,["pass","fail"])}
+        <input type="hidden" name="default_vote_event_result" value="{$vote_event->vote_event_result}">
+    {/if}
 {/if}
 <div class="row">
     <div class="form-group col-sm-4">
@@ -119,3 +122,14 @@
     var t = {$form_t};
 </script>
 <script src="{$settings->app_url}js/vote_event_edit.js"></script>
+
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label class="radio-inline">
+            <input type="radio" name="vote_event_result" {if isset($vote_event) and $vote_event->exist and isset($vote_event->vote_event_result) and ($vote_event->vote_event_result == 'pass')}checked{/if} value="pass"><span class="text-success">{$t->get('pass')}</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="vote_event_result" {if isset($vote_event) and $vote_event->exist and isset($vote_event->vote_event_result) and ($vote_event->vote_event_result == 'fail')}checked{/if} value="fail"><span class="text-danger">{$t->get('fail')}</span>
+        </label>
+    </div>
+</div>

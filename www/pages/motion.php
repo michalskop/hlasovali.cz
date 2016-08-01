@@ -90,6 +90,14 @@ function update() {
     if (isset($parsed['vote_event_identifier'])) {
         $data['identifier'] = $parsed['vote_event_identifier'];
     }
+    if (isset($parsed['vote_event_result'])){
+        if (isset($parsed['default_vote_event_result'])) {
+            if ($parsed['vote_event_result'] == 'on') {
+                $parsed['vote_event_result'] = $parsed['default_vote_event_result'];
+            }
+        }
+        $data['result'] = $parsed['vote_event_result'];
+    }
     $new_vote_event = $vote_event->update($data,$_POST['vote_event_id']);
 
     //create/update organizations(parties)
@@ -142,6 +150,12 @@ function create() {
     if (isset($parsed['vote_event_identifier'])) {
         $data['identifier'] = $parsed['vote_event_identifier'];
     }
+    if (isset($parsed['vote_event_result']) and isset($parsed['default_vote_event_result'])) {
+        if ($parsed['vote_event_result'] == 'on') {
+            $parsed['vote_event_result'] = $parsed['default_vote_event_result'];
+        }
+        $data['result'] = $parsed['vote_event_result'];
+    }
     $new_vote_event = $vote_event->create($data);
 
     //create/update organizations(parties)
@@ -177,36 +191,104 @@ function neww() {
     $smarty->display('motion_new.tpl');
 }
 
+function view_list() {
+    global $user, $settings, $cityhall, $smarty;
+
+    require_once($settings->app_path . 'www/helpers/globalfunctions_helper.php');
+
+    $motion = new Motion($settings);
+
+    //get list of motions
+    $params = ["order" => "motion_date.desc,vote_event_identifier.desc,motion_id.desc"];
+    $filters = [];
+    if (isset($cityhall->id)) {
+        $params['organization_id'] = 'eq.'.$cityhall->id;
+        $filters[] = ['name'=> 'cityhall', 'value'=> $cityhall->name];
+    }
+    if (isset($_GET['since'])) {
+        $params['motion_date'] = 'gte.'.$_GET['since'];
+        $filters[] = ['name'=> 'since', 'value'=> $_GET['since']];
+    }
+    if (isset($_GET['until'])) {
+        $params['motion_date'] = 'lt.'.$_GET['until'];
+        $filters[] = ['name'=> 'until', 'value'=> $_GET['until']];
+    }
+    if (isset($_GET['u'])) {
+        $params['user_id'] = 'eq.'.$_GET['u'];
+        $u = $user->getUser($_GET['u']);
+        if ($u->exist) {
+            $filters[] = ['name'=> 'created_by_author', 'value'=> $u->name];
+        } else {
+            $filters[] = ['name'=> 'created_by_author', 'value'=> '?'];
+        }
+    }
+    if (isset($_GET['start'])) {
+        $params['offset'] = 'eq.'.$_GET['start'];
+    }
+    $tag = new Tag($settings);
+    if (isset($_GET['tag'])) {
+        $tags = $tag->getTags(['tag'=>'eq.'.$_GET['tag']]);
+        $allowed = [];
+        foreach ($tags as $ta) {
+            $allowed[] = $ta->motion_id;
+        }
+        $params['motion_id'] = "in." . implode(',', $allowed);
+        $filters[] = ['name'=> 'tag', 'value'=> $_GET['tag']];
+    }
+
+    $motions = $motion->getMotionsInfo($params);
+
+    //preformat date/time
+    foreach($motions as $m) {
+        $m->formatted_datetime = preformat_date($m->motion_date,$m->motion_date_precision);
+        $m->tags = $tag->getTags(["motion_id" => "eq.".$m->motion_id]);
+        $m->id = $m->motion_id;
+        //filter description even more
+        $m->motion_description = purify_html($m->motion_description,'br,hr');
+    }
+
+    //author?
+    if (isset($cityhall->information) and $cityhall->information->selected) {
+        $smarty->assign('user_has_author_privilages', $user->hasAuthorPrivilages($cityhall->information->id));
+    } else {
+        $smarty->assign('user_has_author_privilages',false);
+    }
+
+    $smarty->assign('motions',$motions);
+    $smarty->assign('filters',$filters);
+
+    $smarty->display('motion_list.tpl');
+
+    exit;
+}
+
 function view() {
+    if (!isset($_GET['m'])) {
+        view_list();
+    }
     global $user, $settings, $cityhall, $smarty, $t;
 
     require_once($settings->app_path . 'www/helpers/globalfunctions_helper.php');
 
     //motion + can edit/can create new
+
     $motion = new Motion($settings);
     $tags = new Tag($settings);
-    if (isset($_GET['m'])) {
-        $m = $motion->getMotion($_GET['m']);
-        $smarty->assign('motion',$m);
-        if ($m->exist) {
-            $smarty->assign('date_and_time',preformat_date($m->date,$m->date_precision));
-            $cityhall->setCookie($m->organization_id);
-            $smarty->assign('author',$user->getUser($m->user_id));
-            // cityhall can change:
-            $smarty->assign('cityhall', $cityhall->getCityHall());
-            $smarty->assign('cityhalls', $cityhall->selectFrom());
-        } else {
-            $smarty->assign('author',$user->getUser());
-        }
-        $smarty->assign('tags',$tags->getTags($_GET['m']));
-        $smarty->assign('user_can_edit', $user->canEditMotion($_GET['m']));
+    $m = $motion->getMotion($_GET['m']);
+    $smarty->assign('motion',$m);
+    if ($m->exist) {
+        $smarty->assign('date_and_time',preformat_date($m->date,$m->date_precision));
+        $cityhall->setCookie($m->organization_id);
+        $smarty->assign('author',$user->getUser($m->user_id));
+        // cityhall can change:
+        $smarty->assign('cityhall', $cityhall->getCityHall());
+        $smarty->assign('cityhalls', $cityhall->selectFrom());
     } else {
-        $motion->getMotion();
-        $smarty->assign('motion',$m);
-        $smarty->assign('tags',[]);
-        $smarty->assign('user_can_edit', false);
         $smarty->assign('author',$user->getUser());
     }
+    $smarty->assign('tags',$tags->getTags(['motion_id' => "eq." . $_GET['m']]));
+    $smarty->assign('user_can_edit', $user->canEditMotion($_GET['m']));
+
     if (isset($cityhall->information) and $cityhall->information->selected) {
         $smarty->assign('user_has_author_privilages', $user->hasAuthorPrivilages($cityhall->information->id));
     } else {
@@ -224,13 +306,14 @@ function view() {
     if ($ve_info->exist) {
         $form = _vote_event_table('view',$ve_info->vote_event_id);
         $smarty->assign('vote_event',$ve_info);
+        $smarty->assign('result',$ve_info->vote_event_result);
+
     } else {
         $form = _vote_event_table('view');
     }
 
     $hemicycle = _hemicycle($form['rows']);
 
-    $smarty->assign('result',$hemicycle['result']);
     $smarty->assign('hemicycle',$hemicycle);
     $smarty->assign('table_rows',$form['rows']);
     $smarty->assign('form_organizations',json_encode($form['organizations']));
@@ -285,16 +368,16 @@ function _hemicycle($rows) {
     }
     array_multisort($option_code, SORT_ASC, $party, SORT_ASC, $data);
 
-    //result
-    if ($counts['for']>$counts['against']) {
-        $result = 'pass';
-    } elseif ($counts['all']>0) {
-        $result = 'fail';
-    } else {
-        $result = FALSE;
-    }
+    // //result
+    // if ($counts['for']>$counts['against']) {
+    //     $result = 'pass';
+    // } elseif ($counts['all']>0) {
+    //     $result = 'fail';
+    // } else {
+    //     $result = FALSE;
+    // }
 
-    return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj),'result'=>$result];
+    return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj)];
 }
 
 function _hemicycle_option2code($o) {

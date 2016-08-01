@@ -14,27 +14,16 @@ class Tag extends Table
 
     //get tags
     // for no filter on "active" column, pass $active=0
-    public function getTags($motion_id=NULL,$active=TRUE) {
-        $params = [];
-        if ($motion_id) {
-            $params['motion_id'] = "eq." . $motion_id;
-        }
-        if ($active) {
+    public function getTags($params=[]) {
+        if (!isset($params['active'])) {
             $params['active'] = 'is.true';
-        }
-        if ($active === FALSE) {
-            $params['active'] = 'is.false';
         }
         $result_arr = $this->get_all(
             "tags",
             $params,
             $this->headers
         );
-        if ($result_arr) {
-            return $result_arr;
-        } else {
-            return [];
-        }
+        return $result_arr;
     }
 
     // parses form and prepares data for create
@@ -59,11 +48,11 @@ class Tag extends Table
 
     //update tag(s)
     public function update($news,$motion_id){
-        $olds_arr = $this->getTags($motion_id);
+        $olds_arr = $this->getTags(['motion_id' => "eq." . $motion_id]);
         $olds = [];
         foreach ($olds_arr as $oa)
             $olds[] = $oa->tag;
-        $inactives_arr = $this->getTags($motion_id,false);
+        $inactives_arr = $this->getTags(['motion_id' => "eq." . $motion_id],false);
         $inactives = [];
         foreach ($inactives_arr as $oa)
             $inactives[] = $oa->tag;

@@ -36,7 +36,7 @@ class VoteEvent extends Table
 
     public function parseForm($form) {
         $fields = ['id','default_option','family_name','given_name','organization_abbreviation', 'organization_name', 'organization_color','option'];
-        $onces = ['vote_event_identifier'];
+        $onces = ['vote_event_identifier','vote_event_result','default_vote_event_result'];
         $data = ['rows'=>[]];
         foreach ($form as $key=>$value) {
             $key_arr = explode('-',$key);

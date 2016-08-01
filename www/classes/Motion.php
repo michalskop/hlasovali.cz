@@ -18,6 +18,12 @@ class Motion extends Table
         return $result;
     }
 
+    // motion with vote event and users
+    public function getMotionsInfo($params=[]) {
+        $result = $this->table->getTable('vote_events_motions_users','page',$params);
+        return $result;
+    }
+
     // parses form and prepares data for create
     function parseForm($form) {
         $data = [];

@@ -5,7 +5,6 @@
 <script src="{$settings->app_url}js/d3.legend.js"></script>
 <script src="{$settings->app_url}js/d3.orloj.js"></script>
 <script src="{$settings->app_url}libs/d3.tip.js"></script>
-<script src="{$settings->app_url}libs/md5.js"></script>
 
 <script>
 var data = {$hemicycle['data']};
@@ -117,15 +116,12 @@ var dat = {$hemicycle['dat']};
            .attr("transform", "translate(0," + movey + ")")
            .call(myOrloj);
 
+    {if $user_can_edit}
         //and export it as png
         postdata = {
-            'url':CryptoJS.MD5(window.location.href).toString(), 'svg':$('#chart').html().replace(/<strong>/g,'').replace(/<\/strong>/g,'').replace(/<br>/g,''), 'nocache': getParameterByName('nocache')};
+            'name':"{$vote_event->vote_event_id}", 'svg':$('#chart').html().replace(/<strong>/g,'').replace(/<\/strong>/g,'').replace(/<br>/g,'')
+        };
         $.post('pages/create_png.php',postdata);
-        var nothing = 0;
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }
+
+    {/if}
 </script>

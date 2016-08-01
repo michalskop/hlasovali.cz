@@ -31,6 +31,12 @@ class Table
                 );
                 return $result;
                 break;
+            case 'page':
+                $result = $this->get_page(
+                    $view,
+                    $params,
+                    $this->headers
+                );
             case 'all':
             default:
                 $result = $this->get_all(
@@ -156,6 +162,15 @@ class Table
                 }
             }
             return $arr;
+        }
+        return [];
+    }
+
+    public function get_page($url, $parameters=[], $headers=[]) {
+        $result = $this->api->get($url, $parameters, $headers);
+        if($result->info->http_code == 200) {
+            $item = $result->decode_response();
+            return $item;
         }
         return [];
     }
