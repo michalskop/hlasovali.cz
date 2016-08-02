@@ -31,8 +31,7 @@
                       <li><a href="?page=about#new_authors">{$t->get('add_new_cityhall')}</a>
                   </ul>
             </li>
-            <li></li>
-            {* <li ><a href="https://github.com/KohoVolit/activities#api" target="_blank">API</a></li> *}
+            <li><a href="?page=motion&action=view">{$t->get('list_of_motions')}</a>
         </ul>
 
       <ul class="nav navbar-nav navbar-right">
