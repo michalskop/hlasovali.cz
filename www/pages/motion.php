@@ -223,7 +223,7 @@ function view_list() {
         }
     }
     if (isset($_GET['start'])) {
-        $params['offset'] = 'eq.'.$_GET['start'];
+        $params['offset'] = $_GET['start'];
     }
     $tag = new Tag($settings);
     if (isset($_GET['tag'])) {
@@ -237,6 +237,12 @@ function view_list() {
     }
 
     $motions = $motion->getMotionsInfo($params);
+
+    //pager
+    $sizes = $motion->getMotionsInfoSizes($params);
+
+    $pager = _pager($sizes);
+    $smarty->assign('pager',$pager);
 
     //preformat date/time
     foreach($motions as $m) {
@@ -260,6 +266,38 @@ function view_list() {
     $smarty->display('motion_list.tpl');
 
     exit;
+}
+
+// creates array for pager
+// $int is size of results sent by API
+function _pager($s,$int=50) {
+    $pager = ['prev'=>[],'next'=>[]];
+    if ($s['size'] > ($s['last'] + 1)) {
+        $query = $_GET;
+        $query['start'] = $s['last'] + 1;
+        $pager['next'] = [
+            'show' => TRUE,
+            'link' => $_SERVER['PHP_SELF'] . '?' . http_build_query($query)
+        ];
+    } else {
+        $pager['next'] = [
+            'show' => FALSE
+        ];
+    }
+    if ($s['first']>0) {
+        $start = max(0,$s['first'] - $int);
+        $query = $_GET;
+        $query['start'] = $start;
+        $pager['prev'] = [
+            'show' => TRUE,
+            'link' => $_SERVER['PHP_SELF'] . '?' . http_build_query($query)
+        ];
+    } else {
+        $pager['prev'] = [
+            'show' => FALSE
+        ];
+    }
+    return $pager;
 }
 
 function view() {
@@ -307,7 +345,6 @@ function view() {
         $form = _vote_event_table('view',$ve_info->vote_event_id);
         $smarty->assign('vote_event',$ve_info);
         $smarty->assign('result',$ve_info->vote_event_result);
-
     } else {
         $form = _vote_event_table('view');
     }

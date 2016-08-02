@@ -24,6 +24,11 @@ class Motion extends Table
         return $result;
     }
 
+    public function getMotionsInfoSizes($params=[]) {
+        $result = $this->table->get_result_sizes('vote_events_motions_users',$params);
+        return $result;
+    }
+
     // parses form and prepares data for create
     function parseForm($form) {
         $data = [];

@@ -18,6 +18,11 @@ class Tag extends Table
         if (!isset($params['active'])) {
             $params['active'] = 'is.true';
         }
+        if (!isset($params['order'])) {
+            $params['order'] = "tag.asc,motion_id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',tag.asc,motion_id.asc';
+        }
         $result_arr = $this->get_all(
             "tags",
             $params,

@@ -13,6 +13,11 @@ class Organization extends Table
 
     // get organizations with params
     public function getOrganizations($params = []) {
+        if (!isset($params['order'])) {
+            $params['order'] = "id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',id.asc';
+        }
         $result = $this->table->getTable('organizations','all',$params);
         return $result;
     }
@@ -20,6 +25,11 @@ class Organization extends Table
     // get first page of organizations with most votes
     //params, example: [['key': 'id', 'operator': 'eq', 'value': '1']]
     public function getOrganizationsWithVotes($params=[]) {
+        if (!isset($params['order'])) {
+            $params['order'] = "id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',id.asc';
+        }
         $result = $this->table->getTable('organizations_with_number_of_votes','all',$params);
         return $result;
     }

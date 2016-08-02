@@ -87,6 +87,8 @@
     "since": "Od",
     "until": "Do",
     "tag": "Tag",
+    "previous": "Předešlé",
+    "next": "Další",
 
     "__ABOUT": "",
     "about_project": "O projektu"

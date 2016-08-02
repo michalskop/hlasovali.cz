@@ -14,6 +14,11 @@ class Vote extends Table
     public $allowed_options = ['yes','no','abstain','absent'];
 
     public function getVotes($params) {
+        if (!isset($params['order'])) {
+            $params['order'] = "person_id.asc,vote_event_id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',person_id.asc,vote_event_id.asc';
+        }
         return $this->table->getTable('votes','all',$params);
     }
 

@@ -13,11 +13,21 @@ class VoteEvent extends Table
 
     // get votes from vote event(s) with people and organizations
     public function getVoteEventVotes($params) {
+        if (!isset($params['order'])) {
+            $params['order'] = "person_id.asc,vote_event_id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',person_id.asc,vote_event_id.asc';
+        }
         $result = $this->table->getTable('votes_people_organizations','all',$params);
         return $result;
     }
 
     public function getVoteEvents($params) {
+        if (!isset($params['order'])) {
+            $params['order'] = "id.asc";
+        } else {
+            $params['order'] = $params['order'] . ',id.asc';
+        }
         $result = $this->table->getTable('vote_events','all',$params);
         return $result;
     }

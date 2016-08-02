@@ -12,4 +12,5 @@
     {foreach $motions as $motion}
         {include "motion_list_motion.tpl"}
     {/foreach}
+    {include "motion_list_pager.tpl"}
 {/block}
