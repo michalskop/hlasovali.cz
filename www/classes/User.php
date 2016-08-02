@@ -41,6 +41,15 @@ class User extends Table
         return $result;
     }
 
+    public function getUserMotionsCounts($id) {
+        $params = [
+            "user_id" => "eq." . $id,
+            "order" => "count.desc,organization_name.asc"
+        ];
+        $result = $this->getTable("users_organizations_motions_counts",'all',$params);
+        return $result;
+    }
+
     // get basic info about logged in user
     public function getCurrentUser(){
         if (property_exists($this,'information'))

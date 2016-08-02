@@ -2,7 +2,7 @@
 $settings = json_decode(file_get_contents("settings.json"));
 
 //get page
-$page = isset($_GET['page']) ? $_GET['page'] : 'login';
+$page = isset($_GET['page']) ? $_GET['page'] : 'motion';
 
 // do 'selects' directly
 $action = isset($_GET['action']) ? $_GET['action'] : 'view';
@@ -22,9 +22,8 @@ spl_autoload_register(function ($class) {
 });
 
 $smarty->assign('settings', $settings);
-$smarty->assign('request_uri', $_SERVER['REQUEST_URI']);
+$smarty->assign('request_uri', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 $smarty->assign('page', $page);
-
 
 // set up user
 $user = new User($settings);

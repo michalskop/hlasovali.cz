@@ -396,7 +396,7 @@ function _hemicycle($rows) {
     // numbers in hemicycle rows
     $hems = json_decode(file_get_contents($settings->app_path . 'www/pages/hemicycle.data.json'));
     $n_str = (string) count($data);
-    if (isset($hems->n_str)) {
+    if (isset($hems->$n_str)) {
         $ns = _hemicycle_optimal_rows(count($data),$hems->$n_str);
     } else {
         $ns = _hemicycle_optimal_rows(count($data));

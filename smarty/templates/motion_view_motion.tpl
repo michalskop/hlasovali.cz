@@ -53,7 +53,7 @@
         {if $author->exist}
             <div>
                 <p>
-                <small>{$t->get('created_by_author')}: {$author->name|htmlspecialchars}</small>
+                <small>{$t->get('created_by_author')}: <a href="?page=user&u={$author->id}">{$author->name|htmlspecialchars}</a></small>
             </div>
         {/if}
     </div>

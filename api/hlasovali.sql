@@ -828,7 +828,7 @@ create or replace view public.vote_events_information as
     ON m.user_id = pu.id;
 
 -- publicly available info about users
-create or replace view public.users as
+create or replace view public.public_users as
   select
         id,
         name,
@@ -851,14 +851,14 @@ create or replace view public.users as
       m.date_precision as motion_date_precision,
       m.organization_id as organization_id,
       m.attributes as motion_attributes,
-      u.id as user_id,
-      u.name as user_name,
-      u.attributes as user_attributes
+      pu.id as user_id,
+      pu.name as user_name,
+      pu.attributes as user_attributes
   FROM vote_events as ve
   LEFT JOIN motions as m
   ON ve.motion_id = m.id
-  LEFT JOIN users as u
-  ON m.user_id = u.id;
+  LEFT JOIN public_users as pu
+  ON m.user_id = pu.id;
 
 -- political groups (parties) with most votes
 create or replace view public.organizations_with_number_of_votes as
@@ -928,7 +928,34 @@ create or replace view public.votes_people_organizations as
     left join vote_events as ve
     on v.vote_event_id = ve.id;
 
-
+-- counts of motions by author/organization
+create or replace view public.users_organizations_motions_counts as
+    SELECT
+    	pu2.id as user_id,
+    	pu2.name as user_name,
+    	pu2.attributes as user_attributes,
+    	o2.id as organizations_id,
+    	o2.name as organization_name,
+    	o2.parent_id as organization_parent_id,
+    	o2.founding_date as organization_founing_date,
+    	o2.dissolution_date as organization_dissolution_date,
+    	o2.attributes as organization_attributes,
+        ou.active as active,
+    	t.count as count
+    FROM
+    (SELECT count(*),m.organization_id,pu.id as user_id
+      FROM motions as m
+      LEFT JOIN public_users as pu
+      ON m.user_id = pu.id
+      LEFT JOIN organizations as o
+      ON m.organization_id = o.id
+      GROUP BY m.organization_id, pu.id) as t
+    LEFT JOIN organizations as o2
+    ON t.organization_id = o2.id
+    LEFT JOIN public_users as pu2
+    ON t.user_id = pu2.id
+    LEFT JOIN organizations_users as ou
+    ON ou.user_id = t.user_id AND ou.organization_id = t.organization_id;
 
  -- ######  ###  #####  #     # #######  #####
  -- #     #  #  #     # #     #    #    #     #

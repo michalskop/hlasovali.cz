@@ -55,10 +55,15 @@ text.shadow {
 .stronger {
  color: yellow;
 }
+
 /* hemicycle on page */
 .hemicycle-container {
     margin-top: 35px;
 }
+.hemicycle-small-container {
+    margin-top: 25px;
+}
+
 /** TYPEAHEAD **/
 /* http://stackoverflow.com/questions/20198247/twitters-typeahead-js-suggestions-are-not-styled-have-no-border-transparent-b */
 /** http://jsfiddle.net/needathinkle/MA7Ep/ **/

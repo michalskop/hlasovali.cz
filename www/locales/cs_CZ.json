@@ -13,7 +13,7 @@
     "pre_name": "Víme, jak",
     "post_name": "v0.1",
     "select_cityhall": "Město",
-    "my_page": "Moje stránka",
+    "my_profile": "Můj profil",
     "add_new_cityhall": "Přidat novou obec",
     "list_of_motions": "Seznam všech návrhů",
 
@@ -92,6 +92,10 @@
     "next": "Další",
 
     "__ABOUT": "",
-    "about_project": "O projektu"
+    "about_project": "O projektu",
+
+    "__USER": "",
+    "user_does_not_exist": "Takového člověka tu neznáme",
+    "":""
 
 }

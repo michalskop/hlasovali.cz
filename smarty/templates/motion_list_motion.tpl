@@ -50,10 +50,10 @@
 
         <div>
             <p>
-            <small>{$t->get('created_by_author')}: {$motion->user_name|htmlspecialchars}</small>
+            <small>{$t->get('created_by_author')}: <a href="?page=user&u={$motion->user_id}">{$motion->user_name|htmlspecialchars}</a></small>
         </div>
     </div>
-    <div class="col-sm-4 center-block">
+    <div class="col-sm-4 center-block hemicycle-small-container">
         {if in_array($motion->vote_event_result,["pass","fail"])}
             <a href="?page=motion&action=view&m={$motion->motion_id}"><img src="{$settings->app_url}pages/cache/png/compact_{$motion->vote_event_id}.png" alt=""></a>
         {/if}
