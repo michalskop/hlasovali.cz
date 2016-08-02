@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="col-sm-3">
-                        {if $o->active}
+                        {if ($user->exist) and ($user->id == $o->user_id) and $o->active}
                             {$continue = "?page=motion&action=new"}
                             <a href="?page=organization&action=select&continue={$continue|urlencode}" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i> {$t->get('new_motion')}</a>
                         {/if}
