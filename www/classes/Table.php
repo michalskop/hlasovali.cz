@@ -62,7 +62,7 @@ class Table
             $headers
         );
         if ($this->is_success($result->info->http_code)) {
-            $decoded = $r->decode_response();
+            $decoded = $result->decode_response();
             if (is_array($decoded)) {
                 if (count($decoded) > 1) {
                     $res = $decoded;

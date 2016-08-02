@@ -35,7 +35,11 @@ d3.hemicycle = function() {
             var data = [],
                 s = [];
             for (i in n_val) {
-                s.push((Math.PI/widthIcon_val + Math.PI*i*gap_val-n_val[i])/(n_val[i] - 1));
+                var ss = (Math.PI/widthIcon_val + Math.PI*i*gap_val-n_val[i])/(n_val[i] - 1);
+                if (ss = Infinity)
+                    s.push(0);
+                else
+                    s.push((Math.PI/widthIcon_val + Math.PI*i*gap_val-n_val[i])/(n_val[i] - 1));
                 var ninrow = n_val[i],
                     radwidth = Math.PI/(n_val[i]+(n_val[i]-1)*s[i]),
                     radspace = radwidth*s[i],

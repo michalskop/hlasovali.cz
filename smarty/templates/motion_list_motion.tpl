@@ -29,7 +29,7 @@
                 <p>
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 {foreach $motion->tags as $tag}
-                    <span class="label label-info">{$tag->tag|htmlspecialchars}</span>
+                    <a href="?page=motion&action=view&tag={$tag->tag|htmlspecialchars}"><span class="label label-primary">{$tag->tag|htmlspecialchars}</span></a>
                 {/foreach}
             {/if}
         </div>

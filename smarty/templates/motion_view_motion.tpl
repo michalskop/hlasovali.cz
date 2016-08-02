@@ -32,7 +32,7 @@
             <i class="fa fa-tags" aria-hidden="true"></i>
             {* {$t->get('tags')}: *}
             {foreach $tags as $tag}
-                <span class="label label-info">{$tag->tag|htmlspecialchars}</span>
+                <a href="?page=motion&action=view&tag={$tag->tag|htmlspecialchars}"><span class="label label-primary">{$tag->tag|htmlspecialchars}</span></a>
             {/foreach}
         </div>
         <div>

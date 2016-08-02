@@ -396,23 +396,21 @@ function _hemicycle($rows) {
     // numbers in hemicycle rows
     $hems = json_decode(file_get_contents($settings->app_path . 'www/pages/hemicycle.data.json'));
     $n_str = (string) count($data);
-    $ns = _hemicycle_optimal_rows(count($data),$hems->$n_str);
+    if (isset($hems->n_str)) {
+        $ns = _hemicycle_optimal_rows(count($data),$hems->$n_str);
+    } else {
+        $ns = _hemicycle_optimal_rows(count($data));
+    }
+
 
     //sort data
-    foreach ($data as $key => $row) {
-        $option_code[$key]  = -1*$row->option_code;
-        $party[$key] = $row->party;
+    if (count($data)>0) {
+        foreach ($data as $key => $row) {
+            $option_code[$key]  = -1*$row->option_code;
+            $party[$key] = $row->party;
+        }
+        array_multisort($option_code, SORT_ASC, $party, SORT_ASC, $data);
     }
-    array_multisort($option_code, SORT_ASC, $party, SORT_ASC, $data);
-
-    // //result
-    // if ($counts['for']>$counts['against']) {
-    //     $result = 'pass';
-    // } elseif ($counts['all']>0) {
-    //     $result = 'fail';
-    // } else {
-    //     $result = FALSE;
-    // }
 
     return ['data'=>json_encode($data),'dat'=>json_encode($ns),'counts'=>json_encode($counts), 'orloj'=>json_encode($orloj)];
 }
@@ -424,7 +422,7 @@ function _hemicycle_option2code($o) {
     return -1;
 }
 
-function _hemicycle_optimal_rows($n,$adepts) {
+function _hemicycle_optimal_rows($n,$adepts=[]) {
     $best = floor(pow(((int)$n)/2 + 1, 0.48));
     $beststr = (string) $best;
     if (isset($adepts->$best)) {
@@ -436,12 +434,14 @@ function _hemicycle_optimal_rows($n,$adepts) {
                 $closest = $key;
         }
     }
-    if (isset($adepts->$closest)) {
+    if (isset($closest) and isset($adepts->$closest)) {
         return $adepts->$closest;
     }
     $out = new stdClass();
-    $out->n = $n;
-    return [$out];
+    $out->n = [$n];
+    $out->g = 1.2;
+    $out->w = 0.39;
+    return $out;
 }
 
 //if id is null, get info about last vote event in city hall without votes
