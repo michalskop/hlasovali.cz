@@ -33,6 +33,7 @@ $smarty->assign('user', $user->getCurrentUser());
 $cityhall = new CityHall($settings);
 $smarty->assign('cityhall', $cityhall->getCityHall());
 $smarty->assign('cityhalls', $cityhall->selectFrom());
+$smarty->assign('title', '*');
 
 // get texts
 $t = new Text($settings);

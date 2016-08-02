@@ -261,8 +261,6 @@ function view_list() {
     }
     if (isset($cityhall->information)) {
         $smarty->assign('title',$cityhall->information->name);
-    } else {
-        $smarty->assign('title','*');
     }
 
 
