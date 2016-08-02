@@ -5,9 +5,10 @@
     "__META": "",
     "iso_lang": "cs",
     "locale": "cz_CZ",
-    "website_description": "",
-    "website_keywords": "",
+    "website_description": "Záznamy o důležitých rozhodnutích v zastupitelstvech, která jsou ručně vybrána a popsána editory.",
+    "website_keywords": "hlasování, zastupitelstva",
     "website_author": "Michal Škop, KohoVolit.eu",
+    "twitter_handle": "@KohoVolitEU",
 
     "__HEADER": "",
     "pre_name": "Víme, jak",
@@ -96,6 +97,6 @@
 
     "__USER": "",
     "user_does_not_exist": "Takového člověka tu neznáme",
-    "":""
+    "users": "Uživatelé"
 
 }

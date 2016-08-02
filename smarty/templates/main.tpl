@@ -10,11 +10,17 @@
     <meta name="author" content="{$t->get('website_author')}">
     <link type="image/x-icon" href="{$settings->app_url}images/favicon.svg" rel="shortcut icon">
 
-    {* <meta property="og:image" content="{$t->get(og_image)}"/>
-	<meta property="og:title" content="{$t->get(og_title)}"/>
-	<meta property="og:url" content="{$t->get(og_url)}"/>
-	<meta property="og:site_name" content="{$t->get(og_site_name)}"/>
-	<meta property="og:type" content="website"/> *}
+    <meta property="og:image" content="{$og_image}"/>
+	<meta property="og:title" content="{$title} - {$t->get('app_title')}"/>
+	<meta property="og:url" content="{$request_uri}"/>
+	<meta property="og:site_name" content="{$t->get('app_name')}"/>
+	<meta property="og:type" content="website"/>
+    <meta property="og:locale" content="{$t->get('locale')}" />
+    <meta property="og:description" content="{$og_description}"/>
+    <meta name="twitter:site" content="{$t->get('twitter_handle')}" />
+    <meta property="twitter:url" content="{$request_uri}"/>
+    <meta property="twitter:image" content="{$og_image}"/>
+    <meta property="twitter:description" content="{$og_description}"/>
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -44,7 +50,7 @@
 {*    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>*}
 {*    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*}
 {*    <script src="../jquery.stickytableheaders.min.js"></script>*}
-    <title>{$t->get('app_title')}</title>
+    <title>{$title} | {$t->get('app_title')}</title>
 
     {block name=additionalHead}{/block}
 

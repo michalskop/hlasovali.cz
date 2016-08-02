@@ -259,6 +259,12 @@ function view_list() {
     } else {
         $smarty->assign('user_has_author_privilages',false);
     }
+    if (isset($cityhall->information)) {
+        $smarty->assign('title',$cityhall->information->name);
+    } else {
+        $smarty->assign('title','*');
+    }
+
 
     $smarty->assign('motions',$motions);
     $smarty->assign('filters',$filters);
@@ -345,6 +351,9 @@ function view() {
         $form = _vote_event_table('view',$ve_info->vote_event_id);
         $smarty->assign('vote_event',$ve_info);
         $smarty->assign('result',$ve_info->vote_event_result);
+        $smarty->assign('og_image',$settings->app_url . "pages/cache/png/ve_" . $ve_info->vote_event_id . ".png");
+        $smarty->assign('title',$ve_info->motion_name);
+        $smarty->assign('og_description',trim(purify_html($ve_info->motion_description,'')));
     } else {
         $form = _vote_event_table('view');
     }

@@ -38,6 +38,10 @@ $smarty->assign('cityhalls', $cityhall->selectFrom());
 $t = new Text($settings);
 $smarty->assign('t',$t);
 
+//set up defaults for metas
+$smarty->assign('og_image', $settings->app_url . 'images/hlasovali.cz.png');
+$smarty->assign('og_description', $t->get('website_description'));
+
 //print_r($cityhall->select_from());die();
 //print_r($_SERVER);die();
 
