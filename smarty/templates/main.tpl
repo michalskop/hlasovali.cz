@@ -15,7 +15,7 @@
     <meta property="og:image:height" content="400"/>
 	<meta property="og:title" content="{$title} - {$t->get('app_title')}"/>
 	<meta property="og:url" content="{$request_uri}"/>
-    <meta property="og:app_id" content="{$settings->og_app_id}"/>
+    <meta property="fb:app_id" content="{$settings->og_app_id}"/>
 	<meta property="og:site_name" content="{$t->get('app_name')}"/>
 	<meta property="og:type" content="website"/>
     <meta property="og:locale" content="{$t->get('locale')}" />
