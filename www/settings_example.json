@@ -1,0 +1,9 @@
+{
+    "api_url_": "http://10.0.0.155:3001/",
+    "app_path": "/home/michal/project/hlasovali.cz/",
+    "app_url": "http://localhost/michal/project/hlasovali.cz/www/",
+    "smarty_path": "/usr/local/lib/php/Smarty-3.1.19/libs/Smarty.class.php",
+    "locales": ["cs_CZ","en_US"],
+    "og_app_id": "1765242883752077",
+    "og_publisher": "https://www.facebook.com/KohoVolit.eu/"
+}

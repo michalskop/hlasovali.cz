@@ -931,7 +931,7 @@ create or replace view public.votes_people_organizations as
 -- counts of motions by author/organization
 create or replace view public.users_organizations_motions_counts as
     SELECT
-            t1.*, t2.count
+            t1.*, COALESCE(t2.count,0) as count
         FROM
         (SELECT
             o.id as organization_id,

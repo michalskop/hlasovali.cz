@@ -150,10 +150,10 @@ function create() {
     if (isset($parsed['vote_event_identifier'])) {
         $data['identifier'] = $parsed['vote_event_identifier'];
     }
-    if (isset($parsed['vote_event_result']) and isset($parsed['default_vote_event_result'])) {
-        if ($parsed['vote_event_result'] == 'on') {
-            $parsed['vote_event_result'] = $parsed['default_vote_event_result'];
-        }
+    if (isset($parsed['vote_event_result'])) {
+        if (isset($parsed['default_vote_event_result']) and ($parsed['vote_event_result'] == 'on')) {
+                $parsed['vote_event_result'] = $parsed['default_vote_event_result'];
+            }
         $data['result'] = $parsed['vote_event_result'];
     }
     $new_vote_event = $vote_event->create($data);

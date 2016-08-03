@@ -19,7 +19,7 @@
     <meta property="og:locale" content="{$t->get('locale')}" />
     <meta property="og:description" content="{$og_description}"/>
     {* <meta property="article:author" content="{$og_author}"/> *}
-    <meta property="article:publisher" content="{$setgings['og_publisher']}"/>
+    <meta property="article:publisher" content="{$settings->og_publisher}"/>
     <meta name="twitter:site" content="{$t->get('twitter_handle')}" />
     <meta property="twitter:url" content="{$request_uri}"/>
     <meta property="twitter:image" content="{$og_image}"/>

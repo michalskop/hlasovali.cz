@@ -22,6 +22,7 @@ chmod a+x certbot-auto
 exit
 
 # ./letsencrypt-auto --apache -d $MYSITE -d www.$MYSITE
+cd /opt/letsencrypt/
 ./certbot-auto
 
 # http://stackoverflow.com/a/878647/1666623
