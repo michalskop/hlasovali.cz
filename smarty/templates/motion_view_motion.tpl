@@ -56,6 +56,7 @@
                 <small>{$t->get('created_by_author')}: <a href="?page=user&u={$author->id}">{$author->name|htmlspecialchars}</a></small>
             </div>
         {/if}
+        {include "sharer.tpl"}
     </div>
     <div class="col-sm-6">
     {include "motion_view_hemicycle.tpl"}

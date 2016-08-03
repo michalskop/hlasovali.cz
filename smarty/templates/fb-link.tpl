@@ -1,0 +1,9 @@
+http://www.facebook.com/dialog/feed?
+    app_id={$settings->og_app_id}&
+    link={$request_uri|escape:'url'}&
+    picture={$og_image|escape:'url'}&
+    caption={$t->get('app_title')}&
+    display=popup&
+    name={$title|escape:'url'}&
+    description={$og_description|escape:'url'}&
+    redirect_uri={$request_uri|escape:'url'}

@@ -97,6 +97,10 @@
 
     "__USER": "",
     "user_does_not_exist": "Takového člověka tu neznáme",
-    "users": "Uživatelé"
+    "users": "Uživatelé",
+
+    "__SHARER": "",
+    "share_on_facebook": "Sdílet na Facebooku",
+    "share_on_twitter": "Sdílet na Twitteru"
 
 }

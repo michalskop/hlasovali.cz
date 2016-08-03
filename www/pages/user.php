@@ -1,7 +1,17 @@
 <?php
 // user page
 
-$u = $user->getUserMotionsCounts($_GET['u']);
+if (isset($_GET['u'])) {
+    $u = $user->getUserMotionsCounts($_GET['u']);
+} else {
+    $cu = $user->getCurrentUser();
+    if ($cu->id) {
+        $u = $user->getUserMotionsCounts($cu->id);
+    } else {
+        $u = $user->getUserMotionsCounts();
+    }
+}
+
 
 $smarty->assign('organizations',$u);
 if (isset($u[0])) {

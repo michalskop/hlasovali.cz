@@ -13,14 +13,18 @@
     <meta property="og:image" content="{$og_image}"/>
 	<meta property="og:title" content="{$title} - {$t->get('app_title')}"/>
 	<meta property="og:url" content="{$request_uri}"/>
+    <meta property="og:app_id" content="{$settings->og_app_id}"/>
 	<meta property="og:site_name" content="{$t->get('app_name')}"/>
 	<meta property="og:type" content="website"/>
     <meta property="og:locale" content="{$t->get('locale')}" />
     <meta property="og:description" content="{$og_description}"/>
+    {* <meta property="article:author" content="{$og_author}"/> *}
+    <meta property="article:publisher" content="{$setgings['og_publisher']}"/>
     <meta name="twitter:site" content="{$t->get('twitter_handle')}" />
     <meta property="twitter:url" content="{$request_uri}"/>
     <meta property="twitter:image" content="{$og_image}"/>
     <meta property="twitter:description" content="{$og_description}"/>
+
 
 
 

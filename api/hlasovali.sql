@@ -931,31 +931,29 @@ create or replace view public.votes_people_organizations as
 -- counts of motions by author/organization
 create or replace view public.users_organizations_motions_counts as
     SELECT
-    	pu2.id as user_id,
-    	pu2.name as user_name,
-    	pu2.attributes as user_attributes,
-    	o2.id as organizations_id,
-    	o2.name as organization_name,
-    	o2.parent_id as organization_parent_id,
-    	o2.founding_date as organization_founing_date,
-    	o2.dissolution_date as organization_dissolution_date,
-    	o2.attributes as organization_attributes,
-        ou.active as active,
-    	t.count as count
-    FROM
-    (SELECT count(*),m.organization_id,pu.id as user_id
-      FROM motions as m
-      LEFT JOIN public_users as pu
-      ON m.user_id = pu.id
-      LEFT JOIN organizations as o
-      ON m.organization_id = o.id
-      GROUP BY m.organization_id, pu.id) as t
-    LEFT JOIN organizations as o2
-    ON t.organization_id = o2.id
-    LEFT JOIN public_users as pu2
-    ON t.user_id = pu2.id
-    LEFT JOIN organizations_users as ou
-    ON ou.user_id = t.user_id AND ou.organization_id = t.organization_id;
+            t1.*, t2.count
+        FROM
+        (SELECT
+            o.id as organization_id,
+            o.name as organization_name,
+            o.parent_id as organization_parent_id,
+        	o.founding_date as organization_founing_date,
+        	o.dissolution_date as organization_dissolution_date,
+        	o.attributes as organization_attributes,
+            pu.id as user_id,
+        	pu.name as user_name,
+        	pu.attributes as user_attributes,
+            ou.active as active
+         FROM organizations_users as ou
+        LEFT JOIN organizations as o
+        ON ou.organization_id = o.id
+        LEFT JOIN public_users as pu
+        ON pu.id = ou.user_id
+        WHERE o.classification = 'city hall') as t1
+        LEFT JOIN
+        (SELECT count(*),m.organization_id,m.user_id FROM motions as m
+        GROUP BY m.organization_id, m.user_id) as t2
+        ON t1.user_id = t2.user_id AND t1.organization_id = t2.organization_id;
 
  -- ######  ###  #####  #     # #######  #####
  -- #     #  #  #     # #     #    #    #     #

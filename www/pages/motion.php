@@ -201,9 +201,9 @@ function view_list() {
     //get list of motions
     $params = ["order" => "motion_date.desc,vote_event_identifier.desc,motion_id.desc"];
     $filters = [];
-    if (isset($cityhall->id)) {
-        $params['organization_id'] = 'eq.'.$cityhall->id;
-        $filters[] = ['name'=> 'cityhall', 'value'=> $cityhall->name];
+    if (isset($cityhall->getCityHall()->id)) {
+        $params['organization_id'] = 'eq.'.$cityhall->getCityHall()->id;
+        //$filters[] = ['name'=> 'cityhall', 'value'=> $cityhall->name];
     }
     if (isset($_GET['since'])) {
         $params['motion_date'] = 'gte.'.$_GET['since'];
@@ -218,6 +218,7 @@ function view_list() {
         $u = $user->getUser($_GET['u']);
         if ($u->exist) {
             $filters[] = ['name'=> 'created_by_author', 'value'=> $u->name];
+            $smarty->assign('og_author', $u->name);
         } else {
             $filters[] = ['name'=> 'created_by_author', 'value'=> '?'];
         }
@@ -321,7 +322,11 @@ function view() {
     if ($m->exist) {
         $smarty->assign('date_and_time',preformat_date($m->date,$m->date_precision));
         $cityhall->setCookie($m->organization_id);
-        $smarty->assign('author',$user->getUser($m->user_id));
+        $auth = $user->getUser($m->user_id);
+        $smarty->assign('author',$auth);
+        if ($auth->exist) {
+            $smarty->assign('og_author', $auth->name);
+        }
         // cityhall can change:
         $smarty->assign('cityhall', $cityhall->getCityHall());
         $smarty->assign('cityhalls', $cityhall->selectFrom());

@@ -12,7 +12,11 @@ switch ($action) {
     default:
         $user = new User($settings);
         $user->logout();
-        header("Location: " . $_GET['continue']);
+        if (isset($_GET['continue'])) {
+            header("Location: " . $_GET['continue']);
+        } else {
+            header("Location: index.php?page=motion");
+        }
         exit;
 }
 

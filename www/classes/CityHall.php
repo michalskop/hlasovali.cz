@@ -14,8 +14,9 @@ class CityHall extends Table
 
     // set
     public function setCookie($id) {
-        if ($this->exist($id))
+        if ($this->exist($id)) {
             setcookie('city_hall', $id);
+        }
     }
 
     //exist

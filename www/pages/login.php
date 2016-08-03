@@ -13,9 +13,8 @@ switch ($action) {
         $user->login($_POST['email'],$_POST['pass']);
         if (isset($_GET['continue'])) {
             header("Location: " . $_GET['continue']);
-            exit;
         } else {
-            $smarty->display('login.tpl');
+            header("Location: ?page=user");
         }
         exit;
     case 'view':

@@ -25,7 +25,7 @@
                 <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       {foreach $cityhalls as $ch}
-                          <li><a href="?page=organization&action=select&continue={$request_uri|urlencode}&org={$ch->id}">{$ch->name|htmlspecialchars}</a>
+                          <li><a href="?page=organization&action=select&continue=?page=motion&org={$ch->id}">{$ch->name|htmlspecialchars}</a>
                       {/foreach}
                       <li role="separator" class="divider">
                       <li><a href="?page=about#new_authors">{$t->get('add_new_cityhall')}</a>

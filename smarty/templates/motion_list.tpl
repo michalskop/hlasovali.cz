@@ -13,4 +13,5 @@
         {include "motion_list_motion.tpl"}
     {/foreach}
     {include "motion_list_pager.tpl"}
+    {include "sharer.tpl"}
 {/block}

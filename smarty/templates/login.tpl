@@ -2,7 +2,7 @@
 {block name=body}
 
     {if !$user->logged}
-    <form action="index.php?page=login&action=run&continue={$request_uri|urlencode}" method="post">
+    <form action="index.php?page=login&action=run" method="post">
         <div class="form-group">
             <label for="email">{$t->get('email_address')}</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Email">

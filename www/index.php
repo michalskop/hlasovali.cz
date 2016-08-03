@@ -33,7 +33,6 @@ $smarty->assign('user', $user->getCurrentUser());
 $cityhall = new CityHall($settings);
 $smarty->assign('cityhall', $cityhall->getCityHall());
 $smarty->assign('cityhalls', $cityhall->selectFrom());
-$smarty->assign('title', '*');
 
 // get texts
 $t = new Text($settings);
@@ -42,6 +41,8 @@ $smarty->assign('t',$t);
 //set up defaults for metas
 $smarty->assign('og_image', $settings->app_url . 'images/hlasovali.cz.png');
 $smarty->assign('og_description', $t->get('website_description'));
+$smarty->assign('og_author', $t->get('website_author'));
+$smarty->assign('title', '*');
 
 //print_r($cityhall->select_from());die();
 //print_r($_SERVER);die();
