@@ -795,6 +795,14 @@ where founding_date < NOW() and ((dissolution_date is null) or (dissolution_date
 -- left join organizations as o
 -- on o.id = m.organization_id;
 
+-- publicly available info about users
+create or replace view public.public_users as
+  select
+        id,
+        name,
+        attributes
+  from basic_auth.users;
+
 -- info about vote event
 create or replace view public.vote_events_information as
     SELECT
@@ -826,14 +834,6 @@ create or replace view public.vote_events_information as
     ON m.organization_id = o.id
     LEFT JOIN public_users as pu
     ON m.user_id = pu.id;
-
--- publicly available info about users
-create or replace view public.public_users as
-  select
-        id,
-        name,
-        attributes
-  from basic_auth.users;
 
   -- vote events with their motions and authors
   create or replace view public.vote_events_motions_users as
