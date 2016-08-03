@@ -245,13 +245,18 @@ function view_list() {
     $pager = _pager($sizes);
     $smarty->assign('pager',$pager);
 
-    //preformat date/time
+    //preformat date/time, tags, og_image
+    $og_image_set = false;
     foreach($motions as $m) {
         $m->formatted_datetime = preformat_date($m->motion_date,$m->motion_date_precision);
         $m->tags = $tag->getTags(["motion_id" => "eq.".$m->motion_id]);
         $m->id = $m->motion_id;
         //filter description even more
         $m->motion_description = purify_html($m->motion_description,'br,hr');
+        if (!$og_image_set) {
+            $smarty->assign('og_image',$settings->app_url . "pages/cache/png/ve_" . $m->vote_event_id . ".png");
+            $og_image_set = true;
+        }
     }
 
     //author?

@@ -11,6 +11,8 @@
     <link type="image/x-icon" href="{$settings->app_url}favicon.ico" rel="shortcut icon">
 
     <meta property="og:image" content="{$og_image}"/>
+    <meta property="og:image:width" content="400"/>
+    <meta property="og:image:height" content="400"/>
 	<meta property="og:title" content="{$title} - {$t->get('app_title')}"/>
 	<meta property="og:url" content="{$request_uri}"/>
     <meta property="og:app_id" content="{$settings->og_app_id}"/>
