@@ -13,4 +13,8 @@ grep -rl 'example.com' ./api.example.com.conf | xargs sed -i "s/example.com/$MYS
 sudo cp api.example.com.conf /etc/apache2/sites-available/api.$MYSITE.conf
 sudo a2ensite api.$MYSITE
 
+sudo a2enmod proxy
+sudo a2enmod proxy_html
+sudo a2enmod rewrite
+
 sudo service apache2 restart

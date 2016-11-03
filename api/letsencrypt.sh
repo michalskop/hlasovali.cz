@@ -15,6 +15,7 @@ MYSITE="dev.hlasovali.cz"
 # cd /opt/letsencrypt
 
 sudo -i
+mkdir /opt/letsencrypt
 cd /opt/letsencrypt/
 
 wget https://dl.eff.org/certbot-auto

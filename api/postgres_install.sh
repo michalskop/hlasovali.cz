@@ -15,16 +15,19 @@ sudo apt-get install postgresql postgresql-contrib
 
 sudo passwd postgres
 
+# PostgREST
+# postgrest v0.3.2.0
+# https://github.com/begriffs/postgrest/releases/
+cd /tmp
+wget https://github.com/begriffs/postgrest/releases/download/v0.3.2.0/postgrest-0.3.2.0-ubuntu.tar.xz
+sudo tar xf postgrest-0.3.2.0-ubuntu.tar.xz
+sudo cp postgrest /opt/postgrest
 
-# MYPGSQLPASS='example'
-#
-# MYEMAIL="michal.skop@example.com"
-# MYPASS="example"
+sudo apt-get install libgmp-dev
 
-
-
-# psql -f /home/projects/cz.parldata.net/api/setup.sql -d activities
-#
-# psql -d activities -c "INSERT INTO basic_auth.users VALUES ('$MYEMAIL','$MYPASS','author',true)"
-#
-# psql -c "ALTER USER postgres WITH PASSWORD '$MYPGSQLPASS'"
+wget "https://gist.githubusercontent.com/michalskop/9edee4757545c7d905c4/raw/bc54f641bf98f164d283153236b7568092d5d931/postgrest.conf" -O postgrest.conf
+grep -rl 'example_password' ./postgrest.conf | xargs sed -i "s/example_password/$PGSQLPASS/g"
+grep -rl 'example_secret' ./postgrest.conf | xargs sed -i "s/example_secret/$PRESTSECRET/g"
+grep -rl 'activities' ./postgrest.conf | xargs sed -i "s/activities/hlasovali/g"
+sudo cp postgrest.conf /etc/init/postgrest.conf
+sudo service postgrest start

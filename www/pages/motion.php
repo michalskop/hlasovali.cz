@@ -265,7 +265,7 @@ function view_list() {
     } else {
         $smarty->assign('user_has_author_privilages',false);
     }
-    if (isset($cityhall->information)) {
+    if (isset($cityhall->information) and isset($cityhall->information->name)) {
         $smarty->assign('title',$cityhall->information->name);
     }
 

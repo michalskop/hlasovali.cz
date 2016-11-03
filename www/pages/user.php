@@ -5,7 +5,7 @@ if (isset($_GET['u'])) {
     $u = $user->getUserMotionsCounts($_GET['u']);
 } else {
     $cu = $user->getCurrentUser();
-    if ($cu->id) {
+    if (isset($cu->id) and $cu->id) {
         $u = $user->getUserMotionsCounts($cu->id);
     } else {
         $u = $user->getUserMotionsCounts();

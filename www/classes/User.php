@@ -41,7 +41,7 @@ class User extends Table
         return $result;
     }
 
-    public function getUserMotionsCounts($id) {
+    public function getUserMotionsCounts($id=NULL) {
         $params = [
             "user_id" => "eq." . $id,
             "order" => "count.desc,organization_name.asc"

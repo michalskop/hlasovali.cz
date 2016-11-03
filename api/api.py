@@ -84,8 +84,8 @@ def delete(resource, params = None, headers = HEADERS):
     r.raise_for_status()
     return r
 
-def signup(email, password):
-    r = post("rpc/signup",{"email": email,"pass": password})
+def signup(email, password, name):
+    r = post("rpc/signup",{"email": email,"pass": password, "name": name})
     r.raise_for_status()
     return r
 
