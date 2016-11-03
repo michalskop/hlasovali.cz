@@ -572,6 +572,7 @@ function _option4handlebars($item) {
     $item->option_is_yes = false;
     $item->option_is_no = false;
     $item->option_is_abstain = false;
+    $item->option_is_not_voting = false;
     $item->option_is_absent = false;
     switch ($item->option) {
         case "yes":
@@ -582,6 +583,9 @@ function _option4handlebars($item) {
             break;
         case "abstain":
             $item->option_is_abstain = true;
+            break;
+        case "not voting":
+            $item->option_is_not_voting = true;
             break;
         case "absent":
             $item->option_is_absent = true;

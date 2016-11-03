@@ -40,6 +40,8 @@ var dat = {$hemicycle['dat']};
                chunk = "{$t->get('ve_no')}";
            if (d['option'] == 'abstain')
                chunk = "{$t->get('ve_abstain')}";
+           if (d['option'] == 'not voting')
+               chunk = "{$t->get('ve_not-voting')}";
            if (d['option'] == 'absent')
                chunk = "{$t->get('ve_absent')}";
            return "<span class=\'stronger\'>" + d["name"] + "</span><br>" + d["party"] + '<br>' + chunk;

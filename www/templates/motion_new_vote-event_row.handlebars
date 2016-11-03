@@ -30,6 +30,9 @@
             <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_abstain}}checked{{/if}} value="abstain"><span class="text-danger">{{t.ve_abstain_short}}</span>
         </label>
         <label class="radio-inline">
+            <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_not_voting}}checked{{/if}} value="not voting"><span class="text-danger">{{t.ve_not-voting_short}}</span>
+        </label>
+        <label class="radio-inline">
             <input type="radio" name="option-{{i}}" data-row="{{i}}" {{#if option_is_absent}}checked{{/if}} value="absent"><span class="text-muted">{{t.ve_absent_short}}</span>
         </label>
     </div>

@@ -11,7 +11,7 @@ class Vote extends Table
         $this->table = new Table($settings);
     }
 
-    public $allowed_options = ['yes','no','abstain','absent'];
+    public $allowed_options = ['yes','no','abstain','not voting','absent'];
 
     public function getVotes($params) {
         if (!isset($params['order'])) {

@@ -27,6 +27,13 @@
     background-color: #FFFFFF;
 }
 
+@media (min-width: 992px) {
+    .modal-lg {
+        /*width: 900px;*/
+        width: 90%;
+    }
+}
+
 /* table */
 #vote-event-table>tbody>tr>td {
     border-bottom: 1px solid #dfd7ca;

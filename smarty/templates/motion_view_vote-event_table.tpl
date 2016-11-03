@@ -11,7 +11,8 @@
       <tr>
           <td>{$row->family_name} {$row->given_name}
           <td>{$row->organization_name} ({$row->organization_abbreviation})
-          <td>{if $row->option=="yes"}<span class="text-success">{else}<span class="text-danger">{/if}{$t->get("ve_`$row->option`")}</span>
+          {$row_option = str_replace(' ','-',$row->option)}
+          <td>{if $row->option=="yes"}<span class="text-success">{else}<span class="text-danger">{/if}{$t->get("ve_`$row_option`")}</span>
       </tr>
   {/foreach}
   </tbody>

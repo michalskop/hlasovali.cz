@@ -93,16 +93,19 @@
         <div class="form-group col-sm-4"></div>
         <div class="form-group col-sm-4">
             <label class="radio-inline">
-                <input type="radio" name="option" value="yes"><span class="text-success">{$t->get('ve_yes')}</span>
+                <input type="radio" name="option" value="yes"><span class="text-success"><strong>{$t->get('ve_yes')}</strong></span>
             </label>
             <label class="radio-inline">
-                <input type="radio" name="option" value="no"><span class="text-danger">{$t->get('ve_no')}</span>
+                <input type="radio" name="option" value="no"><span class="text-danger"><strong>{$t->get('ve_no')}</strong></span>
             </label>
             <label class="radio-inline">
-                <input type="radio" name="option" value="abstain"><span class="text-danger">{$t->get('ve_abstain')}</span>
+                <input type="radio" name="option" value="abstain"><span class="text-danger"><strong>{$t->get('ve_abstain_short')}</strong></span>
             </label>
             <label class="radio-inline">
-                <input type="radio" name="option" value="absent"><span class="text-muted">{$t->get('ve_absent')}</span>
+                <input type="radio" name="option" value="not voting"><span class="text-danger"><strong>{$t->get('ve_not-voting_short')}</strong></span>
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="option" value="absent"><span class="text-muted"><strong>{$t->get('ve_absent_short')}</strong></span>
             </label>
         </div>
     </div>

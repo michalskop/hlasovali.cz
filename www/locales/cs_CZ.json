@@ -60,6 +60,8 @@
     "ve_abstain": "Zdržel/a se",
     "ve_absent_short": "Nepřít.",
     "ve_absent": "Nepřítomen/a",
+    "ve_not-voting": "Nehlasoval/a",
+    "ve_not-voting_short": "Nehl.",
     "add_representative": "Přidat zastupitele",
     "remove": "Odebrat",
     "current_number": "Aktuální počet zadaných zastupitelů",
