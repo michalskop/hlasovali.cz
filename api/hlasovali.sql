@@ -312,24 +312,24 @@ $func$
 LANGUAGE plpgsql;
 
 -- Only user with rights to update the organization can delete it
-CREATE OR REPLACE FUNCTION organizations_users_update_check()
-  RETURNS trigger AS
-$func$
-BEGIN
-    IF (
-        SELECT count(*) FROM public.organizations_users as ou
-        LEFT JOIN basic_auth.users as u
-        ON ou.user_id = u.id
-        WHERE ou.active
-        AND (ou.organization_id = OLD.id)
-        AND (ou.user_id = basic_auth.current_user_id())
-    ) = 0 THEN
-        raise invalid_authorization_specification using message = 'current user is not allowed to delete it';
-    END IF;
-    RETURN OLD;
-END
-$func$
-LANGUAGE plpgsql;
+-- CREATE OR REPLACE FUNCTION organizations_users_update_check()
+--   RETURNS trigger AS
+-- $func$
+-- BEGIN
+--     IF (
+--         SELECT count(*) FROM public.organizations_users as ou
+--         LEFT JOIN basic_auth.users as u
+--         ON ou.user_id = u.id
+--         WHERE ou.active
+--         AND (ou.organization_id = OLD.id)
+--         AND (ou.user_id = basic_auth.current_user_id())
+--     ) = 0 THEN
+--         raise invalid_authorization_specification using message = 'current user is not allowed to delete it';
+--     END IF;
+--     RETURN OLD;
+-- END
+-- $func$
+-- LANGUAGE plpgsql;
 
 -- Only user with rights to update refered organization can update/delete something
 CREATE OR REPLACE FUNCTION organizations_users_update_something_check()
@@ -635,8 +635,10 @@ FOR EACH ROW EXECUTE PROCEDURE organizations_insert_suborganization_check();
 
 -- Only user with rights to update the organization can update it
 CREATE TRIGGER organization_update_check
-BEFORE UPDATE ON organizations
-FOR EACH ROW EXECUTE PROCEDURE organizations_users_update_check();
+  BEFORE UPDATE OR DELETE
+  ON public.organizations
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.organizations_users_update_check();
 
 --Only user with rigths to update the organization can create its memberships
 CREATE TRIGGER membership_new_check
