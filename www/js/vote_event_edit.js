@@ -261,10 +261,11 @@ $(document).ready(function() {
         // add new row
         $("#add-row").on('click',function(){
             next++;
-            row.i = next;
-            row.t = t;
-            values[next] = jQuery.extend(true, {}, row);
-            $('#form_fieldset').append(row_template(row));
+            var ro = {};
+            ro.i = next;
+            ro.t = t;
+            values[next] = jQuery.extend(true, {}, ro);
+            $('#form_fieldset').append(row_template(ro));
             //register functions again including new row:
             activate_typeahead_for_row(next);
             selected_name();
