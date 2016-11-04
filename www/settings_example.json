@@ -5,5 +5,7 @@
     "smarty_path": "/usr/local/lib/php/Smarty-3.1.19/libs/Smarty.class.php",
     "locales": ["cs_CZ","en_US"],
     "og_app_id": "1765242883752077",
-    "og_publisher": "https://www.facebook.com/KohoVolit.eu/"
+    "og_publisher": "https://www.facebook.com/KohoVolit.eu/",
+    "google_tracking_id": "UA-8592359-29",
+    "metrica_counter": "40666744"
 }

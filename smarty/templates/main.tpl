@@ -68,15 +68,15 @@
 
     {block name=js}{/block}
     <!-- google analytics -->
-    {* <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', "{$t->get(google_tracking_id)}"]);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+    <script>
+      (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{$settings->google_tracking_id}', 'auto');
+      ga('send', 'pageview');
+
     </script>
     <!-- /google analytics -->
 
@@ -85,8 +85,8 @@
         (function (d, w, c) {
             (w[c] = w[c] || []).push(function() {
                 try {
-                    w.yaCounter{$t->get(yandex_metrica_id)} = new Ya.Metrika({
-                        id:{$t->get(yandex_metrica_id)},
+                    w.yaCounter{$settings->metrica_counter} = new Ya.Metrika({
+                        id:{$settings->metrica_counter},
                         clickmap:true,
                         trackLinks:true,
                         accurateTrackBounce:true
@@ -106,8 +106,8 @@
             } else { f(); }
         })(document, window, "yandex_metrika_callbacks");
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/{$t->get(yandex_metrica_id)}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter --> *}
+    <noscript><div><img src="https://mc.yandex.ru/watch/{$settings->metrica_counter}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
   </body>
 </html>
