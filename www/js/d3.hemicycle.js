@@ -139,8 +139,13 @@ d3.hemicycle = function() {
 
             //append icons (badges)
             icons.append("text")
-              .attr('font-size',xxScale(
-                d.widthIcon*1.15/2))
+              .attr('font-size',function (d) {
+                  if (d.option == "absent") {
+                      return 0;
+                  } else {
+                      return xxScale(d.widthIcon*1.15/2);
+                  }
+                })
               .attr('font-family', 'FontAwesome')
                .attr('x',function(d) {return xScale(d.x+d.widthIcon/2.8);})
                .attr('y',function(d) {return yScale(d.y+d.widthIcon/2.8);})
