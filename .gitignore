@@ -12,3 +12,5 @@ www/fonts
 api/settings.py
 /www/pages/cache
 www/classes/standalone/HTMLPurifier/DefinitionCache/Serializer/
+db/backup/
+db/pg_backup.config
