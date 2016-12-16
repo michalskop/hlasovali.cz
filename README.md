@@ -7,3 +7,19 @@ Projekt má kompletní read/write [API](https://github.com/michalskop/hlasovali.
 
 ### Source
 Celý projekt je [open source](https://github.com/michalskop/hlasovali.cz).
+
+### Requirements:
+PHP5, FontAwesome, Smarty3
+
+
+Notes:
+```
+cp www/settings_example.json settings.json
+sudo apt-get install fonts-font-awesome
+mkdir www/pages/cache
+mkdir www/pages/cache/png
+mkdir www/pages/cache/svg
+sudo chown -R www-data:www-data www/pages/cache
+
+```
+
