@@ -2,6 +2,9 @@
 
 Projekt uchovává záznamy o důležitých rozhodnutích v zastupitelstvech, která jsou **ručně vybrána a popsána editory**.
 
+### Diskuse
+Real-time diskuse ve [skupině na Telegramu](https://telegram.me/joinchat/BtQyWAqLZAu9Ke1fc7aRHA)
+
 ### API
 Projekt má kompletní read/write [API](https://github.com/michalskop/hlasovali.cz/blob/master/api/README.md)
 
