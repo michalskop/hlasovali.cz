@@ -4,7 +4,8 @@
 MYSITE="dev.hlasovali.cz"
 
 cd /tmp
-wget "https://gist.githubusercontent.com/michalskop/9edee4757545c7d905c4/raw/3831a94d2f6fa33f2c4373be0f42a486a6aac6ca/https.example.com.conf" -O example.com.conf
+# wget "https://gist.githubusercontent.com/michalskop/9edee4757545c7d905c4/raw/3831a94d2f6fa33f2c4373be0f42a486a6aac6ca/https.example.com.conf" -O example.com.conf
+wget "https://gist.githubusercontent.com/michalskop/9edee4757545c7d905c4/raw/883b4fc90be9b744cb0adfd56969470ac3b0b693/example.com.conf" - O example.com.conf
 grep -rl 'example.com' ./example.com.conf | xargs sed -i "s/example.com/$MYSITE/g"
 sudo cp example.com.conf /etc/apache2/sites-available/$MYSITE.conf
 sudo a2ensite $MYSITE
