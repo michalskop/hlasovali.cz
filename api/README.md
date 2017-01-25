@@ -82,7 +82,7 @@ with data
 
 Get the id of the parent organization:
 
-    GET /organizations?classitication=eq.city halls
+    GET /organizations?classification=eq.city halls
 
 e.g., _1_
 
