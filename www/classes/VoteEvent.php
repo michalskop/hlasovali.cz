@@ -14,9 +14,9 @@ class VoteEvent extends Table
     // get votes from vote event(s) with people and organizations
     public function getVoteEventVotes($params) {
         if (!isset($params['order'])) {
-            $params['order'] = "person_id.asc,vote_event_id.asc";
+            $params['order'] = "vote_event_id.asc,vote_rank.asc,person_id.asc";
         } else {
-            $params['order'] = $params['order'] . ',person_id.asc,vote_event_id.asc';
+            $params['order'] = $params['order'] . 'vote_event_id.asc,vote_rank.asc,person_id.asc';
         }
         $result = $this->table->getTable('votes_people_organizations','all',$params);
         return $result;
@@ -45,7 +45,7 @@ class VoteEvent extends Table
     }
 
     public function parseForm($form) {
-        $fields = ['id','default_option','family_name','given_name','organization_abbreviation', 'organization_name', 'organization_color','option'];
+        $fields = ['id','default_option','rank','family_name','given_name','organization_abbreviation', 'organization_name', 'organization_color','option'];
         $onces = ['vote_event_identifier','vote_event_result','default_vote_event_result'];
         $data = ['rows'=>[]];
         foreach ($form as $key=>$value) {

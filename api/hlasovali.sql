@@ -211,6 +211,7 @@ CREATE TABLE public.votes
     person_id bigint NOT NULL,
     option text NOT NULL,
     organization_id bigint NOT NULL,
+    rank real,
     CONSTRAINT votes_pkey PRIMARY KEY (id),
     CONSTRAINT votes_person_id_fkey FOREIGN KEY (person_id)
         REFERENCES public.people (id) MATCH SIMPLE
@@ -921,7 +922,8 @@ create or replace view public.votes_people_organizations as
         ve.date_precision as vote_event_date_precision,
         ve.result as vote_event_result,
         ve.attributes as vote_event_attributes,
-        v.option as vote_option
+        v.option as vote_option,
+        v.rank as vote_rank
     from votes as v
     left join people as p
     on v.person_id = p.id

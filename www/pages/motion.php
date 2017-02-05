@@ -55,8 +55,7 @@ function deletee() {
     }
 
 
-
-    die();
+    //die();
 
     //go to all motions
     header("Location: index.php");
@@ -530,7 +529,7 @@ function _vote_event_table($action='edit',$id=NULL) {
     if ($ve_info->exist) {
         $ves = $vote_event->getVoteEventVotes([
             "vote_event_id"=> "eq.".$ve_id,
-            "order" => "organization_name.asc,person_family_name.asc,person_given_name.asc"
+            "order" => "vote_rank.asc,organization_name.asc,person_family_name.asc,person_given_name.asc"
         ]);
         foreach($ves as $ve){
             $item = new StdClass();
@@ -539,6 +538,7 @@ function _vote_event_table($action='edit',$id=NULL) {
             $item->family_name = $ve->person_family_name;
             $item->given_name = $ve->person_given_name;
             $item->organization_name = $ve->organization_name;
+            $item->rank = $ve->vote_rank;
             if (isset($ve->organization_attributes->abbreviation)) {
                 $item->organization_abbreviation = $ve->organization_attributes->abbreviation;
             } else {
@@ -613,6 +613,7 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
             $v->person_id = $people[$name]->id;
             $v->organization_id = $organizations[$row['organization_name']]->id;
             $v->vote_event_id = $vote_event_id;
+            $v->rank = $row['rank'];
             $votes[] = $v;
         }
     }
@@ -632,15 +633,10 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
     foreach($votes_arr as $k=>$v) {
         if (isset($existing_arr[$k])) {
             $e = $existing_arr[$k];
-            if (($e->organization_id == $v->organization_id) and
-                ($e->option == $v->option)
-            ) {
-                //it is ok, kept
-            } else {
-                $it = $v;
-                $it->id = $e->id;
-                $changing[] = $it;
-            }
+            // let's update it always, because of rank, etc.
+            $it = $v;
+            $it->id = $e->id;
+            $changing[] = $it;
         } else {
             $creating[] = $v;
         }
@@ -676,6 +672,7 @@ function _create_votes($parsed, $organizations, $people, $vote_event_id) {
             $v->person_id = $people[$name]->id;
             $v->organization_id = $organizations[$row['organization_name']]->id;
             $v->vote_event_id = $vote_event_id;
+            $v->rank = $row['rank'];
             $votes[] = $v;
         }
     }

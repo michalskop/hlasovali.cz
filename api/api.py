@@ -1,5 +1,6 @@
 """API client module.
 Contains functions for sending API requests conveniently.
+For Postgrest v 0.3.2
 """
 
 import json

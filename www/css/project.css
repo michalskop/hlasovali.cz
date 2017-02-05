@@ -26,6 +26,12 @@
 .zebra-odd {
     background-color: #FFFFFF;
 }
+.input-short {
+    max-width: 3em;
+}
+.input-gray {
+    color: #bbb;
+}
 
 @media (min-width: 992px) {
     .modal-lg {
