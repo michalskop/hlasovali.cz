@@ -25,13 +25,13 @@
                 <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       {foreach $cityhalls as $ch}
-                          <li><a href="?page=organization&action=select&continue=?page=motion&org={$ch->id}">{$ch->name|htmlspecialchars}</a>
+                          <li><a href="?page=organization&action=select&org={$ch->id}&continue=?page%3Dmotion%26org%3D{$ch->id}">{$ch->name|htmlspecialchars}</a>
                       {/foreach}
                       <li role="separator" class="divider">
                       <li><a href="?page=about#new_authors">{$t->get('add_new_cityhall')}</a>
                   </ul>
             </li>
-            <li><a href="?page=motion&action=view">{$t->get('list_of_motions')}</a>
+            <li><a href="?page=motion&action=view&org={if isset($cityhall->id)}{$cityhall->id}{/if}">{$t->get('list_of_motions')}</a>
         </ul>
 
       <ul class="nav navbar-nav navbar-right">
