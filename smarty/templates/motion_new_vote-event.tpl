@@ -80,7 +80,7 @@
 <div class="row">
     <div class="form-group col-sm-4">
         <label for="vote_event_identifier">{$t->get('vote_event_identifier')}:</label>
-        <input type="text" name="vote_event_identifier" class="form-control input-sm" placeholder="{$t->get('vote_event_identifier_placeholder')}" >
+        <input type="text" name="vote_event_identifier" class="form-control input-sm" placeholder="{$t->get('vote_event_identifier_placeholder')}" {if $vote_event->vote_event_identifier}value="{$vote_event->vote_event_identifier}"{/if}}>
     </div>
 </div>
 <div>

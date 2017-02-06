@@ -820,6 +820,7 @@ create or replace view public.vote_events_information as
         ve.start_date as vote_event_start_date,
         ve.date_precision as vote_event_date_precision,
         ve.result as vote_event_result,
+        ve.identifier as vote_event_identifier,
         ve.attributes as vote_event_attributes,
         m.id as motion_id,
         m.name as motion_name,

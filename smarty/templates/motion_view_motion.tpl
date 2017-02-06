@@ -27,6 +27,11 @@
                 </span>
             {/if}
         </div>
+        {if $vote_event->vote_event_identifier}
+            <div>
+                {$t->get('vote_event_identifier')}: {$vote_event->vote_event_identifier}
+            </div>
+        {/if}
         <div>
             <p>
             <i class="fa fa-tags" aria-hidden="true"></i>
