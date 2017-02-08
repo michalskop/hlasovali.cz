@@ -11,7 +11,7 @@
     <div class="row">
         <div class="form-group col-sm-6">
             <label for="name">{$t->get('motion_name')}:</label>
-            <input type="text" required class="form-control" name="name" id="name" value="{$motion->name|htmlspecialchars}"/>
+            <input type="text" required class="form-control" name="name" id="name" value="{$motion->name|htmlspecialchars|unescape}"/>
         </div>
     </div>
 
@@ -48,10 +48,10 @@
                     {foreach $motion->attributes->links as $link}
                         <div>
                             <div class="col-sm-4">
-                                <input type="text" id="links_descriptions" name="links_descriptions[]" value="{$link->text|htmlspecialchars}" class="form-control"/>
+                                <input type="text" id="links_descriptions" name="links_descriptions[]" value="{$link->text|htmlspecialchars|unescape}" class="form-control"/>
                             </div>
                             <div class="col-sm-7">
-                                <input type="url" id="links_links" name="links_links[]" value="{$link->url|htmlspecialchars}" class="form-control" />
+                                <input type="url" id="links_links" name="links_links[]" value="{$link->url|htmlspecialchars|unescape}" class="form-control" />
                             </div>
                             <button class="remove_field col-sm-1 btn btn-danger">X</button>
                         </div>
@@ -64,7 +64,7 @@
 
     <div class="form-group">
         <label for="tags">{$t->get('tags')}:</label>
-        <input type="text" id="tags" name="tags" data-role="tagsinput" value="{foreach $tags as $tag}{$tag->tag|htmlspecialchars},{/foreach}"/>
+        <input type="text" id="tags" name="tags" data-role="tagsinput" value="{foreach $tags as $tag}{$tag->tag|htmlspecialchars|unescape},{/foreach}"/>
     </div>
 
 

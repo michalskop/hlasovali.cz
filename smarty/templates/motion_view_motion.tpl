@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6">
         {* <h3>{$cityhall->name}</h3> *}
-        <h1>{$motion->name|htmlspecialchars}
+        <h1>{$motion->name|htmlspecialchars|unescape}
             {if $user_can_edit}
                 <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-edit" aria-hidden="true"></i> {$t->get('edit')}</button>
                 <button type="button" class="btn btn-xs btn-danger" data-toggle="modal"
@@ -42,14 +42,14 @@
         </div>
         <div>
             <p>
-            {$motion->description}
+            {$motion->description|htmlspecialchars|unescape}
         </div>
         <div>
             {if isset($motion->attributes->links)}
                 {$t->get('links')}:
                 <ul>
                     {foreach $motion->attributes->links as $link}
-                        <li><a href="{$link->url|htmlspecialchars}">{$link->text|htmlspecialchars}</a>
+                        <li><a href="{$link->url|htmlspecialchars|unescape}">{$link->text|htmlspecialchars|unescape}</a>
                     {/foreach}
                 </ul>
             {/if}
@@ -58,7 +58,7 @@
         {if $author->exist}
             <div>
                 <p>
-                <small>{$t->get('created_by_author')}: <a href="?page=user&u={$author->id}">{$author->name|htmlspecialchars}</a></small>
+                <small>{$t->get('created_by_author')}: <a href="?page=user&u={$author->id}">{$author->name|htmlspecialchars|unescape}</a></small>
             </div>
         {/if}
         {include "sharer.tpl"}

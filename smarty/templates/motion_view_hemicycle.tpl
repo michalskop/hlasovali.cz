@@ -78,7 +78,7 @@ var dat = {$hemicycle['dat']};
        .style("opacity", 1e-6);
 
        //legend data
-       var legendData = [{ "label":["{$motion->name|htmlspecialchars|truncate:50:" ...":false}"],"icons":[{ "color":"#3fb618","text":"{$t->get('pro')|upper}","class":"legend-option-pro"},{ "color":"#ff0039","text":"{$t->get('against')|upper}","class":"legend-option-against"}]}];
+       var legendData = [{ "label":["{$motion->name|unescape|replace:'"':"'"|htmlspecialchars|truncate:50:" ...":false}"],"icons":[{ "color":"#3fb618","text":"{$t->get('pro')|upper}","class":"legend-option-pro"},{ "color":"#ff0039","text":"{$t->get('against')|upper}","class":"legend-option-against"}]}];
 
        var myLegend = d3.legend()
                .label(function(d) { return d.label;})
