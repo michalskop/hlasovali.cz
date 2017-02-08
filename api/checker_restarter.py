@@ -1,4 +1,15 @@
+import os
 import requests
+import subprocess
+import sys
+
+# import settings:
+try:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+except:
+    dir_path = os.path.realpath('.')
+sys.path.insert(0, dir_path)
+
 import settings
 
 
