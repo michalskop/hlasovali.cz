@@ -596,7 +596,6 @@ function _option4handlebars($item) {
 function _update_votes($parsed, $organizations, $people, $vote_event_id) {
     global $settings;
     $vote = new Vote($settings);
-
     $params = ['vote_event_id' => 'eq.'.$vote_event_id];
     $existing = $vote->getVotes($params);
 
@@ -652,7 +651,6 @@ function _update_votes($parsed, $organizations, $people, $vote_event_id) {
             $deleting[] = $e;
         }
     }
-
     foreach($changing as $v) {
         $vote->update($v,$v->id);
     }
@@ -750,7 +748,7 @@ function _create_update_organizations($parsed, $table, $organization){
                 $org->attributes->abbreviation = $parsed_orgs[$org->name]['organization_abbreviation'];
                 $org->attributes->color = $parsed_orgs[$org->name]['organization_color'];
                 unset($org->exist);
-                $organizations[$org->name] = $organization->update((array) $org, $org->id);
+                $organizations[$org->name] = $organization->update(toArray($org), $org->id);
             }
         } else {
             $attrs = new StdClass();

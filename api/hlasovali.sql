@@ -293,17 +293,26 @@ OWNER TO postgres;
 
 
 -- Only user with rights to update the organization
+-- User with right to update an organization can update also its children
 CREATE OR REPLACE FUNCTION organizations_users_update_check()
   RETURNS trigger AS
 $func$
 BEGIN
     IF (
-        SELECT count(*) FROM public.organizations_users as ou
-        LEFT JOIN basic_auth.users as u
-        ON ou.user_id = u.id
-        WHERE ou.active
-        AND (ou.organization_id = OLD.id)
-        AND (ou.user_id = basic_auth.current_user_id())
+        SELECT sum(c) FROM
+            (SELECT count(*) as c FROM public.organizations_users as ou
+            LEFT JOIN basic_auth.users as u
+            ON ou.user_id = u.id
+            WHERE ou.active
+            AND (ou.organization_id = OLD.id)
+            AND (ou.user_id = basic_auth.current_user_id())
+            UNION ALL
+            SELECT count(*) as c FROM public.organizations_users as ou
+            LEFT JOIN basic_auth.users as u
+            ON ou.user_id = u.id
+            WHERE ou.active
+            AND (ou.organization_id = OLD.parent_id)
+            AND (ou.user_id = basic_auth.current_user_id())) as t
     ) = 0 THEN
         raise invalid_authorization_specification using message = 'current user is not allowed to update it';
     END IF;

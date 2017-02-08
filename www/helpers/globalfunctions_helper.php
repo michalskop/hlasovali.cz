@@ -61,4 +61,21 @@ function preformat_date($date,$date_precision) {
     return $out;
 }
 
+// converts object to array
+// http://stackoverflow.com/a/11577501/1666623
+function toArray($obj)
+{
+    if (is_object($obj)) $obj = (array)$obj;
+    if (is_array($obj)) {
+        $new = array();
+        foreach ($obj as $key => $val) {
+            $new[$key] = toArray($val);
+        }
+    } else {
+        $new = $obj;
+    }
+
+    return $new;
+}
+
 ?>
