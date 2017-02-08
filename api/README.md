@@ -268,7 +268,8 @@ with data
     "vote_event_id": 1,
     "person_id": 1,
     "option": "yes",
-    "organization_id": 3
+    "organization_id": 3,
+    "rank": 1
 }
 ```
 Note: _option_ may be _yes_, _no_, _abstain_, _absent_, _not voting_; see http://www.popoloproject.com/specs/vote.html
