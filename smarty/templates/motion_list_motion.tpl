@@ -1,7 +1,7 @@
 {include "motion_view_modal-delete.tpl"}
 <div class="row">
     <div class="col-sm-8">
-        <h3><a href="?page=motion&action=view&m={$motion->motion_id}">{$motion->motion_name|htmlspecialchars}</a>
+        <h3><a href="?page=motion&action=view&m={$motion->motion_id}">{$motion->motion_name|htmlspecialchars|unescape}</a>
             {if ($user->exist and ($user->id == $motion->user_id))}
                 <a href="?page=motion&action=view&m={$motion->motion_id}#edit" type="button" class="btn btn-xs btn-primary"><i class="fa fa-edit" aria-hidden="true"></i> {$t->get('edit')}</a>
                 <button type="button" class="btn btn-xs btn-danger" data-toggle="modal"
@@ -35,7 +35,7 @@
         </div>
         <div>
             <p>
-            {$motion->motion_description|truncate:200:"...":true}
+            {$motion->motion_description|htmlspecialchars|unescape|truncate:200:"...":false}
         </div>
         {* <div>
             {if (isset($motion->motion_attributes->links) and (count($motion->motion_attributes->links)>0))}
@@ -50,7 +50,7 @@
 
         <div>
             <p>
-            <small>{$t->get('created_by_author')}: <a href="?page=user&u={$motion->user_id}">{$motion->user_name|htmlspecialchars}</a></small>
+            <small>{$t->get('created_by_author')}: <a href="?page=user&u={$motion->user_id}">{$motion->user_name|htmlspecialchars|unescape}</a></small>
         </div>
     </div>
     <div class="col-sm-4 center-block hemicycle-small-container">
