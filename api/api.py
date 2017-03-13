@@ -96,6 +96,12 @@ def login(email, password):
     HEADERS['Authorization'] = 'Bearer ' + r.json()['token']
     return r
 
+
+def logout():
+    HEADERS['Authorization'] = None
+    return
+
+
 def post_id(request):
     '''Returns id of POSTed item
     Only for a single item POSTed'''
