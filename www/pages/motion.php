@@ -665,9 +665,13 @@ function _create_votes($parsed, $organizations, $people, $vote_event_id) {
     $vote = new Vote($settings);
 
     $votes = [];
+    $i = 1;
     foreach ($parsed['rows'] as $row) {
         if ($row['option'] == 'on') {
             $row['option'] = $row['default_option'];
+        }
+        if (!$row['rank']) {
+            $row['rank'] = $i;
         }
         if (in_array($row['option'],$vote->allowed_options)) {
             $v = new StdClass();
@@ -679,6 +683,7 @@ function _create_votes($parsed, $organizations, $people, $vote_event_id) {
             $v->rank = $row['rank'];
             $votes[] = $v;
         }
+        $i++;
     }
     $vote->create($votes);
 }
