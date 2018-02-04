@@ -760,7 +760,7 @@ create policy authors_eigenedit on motions
 create or replace view current_organizations as
 select *
 from organizations
-where founding_date < NOW() and ((dissolution_date is null) or (dissolution_date > NOW()));
+where ((founding_date is null) or (founding_date < NOW()))  and ((dissolution_date is null) or (dissolution_date > NOW()));
 
 -- -- Current people
 -- create or replace view current_people_in_organizations as

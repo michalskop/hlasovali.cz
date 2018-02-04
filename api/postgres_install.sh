@@ -32,3 +32,11 @@ grep -rl 'example_secret' ./postgrest.conf | xargs sed -i "s/example_secret/$PRE
 grep -rl 'activities' ./postgrest.conf | xargs sed -i "s/activities/$DB/g"
 sudo cp postgrest.conf /etc/init/postgrest.conf
 sudo service postgrest start
+
+
+## IMPORTANT!
+# SET ALSO:
+# /etc/systemd/system/postgrest-3000.service
+# AND
+# /etc/apache2/sites-available/ ...
+# a2ensite ...
